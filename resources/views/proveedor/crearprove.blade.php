@@ -26,7 +26,7 @@
                     <div class="col-md-8 offset-2 ">
                       <div class="form-group">
                         <label for="insnom">Nombre</label>
-                        <input id="insnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre">
+                        <input id="insnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" maxlength=100>
                         <!-- phone mask -->
                       
                         <label for="instelf">Teléfono:</label>
@@ -38,7 +38,7 @@
                         </div>
                     
                         <label for="insdir">Direccion</label>
-                        <input id="insdir" name="Direccion" type="text" class="form-control" placeholder="Ingrese una dirección Ej: Los arboles #3443 Ave. El manjar." >
+                        <input id="insdir" name="Direccion" type="text" class="form-control" placeholder="Ingrese una dirección Ej: Los arboles #3443 Ave. El manjar."  maxlength=150>
                         <div class="card-footer ">
                                
                         </div>
@@ -100,11 +100,11 @@
                   <form method="POST" action="/proveedor/{{$proveedor->id}}">
                         @method('DELETE')
                         {{ csrf_field() }}  <!--genera un token para enviar los datos al controlador-->
-                        <button type="submit" class="btn btn-danger btn-sm">Borrar</button>
+                        <button type="submit" class="btn btn-danger btn-sm"><i for="btn" class="fa fa-trash"></i> Borrar</button>
                   </form>
                 </td>
                 <td>
-                    <a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#mod{{$proveedor->id}}">Editar</a>
+                    <a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#mod{{$proveedor->id}}"><i for="btn" class="fa fa-edit"></i> Editar</a>
                 </td>
                  
             </tr>

@@ -33,9 +33,9 @@
                               <!--Contenido del modal--> 
                               <div class="form-group">
                                   <label for="addnom">Nombre</label>
-                                  <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese un nombre">
+                                  <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese un nombre" maxlength=60>
                                   <label for="addape">Ciudad</label>
-                                  <input id="addape" name="Ciudad" class="form-control input" type="text" placeholder="Ingrese una ciudad">
+                                  <input id="addape" name="Ciudad" class="form-control input" type="text" placeholder="Ingrese una ciudad" maxlength=30>
                               </div>
                               <!--end contenido-->
                             </div>
@@ -75,10 +75,10 @@
                       <form method="POST" action="/marca/{{$marca->id}}">
                         @method('DELETE')
                         {{ csrf_field() }}  <!--genera un token para enviar los datos al controlador-->
-                        <button type="submit" class="btn btn-danger btn-sm">Borrar</button>
+                        <button type="submit" class="btn btn-danger btn-sm"><i for="btn" class="fa fa-trash"></i> Borrar</button>
                       </form>
                     </td>
-                    <td><a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#mod{{$marca->id}}">Editar</a></td>
+                    <td><a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#mod{{$marca->id}}"><i for="btn" class="fa fa-edit"></i> Editar</a></td>
                   </tr>  
                     <!--modal editar usuario-->
                     <div class="modal fade" id="mod{{$marca->id}}">
@@ -99,9 +99,9 @@
                                                             
                                     <div class="form-group">
                                         <label for="agrenom">Nombre</label>
-                                        <input id="agrenom" value="{{$marca->nombre}}" name="Nombre" class="form-control input" type="text" placeholder="Ingrese un nombre">
+                                        <input id="agrenom" value="{{$marca->nombre}}" name="Nombre" class="form-control input" type="text" placeholder="Ingrese un nombre" maxlength=60>
                                         <label for="agreape">Ciudad</label>
-                                        <input id="agreape" value="{{$marca->ciudad}}" name="Ciudad" class="form-control input" type="text" placeholder="Ingrese una ciudad">
+                                        <input id="agreape" value="{{$marca->ciudad}}" name="Ciudad" class="form-control input" type="text" placeholder="Ingrese una ciudad" maxlength=30>
                                         <div class="card-footer ">
                                         </div>
                                     </div>

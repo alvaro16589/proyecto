@@ -32,13 +32,13 @@
                             <!--Contenido del modal--> 
                             <div class="form-group">
                                 <label for="addnom">Nombre</label>
-                                <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre">
+                                <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" maxlength=30>
                                 <label for="addape">Apellido</label>
-                                <input id="addape" name="Apellido" class="form-control input" type="text" placeholder="Ingrese su apellido">
+                                <input id="addape" name="Apellido" class="form-control input" type="text" placeholder="Ingrese su apellido" maxlength=30>
                                 <label for="addcontra">Contraseña</label>
-                                <input id="addcontra" name="Contraseña" class="form-control input" type="password" placeholder="Ingrese su contraseña">
+                                <input id="addcontra" name="Contraseña" class="form-control input" type="password" placeholder="Ingrese su contraseña" maxlength=30>
                                 <label for="addcontra2">Repita la contraseña</label>
-                                <input id="addcontra2" name="addcontra2" class="form-control input" type="password" placeholder="Ingrese su contraseña">
+                                <input id="addcontra2" name="addcontra2" class="form-control input" type="password" placeholder="Ingrese su contraseña" maxlength=30>
                                 
                                 <label for="addtipo">Tipo</label>
                                 <select id="addtipo" name="Tipo" class="form-control select2" style="width: 100%;">
@@ -74,8 +74,8 @@
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Nombre</th>
                   <th>Avatar</th>
+                  <th>Nombre</th>
                   <th>Apellido</th>
                   <th>Estado</th>
                   <th>tipo</th>
@@ -108,10 +108,10 @@
                       <form method="POST" action="/usuario/{{$usuario->id}}">
                         @method('DELETE')
                         {{ csrf_field() }}  <!--genera un token para enviar los datos al controlador-->
-                        <button type="submit" class="btn btn-danger btn-sm">Borrar</button>
+                        <button type="submit" class="btn btn-danger btn-sm"><i for="btn" class="fa fa-trash"></i> Borrar</button>
                       </form>
                     </td>
-                    <td><a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#mod{{$usuario->id}}">Editar</a></td>
+                    <td><a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#mod{{$usuario->id}}"><i for="btn" class="fa fa-edit"></i> Editar</a></td>
                   </tr>
                    <!--modal editar usuario-->
                   <div class="modal fade" id="mod{{$usuario->id}}">
@@ -133,13 +133,13 @@
                                   <!--Contenido del modal--> 
                                   <div class="form-group">
                                       <label for="addnom">Nombre</label>
-                                      <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" value="{{$usuario->nombre}}">
+                                      <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" value="{{$usuario->nombre}}" maxlength=30 >
                                       <label for="addape">Apellido</label>
-                                      <input id="addape" name="Apellido" class="form-control input" type="text" placeholder="Ingrese su apellido" value="{{$usuario->apellido}}">
+                                      <input id="addape" name="Apellido" class="form-control input" type="text" placeholder="Ingrese su apellido" value="{{$usuario->apellido}}" maxlength=30 >
                                       <label for="addcontra">Contraseña actual</label>
-                                      <input id="addcontra" name="oldpassword" class="form-control input" type="text" disabled value="{{$usuario->contraseña}}">
+                                      <input id="addcontra" name="oldpassword" class="form-control input" type="text" disabled value="{{$usuario->contraseña}}" maxlength=30 >
                                       <label for="addcontra2">Nueva contraseña</label>
-                                      <input id="addcontra2" name="Contraseña" class="form-control input" type="password" placeholder="Ingrese su nueva contraseña" value="{{$usuario->contraseña}}">
+                                      <input id="addcontra2" name="Contraseña" class="form-control input" type="password" placeholder="Ingrese su nueva contraseña" value="{{$usuario->contraseña}}" maxlength=30>
                                       <label for="addtipo">Tipo</label>
                                       <select id="addtipo" name="Tipo" class="form-control select2" style="width: 100%;">
                                         <option selected="selected">Administrador</option>

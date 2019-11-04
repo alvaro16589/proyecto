@@ -46,32 +46,32 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/usuario" class="nav-link @if($pagina  == 'usuario') {{'active'}} @endif">
+                <a href="/usuario" class="nav-link @if($pagina == 'usuario') {{'active'}} @endif">
                   <i class="far fa-circle nav-icon"></i>
                  <p>Usuario </p>
                 </a>
               </li>
               <li class="nav-item">
                 <!--poner la clase active para seleccionar el radio button-->
-                <a href="/cliente" class="nav-link @if($pagina  == 'cliente') {{'active'}} @endif">
+                <a href="/cliente" class="nav-link @if($pagina == 'cliente') {{'active'}} @endif">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Cliente</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/proveedor" class="nav-link @if($pagina  == 'proveedor') {{'active'}} @endif">
+                <a href="/proveedor" class="nav-link @if($pagina == 'proveedor') {{'active'}} @endif">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Proveedor</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/marca" class="nav-link @if($pagina  == 'marca') {{'active'}} @endif ">
+                <a href="/marca" class="nav-link @if($pagina == 'marca') {{'active'}} @endif ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Marca</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="articulo" class="nav-link @if($pagina  == 'articulo') {{'active'}} @endif ">
+                <a href="articulo" class="nav-link @if($pagina == 'articulo') {{'active'}} @endif ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Artículo</p>
                 </a>

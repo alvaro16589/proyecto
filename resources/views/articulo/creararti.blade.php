@@ -2,7 +2,8 @@
   <!--tabla-->
   <div class="card card-primary mt-5">
       <div class="card-header">
-        <h3 class="card-title">PROVEEDORES</h3>
+        <h3 class="card-title">articulo
+          ES</h3>
   
         <div class="card-tools">
           <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#formularioAgregar" ><i class="fas fa-plus"></i> Agregar</button>
@@ -11,11 +12,13 @@
             <!--modal-->
         <div class="modal fade" id="formularioAgregar">
           <div class="modal-dialog modal-lg">
-            <form action="/proveedor" method="POST">
+            <form action="/articulo" method="POST" enctype="multipart/form-data">
               {{ csrf_field() }}
               <div class="modal-content bg-secondary">
                   <div class="modal-header">
-                    <h4 class="modal-title">Ingresar Proveedor</h4>
+                    <h4 class="modal-title">Ingresar articulo
+                      
+                    </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -24,24 +27,35 @@
                     <!--Cuerpo del Modal-->
                     <div class="row">
                       <div class="col-md-8 offset-2 ">
-                        <div class="form-group">
-                          <label for="insnom">Nombre</label>
-                          <input id="insnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre">
-                          <!-- phone mask -->
-                        
-                          <label for="instelf">Teléfono:</label>
-                          <div class="input-group">
-                              <div class="input-group-prepend">
-                              <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                              </div>
-                              <input id="instelf" name="Telefono" type="text" class="form-control"  data-inputmask="'mask': '99999999'" placeholder="99999999" />
-                          </div>
-                      
-                          <label for="insdir">Direccion</label>
-                          <input id="insdir" name="Direccion" type="text" class="form-control" placeholder="Ingrese una dirección Ej: Los arboles #3443 Ave. El manjar." >
-                          <div class="card-footer ">
-                                 
-                          </div>
+                          <div class="form-group"><!--'estado','nombre','descripcion','imagen','vencimiento','stok'-->
+                            <label for="addnom">Nombre</label>
+                            <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" maxlength=60 >
+                            <label for="addape">Descripción</label>
+                            <textarea id="addape" name="Descripcion" class="form-control input"  placeholder="Ingrese su descripción..." maxlength=100></textarea>
+                            <label for="addcontra">Caducidad</label>
+                            <input id="addcontra" name="Vencimiento" class="form-control input" type="date"  >                                            
+                            <label for="addcontra">Cantidad</label>
+                            <input id="addcontra" name="Cantidad" class="form-control input" type="number" style="width: 50%;" min=0 max=200 value="1">      
+                            <label for="addm">Marca</label>
+                            <select id="addm" name="Marca" class="form-control select2" style="width: 50%;" aria-placeholder="Seleccione una marca...">
+                              @foreach ($marcas as $marca)
+                                <option value="{{$marca->id}}">{{$marca->nombre}}</option>
+                                @endforeach
+                              
+                            </select>
+                            <label for="addtipo">Proveedor</label>
+                            <select id="addtipo" name="Proveedor" class="form-control select2" style="width: 50%;" aria-placeholder="Seleccione un proveedor...">
+                                @foreach ($proveedores as $proveedor)
+                                    <option value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
+                                @endforeach
+                            </select>
+
+                            <label for="addco2">Selecionar imagen:</label>
+                            <input id="addco2" accept="image/*" name="Imagen" class="form-control input" type="file" placeholder="Seleccione una imagen..."  >
+
+                            <div class="card-footer ">
+                             
+                            </div>
                         </div>
                       
                       </div>
@@ -64,13 +78,13 @@
   
       <div class="card-body table-responsive p-0" style="height: 600px;">
         <table class="table table-head-fixed table-hover " >
-          <thead>
+          <thead><!--'estado','nombre','descripcion','imagen','vencimiento','stok'-->
               <tr>
                   <th>Nº</th>
-                  <th>Detalle</th>
-                  <th>Cantidad</th>
-                  <th>P/U</th>
-                  <th>Subtotal</th>
+                  <th>Estado</th>
+                  <th>Nombre</th>
+                  <th>Imagen</th>
+                  <th>stok</th>
                   <th></th>
                   <th></th>
                 </tr>
@@ -80,43 +94,47 @@
               <tr>
                 
                   <td>{{$articulo->id}}</td>
-                  <td>{{$articulo->nombre}}</td>
-                  <td>
-                      <form  method="GET" action="/proveedor/{{$proveedor->id}}/edit" enctype="multipart/form-data">
+                  <td><form  method="GET" action="/articulo/{{$articulo->id}}/edit" enctype="multipart/form-data">
                        
                         {{ csrf_field() }}
                         
-                            @if ($proveedor->estado=='activo')
+                            @if ($articulo->estado=='activo')
                               <button type="submit" class="btn btn-block  btn-outline-success btn-sm">ON</button>
-                            @elseif ($proveedor->estado=='inactivo') 
+                            @elseif ($articulo->estado=='inactivo') 
                               <button type="submit" class="btn  btn-block  btn-outline-danger btn-sm">OFF</button>
                             @endif
                         
                       </form>
                   </td>
-                  <td>{{$proveedor->celular}}</td>
-                  <td>{{$proveedor->direccion}}</td>
                   <td>
-                    <form method="POST" action="/proveedor/{{$proveedor->id}}">
+                      {{$articulo->nombre}}
+                  </td>
+                  <td><img class=" img-fluid img-scuare img-bordered-sm img-md " src="{{asset('asset/img/articulos/'.$articulo->imagen)}}" alt="user image"></td>
+                  <td>{{$articulo->stok}}</td>
+                  <td>
+                    <form method="POST" action="/articulo/{{$articulo->id}}">
                           @method('DELETE')
                           {{ csrf_field() }}  <!--genera un token para enviar los datos al controlador-->
-                          <button type="submit" class="btn btn-danger btn-sm">Borrar</button>
+                          <button name="btn" type="submit" class="btn btn-danger btn-sm "><i for="btn" class="fa fa-trash"></i>  Borrar</button>
+                          
                     </form>
                   </td>
                   <td>
-                      <a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#mod{{$proveedor->id}}">Editar</a>
+                      <a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#mod{{$articulo->id}}"><i for="btn" class="fa fa-edit"></i>  Editar</a>
                   </td>
                    
               </tr>
                   <!--modal           -->
-                  <div class="modal fade" id="mod{{$proveedor->id}}">
-                      <div class="modal-dialog modal-lg">
-                        <form  method="POST" action="/proveedor/{{$proveedor->id}}" enctype="multipart/form-data">
+                  <div class="modal fade" id="mod{{$articulo->id}}">
+                      <div class="modal-dialog modal-xl">
+                        <form  method="POST" action="/articulo/{{$articulo->id}}" enctype="multipart/form-data">
                           @method('PUT')
                           {{ csrf_field() }}
                           <div class="modal-content bg-secondary">
                               <div class="modal-header">
-                                <h4 class="modal-title">Actualizar Proveedor</h4>
+                                <h4 class="modal-title">Actualizar artículo
+                                  
+                                </h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                                 </button>
@@ -124,26 +142,55 @@
                               <div class="modal-body">
                                 <!--Cuerpo del Modal-->
                                 <div class="row">
-                                  <div class="col-md-8 offset-2 ">
-                                    <div class="form-group">
-                                      <label for="agrenom">Nombre</label>
-                                      <input id="agrenom" name="Nombre" class="form-control input" type="text"  value = "{{$proveedor->nombre}}">
-                                      <!-- phone mask -->
-                                    
-                                      <label for="agretel">Teléfono:</label>
-                      
-                                          <div class="input-group">
-                                              <div class="input-group-prepend">
-                                              <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                              </div>
-                                              <input id="agretel" name="Telefono" type="text" class="form-control" data-inputmask="'mask': '99999999'" placeholder="99999999" value="{{$proveedor->celular}}">
-                                          </div>
+                                    <div class="col-12 col-sm-6">
                                       
-                                      <label for="agredir">Direccion</label>
-                                        <input id="agredir"  name="Direccion" type="text" class="form-control" value="{{$proveedor->direccion}}" placeholder="Ingrese una dirección Ej: Los arboles #3443 Ave. El manjar." >
+                                      <div class="col-12">
+                                        <img src="{{asset('asset/img/articulos/'.$articulo->imagen)}}" class="product-image" alt="Product Image">
+                                      </div>
+                                      
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <div class="form-group"><!--'estado','nombre','descripcion','imagen','vencimiento','stok'-->
+                                            <label for="addnom">Nombre</label>
+                                            <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" value="{{$articulo->nombre}}" maxlength=60>
+                                            <label for="addape">Descripción</label>
+                                            <textarea id="addape" name="Descripcion" class="form-control input"  placeholder="Ingrese su descripción..." maxlength=100>{{$articulo->descripcion}}</textarea>
+                                            <label for="addcontra">Caducidad</label>
+                                            <input id="addcontra" name="Vencimiento" class="form-control input" type="date"  value="{{$articulo->vencimiento}}">                                            
+                                            <label for="addcontra">Cantidad</label>
+                                            <input id="addcontra" name="Cantidad" class="form-control input" type="number" style="width: 50%;" value="{{$articulo->stok}}" min={{$articulo->stok}} max=200 >      
+                                            <label for="addm">Marca</label>
+                                            <select id="addm" name="Marca" class="form-control select2" style="width: 50%;">
+                                              @foreach ($marcas as $marca)
+                                                @if ($marca->id == $articulo->idmar)
+                                                  <option selected="selected" value="{{$marca->id}}">{{$marca->nombre}}</option>
+                                                @else
+                                                  <option value="{{$marca->id}}">{{$marca->nombre}}</option>
+                                                @endif
+                                              @endforeach
+                                              
+                                            </select>
+                                            <label for="addtipo">Proveedor</label>
+                                            <select id="addtipo" name="Proveedor" class="form-control select2" style="width: 50%;">
+                                                @foreach ($proveedores as $proveedor)
+                                                  @if ($proveedor->id == $articulo->idprov)
+                                                    <option selected="selected" value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
+                                                  @else
+                                                    <option value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
+                                                  @endif
+                                                @endforeach
+                                            </select>
+      
+                                            <label for="addco2">Selecionar imagen:</label>
+                                            <input id="addco2" accept="image/*" name="Imagen" class="form-control input" type="file" placeholder="Seleccione una imagen..."  >
+      
+                                            <div class="card-footer ">
+                                             
+                                            </div>
+                                        </div>
+                        
                                     </div>
                                   </div>
-                                </div>
                                 <!--Fin del cuerpo del modal-->
                               </div>
                               <div class="modal-footer justify-content-between">

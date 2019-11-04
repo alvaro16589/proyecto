@@ -6,10 +6,11 @@ namespace App\Http\Controllers;
 use App\Usuario;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUsuarioRequest;//modulo agregado de los requests para las validaciones de los campos enviados por los formularios
-use Illuminate\Http\File;
 
+use Illuminate\Http\File;
 use Response;
 use Illuminate\Support\Facades\Storage;
+
 class UsuarioController extends Controller
 {
     /**

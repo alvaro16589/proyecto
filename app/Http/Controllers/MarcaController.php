@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Marca;
+
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreMarcaRequest;
 
@@ -42,7 +43,7 @@ class MarcaController extends Controller
         $marca->ciudad = $request->input('Ciudad');
         $marca->save();
         $marcas = Marca::all();//muestra todos los datos de la lista en un list
-        return view('marca/marca',compact('marcas'))->with('status','Guardado exitoso...!');//hace el envio de datos en al url de clientes 
+        return view('marca/marca',compact('marcas'))->with('status','Guardado exitoso...!')->with('pagina','marca');//hace el envio de datos en al url de clientes 
     }
 
     /**

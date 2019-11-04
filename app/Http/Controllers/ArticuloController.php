@@ -3,7 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\articulo;
+use App\Proveedor;
+use App\Marca;
 use Illuminate\Http\Request;
+
+use App\Http\Requests\StoreArticuloRequest;
+use Illuminate\Http\File;
+use Response;
+use Illuminate\Support\Facades\Storage;
 
 class ArticuloController extends Controller
 {
@@ -14,8 +21,10 @@ class ArticuloController extends Controller
      */
     public function index()
     {
+        $marcas = Marca::all();
+        $proveedores = Proveedor::all();
         $articulos = Articulo::all();//muestra todos los datos de la lista en un list
-        return view('articulo/articulo',compact('articulos'))->with('pagina','articulo');//hace el envio de datos en al url de clientes 
+        return view('articulo/articulo',compact('articulos'),compact('marcas'))->with(compact('proveedores'))->with('pagina','articulo');//hace el envio de datos en al url de clientes 
     }
 
     /**
@@ -25,7 +34,7 @@ class ArticuloController extends Controller
      */
     public function create()
     {
-        //
+        return 'estamos en el controlador create';
     }
 
     /**
@@ -34,9 +43,34 @@ class ArticuloController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(StoreArticuloRequest $request)
+    {//'estado','nombre','descripcion','imagen','vencimiento','stok'
+
+        $arti = new Articulo();
+        if ($request->hasFile('Imagen')) {
+            $file = $request->file('Imagen');//generando ruta de guardado
+            $name = time().$file->getClientOriginalName();//generando nombre de usuario
+            $file->move(public_path().'/asset/img/articulos',$name);////'
+            $arti->imagen = $name;
+        }
+        else{
+            $arti->imagen = 'default-150x150.png';
+        }
+        
+        $arti->estado = 'activo';
+        $arti->nombre = $request->input('Nombre');
+        $arti->descripcion = $request->input('Descripcion');
+        
+        $arti->vencimiento = $request->input('Vencimiento');
+        $arti->stok = $request->input('Cantidad');
+        $arti->idusua = '1';
+        $arti->idmar = $request->input('Marca');
+        $arti->idprov = $request->input('Proveedor');
+        $arti->save();
+        $marcas = Marca::all();
+        $proveedores = Proveedor::all();
+        $articulos = Articulo::all();//muestra todos los datos de la lista en un list
+        return view('articulo/articulo',compact('articulos'),compact('marcas'))->with(compact('proveedores'))->with('status','Guardado exitoso...!')->with('pagina','articulo');//hace el envio de datos en al url de clientes  
     }
 
     /**
@@ -47,7 +81,10 @@ class ArticuloController extends Controller
      */
     public function show(articulo $articulo)
     {
-        //
+        $marcas = Marca::all();
+        $proveedores = Proveedor::all();
+        $articulos = Articulo::all();//muestra todos los datos de la lista en un list
+        return view('articulo/articulo',compact('articulos'),compact('marcas'))->with(compact('proveedores'))->with('pagina','articulo');//hace el envio de datos en al url de clientes 
     }
 
     /**
@@ -58,7 +95,19 @@ class ArticuloController extends Controller
      */
     public function edit(articulo $articulo)
     {
-        //
+        if ($articulo->estado == 'activo') {
+            $articulo->estado = 'inactivo';
+        }else{
+           
+            $articulo->estado =  'activo';
+           
+        } 
+        
+        $articulo->save();
+        $marcas = Marca::all();
+        $proveedores = Proveedor::all();
+        $articulos = Articulo::all();//muestra todos los datos de la lista en un list
+        return view('articulo/articulo',compact('articulos'),compact('marcas'))->with(compact('proveedores'))->with('pagina','articulo');//hace el envio de datos en al url de clientes 
     }
 
     /**
@@ -68,10 +117,35 @@ class ArticuloController extends Controller
      * @param  \App\articulo  $articulo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, articulo $articulo)
+    public function update(StoreArticuloRequest $request, articulo $articulo)
     {
-        //
+        if ($request->hasFile('Imagen')) {
+            //eliminacion de la foto ya existente
+            if ($articulo->imagen != 'default-150x150.png') { 
+                $file_path = public_path().'/asset/img/articulos/'.$articulo->imagen;
+                \File::delete($file_path);         
+           }
+            //agregando la nueva foto al path
+            $file = $request->file('Imagen');//generando ruta de guardado
+            $name = time().$file->getClientOriginalName();//generando nombre de usuario
+            $file->move(public_path().'/asset/img/articulos',$name);////'
+            $articulo->imagen = $name;
+        }
+        
+        $articulo->nombre = $request->input('Nombre');
+        $articulo->descripcion = $request->input('Descripcion');
+        $articulo->vencimiento = $request->input('Vencimiento');
+        $articulo->stok = $request->input('Cantidad');
+        $articulo->idmar = $request->input('Marca');
+        $articulo->idprov = $request->input('Proveedor');
+        $articulo->save();
+
+        $marcas = Marca::all();
+        $proveedores = Proveedor::all();
+        $articulos = Articulo::all();//muestra todos los datos de la lista en un list
+        return view('articulo/articulo',compact('articulos'),compact('marcas'))->with(compact('proveedores'))->with('status','Actualización hecha, Satisfactoriamente...!')->with('pagina','articulo');//llamar a la vista del provee
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -81,6 +155,15 @@ class ArticuloController extends Controller
      */
     public function destroy(articulo $articulo)
     {
-        //
+        if ($articulo->imagen != 'default-150x150.png') { 
+             $file_path = public_path().'/asset/img/articulos/'.$articulo->imagen;
+             \File::delete($file_path);         
+        }
+       
+        $articulo->delete();
+        $marcas = Marca::all();
+        $proveedores = Proveedor::all();
+        $articulos = Articulo::all();//muestra todos los datos de la lista en un list
+        return view('articulo/articulo',compact('articulos'),compact('marcas'))->with(compact('proveedores'))->with('status','Eliminación hecha, Satisfactoriamente...!')->with('pagina','usuario');//llamar a la vista del provee
     }
 }

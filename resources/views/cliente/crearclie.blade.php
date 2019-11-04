@@ -33,9 +33,9 @@
                           <!--Contenido del modal--> 
                           <div class="form-group">
                               <label for="addnom">Nombre</label>
-                              <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre">
+                              <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" maxlength=50>
                               <label for="addape">Apellido</label>
-                              <input id="addape" name="Apellido" class="form-control input" type="text" placeholder="Ingrese su apellido">
+                              <input id="addape" name="Apellido" class="form-control input" type="text" placeholder="Ingrese su apellido" maxlength=50>
                               
                              <!-- phone mask -->
                       
@@ -90,10 +90,10 @@
                 <td><form method="POST" action="/cliente/{{$cliente->id}}">
                         @method('DELETE')
                         {{ csrf_field() }}  <!--genera un token para enviar los datos al controlador-->
-                        <button type="submit" class="btn btn-danger btn-sm">Borrar</button>
+                        <button type="submit" class="btn btn-danger btn-sm"><i for="btn" class="fa fa-trash"></i> Borrar</button>
                     </form>
                 </td>
-                <td><a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#mod{{$cliente->id}}">Editar</a></td>
+                <td><a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#mod{{$cliente->id}}"><i for="btn" class="fa fa-edit"></i> Editar</a></td>
               </tr>  
                 <!--modal editar usuario-->
                 <div class="modal fade" id="mod{{$cliente->id}}">
@@ -114,9 +114,9 @@
                                                         
                                 <div class="form-group">
                                     <label for="agrenom">Nombre</label>
-                                    <input id="agrenom" value="{{$cliente->nombre}}" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre">
+                                    <input id="agrenom" value="{{$cliente->nombre}}" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" maxlength=50>
                                     <label for="agreape">Apellido</label>
-                                    <input id="agreape" value="{{$cliente->apellido}}" name="Apellido" class="form-control input" type="text" placeholder="Ingrese su apellido">
+                                    <input id="agreape" value="{{$cliente->apellido}}" name="Apellido" class="form-control input" type="text" placeholder="Ingrese su apellido" maxlength=50>
                                 
                                     <!-- phone mask -->
                             
