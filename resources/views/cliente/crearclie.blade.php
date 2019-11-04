@@ -151,9 +151,13 @@
             </tbody>
            
           </table>
-          {{ $clientes->links() }}
+          
         </div>
         <!-- /.card-body -->
+        <!--paginacion de tablas en la pagina -->
+        <div class="pagination justify-content-center">
+            {{ $clientes->links() }}
+        </div>
       </div>
       <!-- /.card -->
     </div>

@@ -16,7 +16,7 @@ class MarcaController extends Controller
      */
     public function index()
     {
-        $marcas = Marca::all();//muestra todos los datos de la lista en un list
+        $marcas = Marca::paginate(10);//muestra todos los datos de la lista en un list
         return view('marca/marca',compact('marcas'))->with('pagina','marca');//hace el envio de datos en al url de clientes 
     }
 
@@ -42,7 +42,7 @@ class MarcaController extends Controller
         $marca->nombre = $request->input('Nombre');
         $marca->ciudad = $request->input('Ciudad');
         $marca->save();
-        $marcas = Marca::all();//muestra todos los datos de la lista en un list
+        $marcas = Marca::paginate(10);//muestra todos los datos de la lista en un list
         return view('marca/marca',compact('marcas'))->with('status','Guardado exitoso...!')->with('pagina','marca');//hace el envio de datos en al url de clientes 
     }
 
@@ -54,7 +54,7 @@ class MarcaController extends Controller
      */
     public function show(Marca $marca)
     {
-        $marcas = Marca::all();//muestra todos los datos de la lista en un list
+        $marcas = Marca::paginate(10);//muestra todos los datos de la lista en un list
         return view('marca/marca',compact('marcas'))->with('pagina','marca');//hace el envio de datos en al url de clientes
     }
 
@@ -81,7 +81,7 @@ class MarcaController extends Controller
         $marca->nombre = $request->input('Nombre');
         $marca->ciudad = $request->input('Ciudad');
         $marca->save();
-        $marcas = Marca::all();//muestra todos los datos de la lista en un list
+        $marcas = Marca::paginate(10);//muestra todos los datos de la lista en un list
         return view('marca/marca',compact('marcas'))->with('status','Actualización hecha, Satisfactoriamente...!')->with('pagina','marca');//hace el envio de datos en al url de clientes 
     }
 
@@ -94,7 +94,7 @@ class MarcaController extends Controller
     public function destroy(Marca $marca)
     {
         $marca->delete();
-        $marcas = Marca::all();//muestra todos los datos de la lista en un list
+        $marcas = Marca::paginate(10);//muestra todos los datos de la lista en un list
         return view('marca/marca',compact('marcas'))->with('status','Eliminación hecha, Satisfactoriamente...!')->with('pagina','marca');//hace el envio de datos en al url de clientes 
     }
 }

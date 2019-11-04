@@ -20,7 +20,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarios = Usuario::all();
+        $usuarios = Usuario::paginate(10);
         return view('usuario/usuario',compact('usuarios'))->with('pagina','usuario');
     }
 
@@ -58,7 +58,7 @@ class UsuarioController extends Controller
         $usua->tipo = $request->input('Tipo');
         $usua->foto = $name;
         $usua->save();
-         $usuarios = Usuario::all();
+         $usuarios = Usuario::paginate(10);
         return view('usuario/usuario',compact('usuarios'))->with('status','Guardado exitoso...!')->with('pagina','usuario');
         
 
@@ -72,7 +72,7 @@ class UsuarioController extends Controller
      */
     public function show(Usuario $usuario)
     {
-        $usuarios = Usuario::all();
+        $usuarios = Usuario::paginate(10);
         return view('usuario/usuario',compact('usuarios'))->with('pagina','usuario');
     }
 
@@ -93,7 +93,7 @@ class UsuarioController extends Controller
         } 
         
         $usuario->save();
-        $usuarios = Usuario::all();//Llamar a todos los datos contenidos dentro de la tabla proveedor
+        $usuarios = Usuario::paginate(10);//Llamar a todos los datos contenidos dentro de la tabla proveedor
         return view('usuario/usuario',compact('usuarios'))->with('pagina','usuario');//llamar a la vista del provee
     }
 
@@ -123,7 +123,7 @@ class UsuarioController extends Controller
         $usuario->tipo = $request->input('Tipo');
         
         $usuario->save();
-        $usuarios = Usuario::all();//Llamar a todos los datos contenidos dentro de la tabla proveedor
+        $usuarios = Usuario::paginate(10);//Llamar a todos los datos contenidos dentro de la tabla proveedor
         return view('usuario/usuario',compact('usuarios'))->with('status','Actualización hecha, Satisfactoriamente...!')->with('pagina','usuario');//llamar a la vista del provee
     }
 
@@ -138,7 +138,7 @@ class UsuarioController extends Controller
         $file_path = public_path().'/asset/img/userprofile/'.$usuario->foto;
         \File::delete($file_path);
         $usuario->delete();
-        $usuarios = Usuario::all();//Llamar a todos los datos contenidos dentro de la tabla proveedor
+        $usuarios = Usuario::paginate(10);//Llamar a todos los datos contenidos dentro de la tabla proveedor
         return view('usuario/usuario',compact('usuarios'))->with('status','Eliminación hecha, Satisfactoriamente...!')->with('pagina','usuario');//llamar a la vista del provee
         
     }

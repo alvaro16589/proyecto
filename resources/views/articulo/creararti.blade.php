@@ -208,6 +208,10 @@
           </tbody>
         </table>
       </div>
+      <!--paginacion de tablas en la pagina -->
+      <div class="pagination justify-content-center">
+          {{ $articulos->links() }}
+        </div>
     </div>
   <!--fin tabla-->
       <!-- /.card -->

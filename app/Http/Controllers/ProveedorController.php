@@ -14,7 +14,7 @@ class ProveedorController extends Controller
      */
     public function index()
     {
-        $proveedores = Proveedor::all();//Llamar a todos los datos contenidos dentro de la tabla proveedor
+        $proveedores = Proveedor::paginate(10);//Llamar a todos los datos contenidos dentro de la tabla proveedor
         return view('proveedor/proveedor',compact('proveedores'))->with('pagina','proveedor');//llamar a la vista del proveedor
     }
 
@@ -42,7 +42,7 @@ class ProveedorController extends Controller
         $prove->celular = $request->input('Telefono');
         $prove->direccion = $request->input('Direccion');
         $prove->save();
-        $proveedores = Proveedor::all();
+        $proveedores = Proveedor::paginate(10);
         return view('proveedor/proveedor',compact('proveedores'))->with('status','Guardado exitoso...!')->with('pagina','proveedor');
         }
 
@@ -54,7 +54,7 @@ class ProveedorController extends Controller
      */
     public function show(Proveedor $proveedor)
     {
-        $proveedores = Proveedor::all();//Llamar a todos los datos contenidos dentro de la tabla proveedor
+        $proveedores = Proveedor::paginate(10);//Llamar a todos los datos contenidos dentro de la tabla proveedor
         return view('proveedor/proveedor',compact('proveedores'))->with('pagina','proveedor');//llamar a la vista del provee
     }
 
@@ -75,7 +75,7 @@ class ProveedorController extends Controller
         } 
         
         $proveedor->save();
-        $proveedores = Proveedor::all();//Llamar a todos los datos contenidos dentro de la tabla proveedor
+        $proveedores = Proveedor::paginate(10);//Llamar a todos los datos contenidos dentro de la tabla proveedor
         return view('proveedor/proveedor',compact('proveedores'))->with('pagina','proveedor');//llamar a la vista del provee
     }
 
@@ -92,7 +92,7 @@ class ProveedorController extends Controller
         $proveedor->celular = $request->input('Telefono');
         $proveedor->direccion = $request->input('Direccion');
         $proveedor->save();
-        $proveedores = Proveedor::all();//Llamar a todos los datos contenidos dentro de la tabla proveedor
+        $proveedores = Proveedor::paginate(10);//Llamar a todos los datos contenidos dentro de la tabla proveedor
         return view('proveedor/proveedor',compact('proveedores'))->with('status','Actualización hecha, Satisfactoriamente...!')->with('pagina','proveedor');//llamar a la vista del provee
     }
 
@@ -105,7 +105,7 @@ class ProveedorController extends Controller
     public function destroy(Proveedor $proveedor)
     {
         $proveedor->delete();
-        $proveedores = Proveedor::all();//Llamar a todos los datos contenidos dentro de la tabla proveedor
+        $proveedores = Proveedor::paginate(10);//Llamar a todos los datos contenidos dentro de la tabla proveedor
         return view('proveedor/proveedor',compact('proveedores'))->with('status','Eliminación hecha, Satisfactoriamente...!')->with('pagina','proveedor');//llamar a la vista del provee
     }
 }

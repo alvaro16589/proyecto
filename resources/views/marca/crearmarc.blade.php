@@ -127,6 +127,10 @@
       
             </div>
             <!-- /.card-body -->
+            <!--paginacion de tablas en la pagina -->
+            <div class="pagination justify-content-center">
+              {{ $marcas->links() }}
+            </div>
           </div>
           <!-- /.card -->
         </div>

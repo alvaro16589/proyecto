@@ -159,7 +159,12 @@
                 </div>
           @endforeach
         </tbody>
+
       </table>
+       <!--paginacion de tablas en la pagina -->
+       <div class="pagination justify-content-center">
+          {{ $proveedores->links() }}
+        </div>
     </div>
   </div>
 <!--fin tabla-->
