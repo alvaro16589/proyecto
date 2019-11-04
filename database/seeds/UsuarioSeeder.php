@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Usuario;
 
 class UsuarioSeeder extends Seeder
 {
@@ -11,10 +12,8 @@ class UsuarioSeeder extends Seeder
      */
     public function run()
     {
-        $tipo = ['administrador',
-        'vendedor',
-        'secretaria'];
-        foreach($tipo as $key=>$value)
-        DB::insert('insert into users (nombre,apellido,contraseña,estado,tipo) values ("jose","perez","contraseña","activo",$key)');
+        factory(Usuario::class,50)->create();
+
+        
     }
 }

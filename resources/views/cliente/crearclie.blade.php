@@ -149,8 +149,9 @@
               
 
             </tbody>
+           
           </table>
-  
+          {{ $clientes->links() }}
         </div>
         <!-- /.card-body -->
       </div>

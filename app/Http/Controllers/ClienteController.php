@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Cliente;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreClienteRequest;
-
+use Illuminate\Support\Facades\DB;  
+use App\Http\Controllers\Controller;
 
 class ClienteController extends Controller
 {
@@ -16,7 +17,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Cliente::all();//muestra todos los datos de la lista en un list
+        //$clientes = Cliente::all();//muestra todos los datos de la lista en un list
+        $clientes = DB::table('cliente')->simplePaginate(10);
         return view('/cliente/cliente',compact('clientes'))->with('pagina','cliente');//hace el envio de datos en al url de clientes 
     }
 

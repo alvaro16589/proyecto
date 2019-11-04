@@ -17,7 +17,7 @@ class CreateUsuarioTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombre', 30);
             $table->string('apellido',30);
-            $table->string('contraseña',30);
+            $table->string('contraseña',100);
             $table->string('estado',15);
             $table->set('tipo', ['administrador', 'vendedor','secretaria']);
             $table->string('foto',60);
