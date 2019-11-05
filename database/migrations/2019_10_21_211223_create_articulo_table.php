@@ -21,6 +21,7 @@ class CreateArticuloTable extends Migration
             $table->string('imagen', 150);
             $table->date('vencimiento');
             $table->integer('stok');
+            $table->float('precio',6,2);
             $table->unsignedBigInteger('idusua');
             $table->foreign('idusua')->references('id')->on('usuario')->onDelete('cascade');
             $table->unsignedBigInteger('idmar');

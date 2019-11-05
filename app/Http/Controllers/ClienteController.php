@@ -18,7 +18,7 @@ class ClienteController extends Controller
     public function index()
     {
         //$clientes = Cliente::all();//muestra todos los datos de la lista en un list
-        $clientes = DB::table('cliente')->paginate(10);
+        $clientes = DB::table('cliente')->paginate(15);
         return view('/cliente/cliente',compact('clientes'))->with('pagina','cliente');//hace el envio de datos en al url de clientes 
     }
 
@@ -46,7 +46,7 @@ class ClienteController extends Controller
         $client->apellido = $request->input('Apellido');
         $client->ci =(int) $request->input('CI');
         $client->save();
-        $clientes = Cliente::paginate(10);;//muestra todos los datos de la lista en un list
+        $clientes = Cliente::paginate(15);;//muestra todos los datos de la lista en un list
         return view('/cliente/cliente',compact('clientes'))->with('status','Guardado satisfactoriamente...!')->with('pagina','cliente');//hace el envio de datos en al url de clientes 
     }
 
@@ -58,7 +58,7 @@ class ClienteController extends Controller
      */
     public function show(Cliente $cliente)
     {
-        $clientes = Cliente::paginate(10);//muestra todos los datos de la lista en un list
+        $clientes = Cliente::paginate(15);//muestra todos los datos de la lista en un list
         return view('/cliente/cliente',compact('clientes'))->with('pagina','cliente');//hace el envio de datos en al url de clientes 
     }
 
@@ -86,7 +86,7 @@ class ClienteController extends Controller
         $cliente->apellido = $request->input('Apellido');
         $cliente->ci = $request->input('CI');
         $cliente->save();
-        $clientes = Cliente::paginate(10);//muestra todos los datos de la lista en un list
+        $clientes = Cliente::paginate(15);//muestra todos los datos de la lista en un list
         return view('/cliente/cliente',compact('clientes'))->with('status','Actualización hecha, satisfactoriamente...!')->with('pagina','cliente');//hace el envio de datos en al url de clientes 
         
         
@@ -101,7 +101,7 @@ class ClienteController extends Controller
     public function destroy(Cliente $cliente)
     {
         $cliente->delete();
-        $clientes = Cliente::paginate(10);//muestra todos los datos de la lista en un list
+        $clientes = Cliente::paginate(15);//muestra todos los datos de la lista en un list
         return view('/cliente/cliente',compact('clientes'))->with('status','Eliminado satisfactoriamente...!')->with('pagina','cliente');//hace el envio de datos en al url de clientes 
     }
 }

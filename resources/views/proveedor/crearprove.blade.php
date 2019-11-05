@@ -62,7 +62,7 @@
     </div>
   
 
-    <div class="card-body table-responsive p-0" style="height: 600px;">
+    <div class="card-body table-responsive p-0" style="height: 60em;">
       <table class="table table-head-fixed table-hover " >
         <thead>
           <tr>

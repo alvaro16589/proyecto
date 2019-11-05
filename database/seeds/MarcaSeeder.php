@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\Marca;
 class MarcaSeeder extends Seeder
 {
     /**
@@ -11,6 +11,6 @@ class MarcaSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(Marca::class,10)->create();
     }
 }

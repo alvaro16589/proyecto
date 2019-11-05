@@ -2,8 +2,7 @@
   <!--tabla-->
   <div class="card card-primary mt-5">
       <div class="card-header">
-        <h3 class="card-title">articulo
-          ES</h3>
+        <h3 class="card-title">Detalle articulos</h3>
   
         <div class="card-tools">
           <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#formularioAgregar" ><i class="fas fa-plus"></i> Agregar</button>
@@ -35,7 +34,9 @@
                             <label for="addcontra">Caducidad</label>
                             <input id="addcontra" name="Vencimiento" class="form-control input" type="date"  >                                            
                             <label for="addcontra">Cantidad</label>
-                            <input id="addcontra" name="Cantidad" class="form-control input" type="number" style="width: 50%;" min=0 max=200 value="1">      
+                            <input id="addcontra" name="Cantidad" class="form-control input" type="number" style="width: 50%;" min=0 max=200 value="1">  
+                            <label for="addcontra">Precio(Bs.)</label>
+                            <input id="addcontra" name="Precio" class="form-control input" type="number" style="width: 50%;" min=1.0 max=500000.0 value="1.0">  
                             <label for="addm">Marca</label>
                             <select id="addm" name="Marca" class="form-control select2" style="width: 50%;" aria-placeholder="Seleccione una marca...">
                               @foreach ($marcas as $marca)
@@ -76,7 +77,7 @@
       </div>
     
   
-      <div class="card-body table-responsive p-0" style="height: 600px;">
+      <div class="card-body table-responsive p-0" style="height: 60em;">
         <table class="table table-head-fixed table-hover " >
           <thead><!--'estado','nombre','descripcion','imagen','vencimiento','stok'-->
               <tr>
@@ -84,7 +85,8 @@
                   <th>Estado</th>
                   <th>Nombre</th>
                   <th>Imagen</th>
-                  <th>stok</th>
+                  <th>Cantidad</th>
+                  <th>Precio (Bs.)</th>
                   <th></th>
                   <th></th>
                 </tr>
@@ -111,6 +113,7 @@
                   </td>
                   <td><img class=" img-fluid img-scuare img-bordered-sm img-md " src="{{asset('asset/img/articulos/'.$articulo->imagen)}}" alt="user image"></td>
                   <td>{{$articulo->stok}}</td>
+                  <td>{{$articulo->precio}}</td>
                   <td>
                     <form method="POST" action="/articulo/{{$articulo->id}}">
                           @method('DELETE')
@@ -159,6 +162,8 @@
                                             <input id="addcontra" name="Vencimiento" class="form-control input" type="date"  value="{{$articulo->vencimiento}}">                                            
                                             <label for="addcontra">Cantidad</label>
                                             <input id="addcontra" name="Cantidad" class="form-control input" type="number" style="width: 50%;" value="{{$articulo->stok}}" min={{$articulo->stok}} max=200 >      
+                                            <label for="addcontra">Precio(Bs.)</label>
+                                            <input id="addcontra" name="Precio" class="form-control input" type="number" style="width: 50%;" min=1.0 max=500000.0 value="{{$articulo->precio}}">  
                                             <label for="addm">Marca</label>
                                             <select id="addm" name="Marca" class="form-control select2" style="width: 50%;">
                                               @foreach ($marcas as $marca)

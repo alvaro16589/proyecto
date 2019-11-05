@@ -63,6 +63,7 @@ class ArticuloController extends Controller
         
         $arti->vencimiento = $request->input('Vencimiento');
         $arti->stok = $request->input('Cantidad');
+        $arti->precio = $request->input('Precio');
         $arti->idusua = '1';
         $arti->idmar = $request->input('Marca');
         $arti->idprov = $request->input('Proveedor');
@@ -136,8 +137,10 @@ class ArticuloController extends Controller
         $articulo->descripcion = $request->input('Descripcion');
         $articulo->vencimiento = $request->input('Vencimiento');
         $articulo->stok = $request->input('Cantidad');
+        $articulo->precio = $request->input('Precio');
         $articulo->idmar = $request->input('Marca');
         $articulo->idprov = $request->input('Proveedor');
+        
         $articulo->save();
 
         $marcas = Marca::all();

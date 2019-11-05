@@ -107,9 +107,12 @@ class UsuarioController extends Controller
     public function update(StoreUsuarioRequest $request, Usuario $usuario)
     { 
         if ($request->hasFile('Foto')) {
-            //eliminacion de la foto ya existente
-            $file_path = public_path().'/asset/img/userprofile/'.$usuario->foto;
-            \File::delete($file_path);
+             //eliminacion de la foto si ya existente
+             if ($usuario->foto != 'user2-160x160.jpg') { 
+                $file_path = public_path().'/asset/img/userprofile/'.$usuario->foto;
+                \File::delete($file_path);        
+           }
+            
             //agregando la nueva foto al path
             $file = $request->file('Foto');//generando ruta de guardado
             $name = time().$file->getClientOriginalName();//generando nombre de usuario
@@ -135,8 +138,11 @@ class UsuarioController extends Controller
      */
     public function destroy(Usuario $usuario)
     {
-        $file_path = public_path().'/asset/img/userprofile/'.$usuario->foto;
-        \File::delete($file_path);
+        
+        if ($usuario->foto != 'user2-160x160.jpg') { 
+            $file_path = public_path().'/asset/img/userprofile/'.$usuario->foto;
+            \File::delete($file_path); 
+        }
         $usuario->delete();
         $usuarios = Usuario::paginate(10);//Llamar a todos los datos contenidos dentro de la tabla proveedor
         return view('usuario/usuario',compact('usuarios'))->with('status','Eliminación hecha, Satisfactoriamente...!')->with('pagina','usuario');//llamar a la vista del provee
