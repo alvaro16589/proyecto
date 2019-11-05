@@ -20,7 +20,7 @@
 </head>
 <body class="hold-transition login-page" style="background-image: url({{asset('asset/img/background/hd-wallpaper-all-5.jpg')}})">
     
-        @include('login/logbody')
+        //include('login/logbody')
 
 <!-- jQuery -->
 <script src="{{asset('asset/adminlte/plugins/jquery/jquery.min.js')}}"></script>

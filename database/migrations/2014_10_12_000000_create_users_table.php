@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProvmarcTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateProvmarcTable extends Migration
      */
     public function up()
     {
-        Schema::create('provmarc', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('idusua');
-            $table->foreign('idusua')->references('id')->on('usuario')->onDelete('cascade');
-            $table->unsignedBigInteger('idprov');
-            $table->foreign('idprov')->references('id')->on('proveedor')->onDelete('cascade');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
-
         });
     }
 
@@ -31,6 +31,6 @@ class CreateProvmarcTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('provmarc');
+        Schema::dropIfExists('users');
     }
 }

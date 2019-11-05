@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -28,30 +27,9 @@
         @include('tema.aside')
         <main class="py-4">
             @yield('content')
-
         </main>
     </div>
-        @section('content')
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-header">Aplicación</div>
 
-                        <div class="card-body">
-                            @if (session('status'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('status') }}
-                                </div>
-                            @endif
-
-                        @include('welcome')
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endsection
     <!-- jQuery -->
     <script src="{{asset('asset/adminlte/plugins/jquery/jquery.min.js')}}"></script>
     <!-- Bootstrap 4 -->
@@ -62,5 +40,3 @@
     <script src="{{asset('asset/adminlte/dist/js/demo.js')}}"></script>
 </body>
 </html>
-
-

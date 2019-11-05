@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Provmarc;
+use App\ImagenArti;
 use Illuminate\Http\Request;
 
-class ProvmarcController extends Controller
+class ImagenArtiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ProvmarcController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Provmarc  $provmarc
+     * @param  \App\ImagenArti  $imagenArti
      * @return \Illuminate\Http\Response
      */
-    public function show(Provmarc $provmarc)
+    public function show(ImagenArti $imagenArti)
     {
         //
     }
@@ -52,10 +52,10 @@ class ProvmarcController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Provmarc  $provmarc
+     * @param  \App\ImagenArti  $imagenArti
      * @return \Illuminate\Http\Response
      */
-    public function edit(Provmarc $provmarc)
+    public function edit(ImagenArti $imagenArti)
     {
         //
     }
@@ -64,10 +64,10 @@ class ProvmarcController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Provmarc  $provmarc
+     * @param  \App\ImagenArti  $imagenArti
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Provmarc $provmarc)
+    public function update(Request $request, ImagenArti $imagenArti)
     {
         //
     }
@@ -75,10 +75,10 @@ class ProvmarcController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Provmarc  $provmarc
+     * @param  \App\ImagenArti  $imagenArti
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Provmarc $provmarc)
+    public function destroy(ImagenArti $imagenArti)
     {
         //
     }
