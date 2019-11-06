@@ -23,8 +23,8 @@
 </head>
 <body class="hold-transition sidebar-mini layout-boxed" style="background-color: lightgrey;">
     <div id="app"  class="wrapper">
-        @include('tema.header')
-        @include('tema.aside')
+        
+     
         <main class="py-4">
             @yield('content')
         </main>

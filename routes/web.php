@@ -13,7 +13,7 @@
 
 
 Route::resource('/', 'InicioController');
-Route::resource('/home','HomeController');
+
 Route::resource('/articulo', 'ArticuloController');
 Route::resource('/cliente', 'ClienteController');
 Route::resource('/detalle', 'DetalleController');

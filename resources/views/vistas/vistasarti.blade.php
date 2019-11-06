@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -6,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
 
-    <title>{{ config('app.name', 'Inicio') }}</title>
+    <title>{{$namepage}}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -16,42 +15,26 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{asset('asset/adminlte/plugins/fontawesome-free/css/all.min.css')}}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Styles -->
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('asset/adminlte/dist/css/adminlte.min.css')}}">
     <link rel="stylesheet" href="{{asset('asset/adminlte/dist/css/adminlte.css')}}">
 </head>
-<body class="hold-transition sidebar-mini layout-boxed" style="background-color: lightgrey;">
-    <div id="app"  class="wrapper">
+<body class="hold-transition sidebar-mini layout-top-nav" style="background-color: lightgrey;">
+    
+    <div class="wrapper">
         @include('tema.header')
-        @include('tema.aside')
-        <main class="py-4">
+        @yield('contenido')
+        
            
 
-        </main>
+        
     </div>
-        @section('content')
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-header">Aplicación</div>
-
-                        <div class="card-body">
-                            @if (session('status'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('status') }}
-                                </div>
-                            @endif
-
-                        
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endsection
+       
     <!-- jQuery -->
     <script src="{{asset('asset/adminlte/plugins/jquery/jquery.min.js')}}"></script>
     <!-- Bootstrap 4 -->

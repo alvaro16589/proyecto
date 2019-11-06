@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Usuario;
 use Illuminate\Http\Request;
-
+use App\Articulo;
 class InicioController extends Controller
 {
     /**
@@ -13,7 +13,8 @@ class InicioController extends Controller
      */
     public function index()
     {
-       return view('login/logcontent');
+        $articulos = Articulo :: paginate('12');
+       return view('vistas.vistas',compact('articulos'));
     }
    
      /**

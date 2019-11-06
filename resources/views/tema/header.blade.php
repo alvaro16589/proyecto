@@ -1,14 +1,13 @@
 
-<div class="container mt-3 mb-2 " style="text-align: start; display: block; filter: drop-shadow(3px 5px 6px grey); ">
-  <div class="" style=" background-image: url('{{asset('asset/adminlte/dist/img/Egzon_Bytyqi.jpeg')}}') ; color: ivory; height: 7em; " >
-    <div class="row">
-      <div class="col-6  offset-6 p-4 " >
-        <h1 >{{$namepage}}</h1>
+
+<div id="app">
+    <div  style="text-align: center; ">
+      <div class="row " style=" background-image: url('{{asset('asset/adminlte/dist/img/Egzon_Bytyqi.jpeg')}}') ; color: ivory; height: 7em; " >
+        <div class="col-12 " >
+          <h1 class="p-4">{{$namepage}}</h1>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-<div id="app">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-orange navbar-dark">
       <!-- Left navbar links -->
@@ -17,8 +16,8 @@
           <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a class="navbar-brand" href="{{ url('/') }}">
-              {{ config('app.name', 'Inicio') }}
+            <a class="navbar-brand" href="@guest{{ url('/') }} @else {{ url('/home') }}@endguest">
+              {{ $namepage }}
           </a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
@@ -44,11 +43,11 @@
               <!-- Authentication Links -->
               @guest
                   <li class="nav-item">
-                      <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                      <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar sesión') }}</a>
                   </li>
                   @if (Route::has('register'))
                       <li class="nav-item">
-                          <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                          <a class="nav-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
                       </li>
                   @endif
               @else
@@ -61,7 +60,7 @@
                           <a class="dropdown-item" href="{{ route('logout') }}"
                              onclick="event.preventDefault();
                                            document.getElementById('logout-form').submit();">
-                              {{ __('Logout') }}
+                              {{ __('Cerrar sesión') }}
                           </a>
 
                           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
