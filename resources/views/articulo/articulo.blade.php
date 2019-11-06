@@ -1,88 +1,226 @@
-
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>{{$namepage}}</title>
-        <!-- Tell the browser to be responsive to screen width -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="{{asset('asset/adminlte/plugins/fontawesome-free/css/all.min.css')}}">
-        <!-- Ionicons -->
-        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-        <!--switch-->
-        <link rel="stylesheet" href="{{asset('asset/adminlte/plugins/bootstrap-switch/js/bootstrap-switch.js')}}">
-        <link rel="stylesheet" href="{{asset('asset/adminlte/plugins/bootstrap-switch/css/bootstrap3/bootstrap-switch.css')}}">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="{{asset('asset/adminlte/dist/css/adminlte.min.css')}}">
-        <link rel="stylesheet" href="{{asset('asset/adminlte/dist/css/adminlte.css')}}">
-        <!-- rtoast-->
-        <link rel="stylesheet" href="{{asset('asset/adminlte/plugins/toastr/toastr.css')}}">
-        <!-- Google Font: Source Sans Pro -->
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    </head>
-    <body class="hold-transition sidebar-mini layout-boxed" style="background-color: lightgrey;">
-        
-        <!-- Content Wrapper. Contains page content -->
-        
-        <div class="wrapper">
-            @include('tema/aside')
-            @include('tema/header')
-            
-            <div class="content-wrapper">
-                <section class="content">
-                    
-                    
-                    <!--incluyendo el cliente-->
-                   @include('articulo/creararti')
-                </section>
+@extends('tema.layout')
+@section('contenido')
+    <!--end modal-->
+    <!--tabla-->
+    <div class="card card-primary mt-5">
+        <div class="card-header">
+            <h3 class="card-title">Detalle articulos</h3>
+    
+            <div class="card-tools">
+                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#formularioAgregar" ><i class="fas fa-plus"></i> Agregar</button>
+                
             </div>
-            
-        
-                <!-- Control Sidebar -->
-                
-            <!-- /.control-sidebar -->
-            <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-            
-            </aside>
-        
+              <!--modal-->
+            <div class="modal fade" id="formularioAgregar">
+                <div class="modal-dialog modal-lg">
+                <form action="/articulo" method="POST" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <div class="modal-content bg-secondary">
+                        <div class="modal-header">
+                        <h4 class="modal-title">Ingresar articulo
+                            
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                        <!--Cuerpo del Modal-->
+                        <div class="row">
+                            <div class="col-md-8 offset-2 ">
+                                <div class="form-group"><!--'estado','nombre','descripcion','imagen','vencimiento','stok'-->
+                                <label for="addnom">Nombre</label>
+                                <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" maxlength=60 >
+                                <label for="addape">Descripción</label>
+                                <textarea id="addape" name="Descripcion" class="form-control input"  placeholder="Ingrese su descripción..." maxlength=100></textarea>
+                                <label for="addcontra">Caducidad</label>
+                                <input id="addcontra" name="Vencimiento" class="form-control input" type="date"  >                                            
+                                <label for="addcontra">Cantidad</label>
+                                <input id="addcontra" name="Cantidad" class="form-control input" type="number" style="width: 50%;" min=0 max=200 value="1">  
+                                <label for="addcontra">Precio(Bs.)</label>
+                                <input id="addcontra" name="Precio" class="form-control input" type="number" style="width: 50%;" min=1.0 max=500000.0 value="1.0">  
+                                <label for="addm">Marca</label>
+                                <select id="addm" name="Marca" class="form-control select2" style="width: 50%;" aria-placeholder="Seleccione una marca...">
+                                    @foreach ($marcas as $marca)
+                                    <option value="{{$marca->id}}">{{$marca->nombre}}</option>
+                                    @endforeach
+                                    
+                                </select>
+                                <label for="addtipo">Proveedor</label>
+                                <select id="addtipo" name="Proveedor" class="form-control select2" style="width: 50%;" aria-placeholder="Seleccione un proveedor...">
+                                    @foreach ($proveedores as $proveedor)
+                                        <option value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
+                                    @endforeach
+                                </select>
+    
+                                <label for="addco2">Selecionar imagen:</label>
+                                <input id="addco2" accept="image/*" name="Imagen" class="form-control input" type="file" placeholder="Seleccione una imagen..."  >
+    
+                                <div class="card-footer ">
+                                
+                                </div>
+                            </div>
+                            
+                            </div>
+                        </div>
+                        <!--Fin del cuerpo del modal-->
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </form>
+                <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+            </div>        
         </div>
-        <!-- ./wrapper -->
-           @include('tema/message')
-        @include("tema/footer")
-        <!-- jQuery -->
-        <script src="{{asset('asset/adminlte/plugins/jquery/jquery.min.js')}}"></script>
-        <!-- Bootstrap 4 -->
-        <script src="{{asset('asset/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-        <!-- AdminLTE App -->
-        <script src="{{asset('asset/adminlte/dist/js/adminlte.min.js')}}"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="{{asset('asset/adminlte/dist/js/demo.js')}}"></script>
-        <!-- InputMask -->
-        <script src="{{asset('asset/adminlte/plugins/moment/moment.min.js')}}"></script>
-        <script src="{{asset('asset/adminlte/plugins/inputmask/min/jquery.inputmask.bundle.min.js')}}"></script>
-        <!-- Bootstrap Switch -->
-        <script src="{{asset('asset/adminlte/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}"></script>
-        <script src="{{asset('asset/adminlte/plugins/bootstrap-switch/css/bootstrap3/bootstrap-switch.min.css')}}"></script>
-        <!-- Toastr -->
-        <script src="{{asset('asset/adminlte/plugins/toastr/toastr.min.js')}}"></script>
-        <script>
-                $(document).ready(function(){
-                    $(".toast").toast({delay: 5000});
-                    $(".toast").toast("show");
+      
+    
+        <div class="card-body table-responsive p-0" style="height: 60em;">
+          <table class="table table-head-fixed table-hover " >
+            <thead><!--'estado','nombre','descripcion','imagen','vencimiento','stok'-->
+                <tr>
+                    <th>Nº</th>
+                    <th>Estado</th>
+                    <th>Nombre</th>
+                    <th>Imagen</th>
+                    <th>Cantidad</th>
+                    <th>Precio (Bs.)</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($articulos as $articulo)
+                    <tr>
                     
-                });
-                $(":input").inputmask();
-
-                $("#phone").inputmask({"mask": "(999) 999-99999"}
-                
-                );
+                        <td>{{$articulo->id}}</td>
+                        <td><form  method="GET" action="/articulo/{{$articulo->id}}/edit" enctype="multipart/form-data">
+                            
+                            {{ csrf_field() }}
+                            
+                                @if ($articulo->estado=='activo')
+                                    <button type="submit" class="btn btn-block  btn-outline-success btn-sm">ON</button>
+                                @elseif ($articulo->estado=='inactivo') 
+                                    <button type="submit" class="btn  btn-block  btn-outline-danger btn-sm">OFF</button>
+                                @endif
+                            
+                            </form>
+                        </td>
+                        <td>
+                            {{$articulo->nombre}}
+                        </td>
+                        <td><img class=" img-fluid img-scuare img-bordered-sm img-md " src="{{asset('asset/img/articulos/'.$articulo->imagen)}}" alt="user image"></td>
+                        <td>{{$articulo->stok}}</td>
+                        <td>{{$articulo->precio}}</td>
+                        <td>
+                        <form method="POST" action="/articulo/{{$articulo->id}}">
+                                @method('DELETE')
+                                {{ csrf_field() }}  <!--genera un token para enviar los datos al controlador-->
+                                <button name="btn" type="submit" class="btn btn-danger btn-sm "><i for="btn" class="fa fa-trash"></i>  Borrar</button>
+                                
+                        </form>
+                        </td>
+                        <td>
+                            <a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#mod{{$articulo->id}}"><i for="btn" class="fa fa-edit"></i>  Editar</a>
+                        </td>
+                        
+                    </tr>
+                    <!--modal           -->
+                    <div class="modal fade" id="mod{{$articulo->id}}">
+                        <div class="modal-dialog modal-xl">
+                            <form  method="POST" action="/articulo/{{$articulo->id}}" enctype="multipart/form-data">
+                                @method('PUT')
+                                {{ csrf_field() }}
+                                <div class="modal-content bg-secondary">
+                                    <div class="modal-header">
+                                    <h4 class="modal-title">Actualizar artículo
+                                        
+                                    </h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <!--Cuerpo del Modal-->
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6">
+                                            
+                                            <div class="col-12">
+                                                <img src="{{asset('asset/img/articulos/'.$articulo->imagen)}}" class="product-image" alt="Product Image">
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group"><!--'estado','nombre','descripcion','imagen','vencimiento','stok'-->
+                                                <label for="addnom">Nombre</label>
+                                                <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" value="{{$articulo->nombre}}" maxlength=60>
+                                                <label for="addape">Descripción</label>
+                                                <textarea id="addape" name="Descripcion" class="form-control input"  placeholder="Ingrese su descripción..." maxlength=100>{{$articulo->descripcion}}</textarea>
+                                                <label for="addcontra">Caducidad</label>
+                                                <input id="addcontra" name="Vencimiento" class="form-control input" type="date"  value="{{$articulo->vencimiento}}">                                            
+                                                <label for="addcontra">Cantidad</label>
+                                                <input id="addcontra" name="Cantidad" class="form-control input" type="number" style="width: 50%;" value="{{$articulo->stok}}" min={{$articulo->stok}} max=200 >      
+                                                <label for="addcontra">Precio(Bs.)</label>
+                                                <input id="addcontra" name="Precio" class="form-control input" type="number" style="width: 50%;" min=1.0 max=500000.0 value="{{$articulo->precio}}">  
+                                                <label for="addm">Marca</label>
+                                                <select id="addm" name="Marca" class="form-control select2" style="width: 50%;">
+                                                    @foreach ($marcas as $marca)
+                                                    @if ($marca->id == $articulo->idmar)
+                                                        <option selected="selected" value="{{$marca->id}}">{{$marca->nombre}}</option>
+                                                    @else
+                                                        <option value="{{$marca->id}}">{{$marca->nombre}}</option>
+                                                    @endif
+                                                    @endforeach
+                                                    
+                                                </select>
+                                                <label for="addtipo">Proveedor</label>
+                                                <select id="addtipo" name="Proveedor" class="form-control select2" style="width: 50%;">
+                                                    @foreach ($proveedores as $proveedor)
+                                                        @if ($proveedor->id == $articulo->idprov)
+                                                        <option selected="selected" value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
+                                                        @else
+                                                        <option value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
             
-        </script>
-        
-       
-    </body>
-</html>
+                                                <label for="addco2">Selecionar imagen:</label>
+                                                    <input id="addco2" accept="image/*" name="Imagen" class="form-control input" type="file" placeholder="Seleccione una imagen..."  >
+                                                <div class="card-footer ">
+                                                    {{-- footer vacio  --}}
+                                                    
+                                                </div>
+                                            </div>
+                            
+                                        </div>
+                                        </div>
+                                    <!--Fin del cuerpo del modal-->
+                                    </div>
+                                    <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </form>
+                        <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
+                    </div>
+                @endforeach
+            </tbody>
+          </table>
+        </div>
+        <!--paginacion de tablas en la pagina -->
+        <div class="pagination justify-content-center">
+            {{ $articulos->links() }}
+        </div>
+    </div>
+    <!--fin tabla-->
+        <!-- /.card -->
+    
+@endsection

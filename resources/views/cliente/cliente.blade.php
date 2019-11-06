@@ -1,88 +1,162 @@
-
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>{{$namepage}}</title>
-        <!-- Tell the browser to be responsive to screen width -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="{{asset('asset/adminlte/plugins/fontawesome-free/css/all.min.css')}}">
-        <!-- Ionicons -->
-        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-        <!--switch-->
-        <link rel="stylesheet" href="{{asset('asset/adminlte/plugins/bootstrap-switch/js/bootstrap-switch.js')}}">
-        <link rel="stylesheet" href="{{asset('asset/adminlte/plugins/bootstrap-switch/css/bootstrap3/bootstrap-switch.css')}}">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="{{asset('asset/adminlte/dist/css/adminlte.min.css')}}">
-        <link rel="stylesheet" href="{{asset('asset/adminlte/dist/css/adminlte.css')}}">
-        <!-- rtoast-->
-        <link rel="stylesheet" href="{{asset('asset/adminlte/plugins/toastr/toastr.css')}}">
-        <!-- Google Font: Source Sans Pro -->
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    </head>
-    <body class="hold-transition sidebar-mini layout-boxed" style="background-color: lightgrey;">
-        
-        <!-- Content Wrapper. Contains page content -->
-        
-        <div class="wrapper">
-            @include('tema/aside')
-            @include('tema/header')
-            
-            <div class="content-wrapper">
-                <section class="content">
+@extends('tema.layout')
+@section('contenido')
+<!-- /.row -->
+    <div class="row mt-5" >
+        <div class="col-12" >
+            <div class="card">
+                <div class="card-header bg-primary">
+                    <h3 class="card-title">Detalle de clientes</h3>
+                    <div class="card-tools">
+                        <div class="input-group input-group-sm" style="width: 250px;">
+                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                            </div>
+                            <!--boton agregar usuario-->
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#agreusua" ><i class="fas fa-plus"></i> Agregar</button>
+                            <!--modal agregar usuario-->
+                            <div class="modal fade" id="agreusua">
+                                <div class="modal-dialog modal-lg ">
+                                    <form action="/cliente" method="POST">
+                                        <!--generador de token para envio de datos seguros-->
+                                        {{ csrf_field() }}
+                                        <div class="modal-content bg-secondary">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Agregar usuario</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body col-md-8 col-sm-12 offset-md-2">
+                                                <!--Contenido del modal--> 
+                                                <div class="form-group">
+                                                    <label for="addnom">Nombre</label>
+                                                    <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" maxlength=50>
+                                                    <label for="addape">Apellido</label>
+                                                    <input id="addape" name="Apellido" class="form-control input" type="text" placeholder="Ingrese su apellido" maxlength=50>
+                                                    
+                                                    <!-- phone mask -->
+                                            
+                                                    <label for="addci">Cédula de Identidad / Nit:</label>
+                                                    <div   class="input-group">
+                                                        <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                        </div>
+                                                        <input id="addci" name="CI" type="text" class="form-control" data-inputmask="'mask': '9999999'" placeholder="9999999" />
+                                                    </div>
+                                                </div>
+                                            <!--end contenido-->
+                                            </div>
+                                            <div class="modal-footer justify-content-between">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                        <!--fin modal agregar usuario-->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0" style="height: 60em;">
+                    <table class="table table-head-fixed table-hover " >
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>C.I./ NIT</th>
+                            <th>tipo</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($clientes as $cliente)
+                                <tr>
+                                    <td>{{$cliente->id}}</td>
+                                    <td>{{$cliente->nombre}}</td>
+                                    <td>{{$cliente->apellido}}</td>
+                                    <td>{{$cliente->ci}}</td>
+                                    <td>
+                                        <form method="POST" action="/cliente/{{$cliente->id}}">
+                                            @method('DELETE')
+                                            {{ csrf_field() }}  <!--genera un token para enviar los datos al controlador-->
+                                            <button type="submit" class="btn btn-danger btn-sm"><i for="btn" class="fa fa-trash"></i> Borrar</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#mod{{$cliente->id}}"><i for="btn" class="fa fa-edit"></i> Editar</a>
+                                    </td>
+                                </tr>  
+                                <!--modal editar usuario-->
+                                <div class="modal fade" id="mod{{$cliente->id}}">
+                                    <div class="modal-dialog modal-lg modal-secondary ">
+                                        <form method="POST" action="/cliente/{{$cliente->id}}" enctype="multipart/form-data">
+                                                @method('PUT')
+                                                {{ csrf_field() }}  
+                                            <div class="modal-content bg-secondary">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Editar cliente</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body col-md-8 col-sm-12 offset-md-2">
+                                                <!--Contenido del modal--> 
+                                                                            
+                                                    <div class="form-group">
+                                                        <label for="agrenom">Nombre</label>
+                                                        <input id="agrenom" value="{{$cliente->nombre}}" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" maxlength=50>
+                                                        <label for="agreape">Apellido</label>
+                                                        <input id="agreape" value="{{$cliente->apellido}}" name="Apellido" class="form-control input" type="text" placeholder="Ingrese su apellido" maxlength=50>
+                                                    
+                                                        <!-- phone mask -->
+                                                
+                                                        <label for="agreci">Cédula de Identidad / Nit:</label>
+                                                        <div   class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                                </div>
+                                                            <input id="agreci" name="CI" type="text" value="{{$cliente->ci}}" class="form-control" data-inputmask="'mask': '9999999'" placeholder="9999999" />
+                                                        </div>
+                                                
+                                                        <div class="card-footer ">
+                                                        </div>
+                                                    </div>
+                                                <!--end contenido-->
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                                </div>
                     
-                    
-                    <!--incluyendo el cliente-->
-                   @include('cliente/crearclie')
-                </section>
+                                            </div>
+                                        </form>
+                                    <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!--fin modal agregar usuario-->
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+                <!--paginacion de tablas en la pagina -->
+                <div class="pagination justify-content-center">
+                    {{ $clientes->links() }}
+                </div>
             </div>
-            
-        
-                <!-- Control Sidebar -->
-                
-            <!-- /.control-sidebar -->
-            <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-            
-            </aside>
-        
+        <!-- /.card -->
         </div>
-        <!-- ./wrapper -->
-           @include('tema/message')
-        @include("tema/footer")
-        <!-- jQuery -->
-        <script src="{{asset('asset/adminlte/plugins/jquery/jquery.min.js')}}"></script>
-        <!-- Bootstrap 4 -->
-        <script src="{{asset('asset/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-        <!-- AdminLTE App -->
-        <script src="{{asset('asset/adminlte/dist/js/adminlte.min.js')}}"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="{{asset('asset/adminlte/dist/js/demo.js')}}"></script>
-        <!-- InputMask -->
-        <script src="{{asset('asset/adminlte/plugins/moment/moment.min.js')}}"></script>
-        <script src="{{asset('asset/adminlte/plugins/inputmask/min/jquery.inputmask.bundle.min.js')}}"></script>
-        <!-- Bootstrap Switch -->
-        <script src="{{asset('asset/adminlte/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}"></script>
-        <script src="{{asset('asset/adminlte/plugins/bootstrap-switch/css/bootstrap3/bootstrap-switch.min.css')}}"></script>
-        <!-- Toastr -->
-        <script src="{{asset('asset/adminlte/plugins/toastr/toastr.min.js')}}"></script>
-        <script>
-                $(document).ready(function(){
-                    $(".toast").toast({delay: 5000});
-                    $(".toast").toast("show");
-                    
-                });
-                $(":input").inputmask();
-
-                $("#phone").inputmask({"mask": "(999) 999-99999"}
-                
-                );
-            
-        </script>
-        
-       
-    </body>
-</html>
+    </div>
+            <!-- /.row -->
+    
+    <!-- /.card -->
+@endsection
