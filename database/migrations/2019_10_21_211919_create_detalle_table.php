@@ -16,8 +16,8 @@ class CreateDetalleTable extends Migration
         Schema::create('detalle', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('fecha');
-            $table->unsignedBigInteger('idclie');
-            $table->foreign('idclie')->references('id')->on('cliente')->onDelete('cascade');
+            $table->unsignedBigInteger('iduser');
+            $table->foreign('iduser')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('idart');
             $table->foreign('idart')->references('id')->on('articulo')->onDelete('cascade');
             $table->integer('cantidad');

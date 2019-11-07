@@ -15,7 +15,7 @@ $factory->define(Articulo::class, function (Faker $faker) {
         'vencimiento' => $faker->date($format = 'Y-m-d', $max = 'now'),
         'stok' => $faker->numberBetween($min = 10, $max = 300),
         'precio' => $faker->randomFloat($nbMaxDecimals = 1, $min = 5, $max = 60),
-        'idusua' => $faker->numberBetween($min = 1, $max = 25),
+        'idusua' => $faker->numberBetween($min = 1, $max = 10),
         'idmar' => $faker->numberBetween($min = 1, $max = 10),
         'idprov' => $faker->numberBetween($min = 1, $max = 20)
     ];

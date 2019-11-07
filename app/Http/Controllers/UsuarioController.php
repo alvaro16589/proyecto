@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 
-use App\Usuario;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUsuarioRequest;//modulo agregado de los requests para las validaciones de los campos enviados por los formularios
 
 use Illuminate\Http\File;
 use Response;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -20,7 +21,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarios = Usuario::paginate(10);
+        $usuarios = User::paginate(10);
         return view('usuario/usuario',compact('usuarios'))->with('pagina','usuario');
     }
 
@@ -49,16 +50,16 @@ class UsuarioController extends Controller
             $name = time().$file->getClientOriginalName();//generando nombre de usuario
             $file->move(public_path().'/asset/img/userprofile',$name);////'
         }
-        //'nombre','apellido','contraseña','estado','tipo'
-        $usua = new Usuario();
-        $usua->nombre = $request->input('Nombre');
-        $usua->apellido = $request->input('Apellido');
-        $usua->contraseña = $request->input('Contraseña');
+        //'name', 'email', 'password','tipo', 'estado','foto'
+        $usua = new User();
+        $usua->name = $request->input('Nombre');
+        $usua->email = $request->input('Correo');
+        $usua->password = bcrypt($request->input('Contraseña'));
         $usua->estado = 'activo';
         $usua->tipo = $request->input('Tipo');
         $usua->foto = $name;
         $usua->save();
-         $usuarios = Usuario::paginate(10);
+         $usuarios = User::paginate(10);
         return view('usuario/usuario',compact('usuarios'))->with('status','Guardado exitoso...!')->with('pagina','usuario');
         
 
@@ -72,7 +73,7 @@ class UsuarioController extends Controller
      */
     public function show(Usuario $usuario)
     {
-        $usuarios = Usuario::paginate(10);
+        $usuarios = User::paginate(10);
         return view('usuario/usuario',compact('usuarios'))->with('pagina','usuario');
     }
 
@@ -93,7 +94,7 @@ class UsuarioController extends Controller
         } 
         
         $usuario->save();
-        $usuarios = Usuario::paginate(10);//Llamar a todos los datos contenidos dentro de la tabla proveedor
+        $usuarios = User::paginate(10);//Llamar a todos los datos contenidos dentro de la tabla proveedor
         return view('usuario/usuario',compact('usuarios'))->with('pagina','usuario');//llamar a la vista del provee
     }
 
@@ -119,14 +120,14 @@ class UsuarioController extends Controller
             $file->move(public_path().'/asset/img/userprofile',$name);////'
             $usuario->foto = $name;
         }
-        //'nombre','apellido','contraseña','estado','tipo'
-        $usuario->nombre = $request->input('Nombre');
-        $usuario->apellido = $request->input('Apellido');
-        $usuario->contraseña = $request->input('Contraseña');
+        //'name', 'email', 'password','tipo', 'estado','foto'
+        $usuario->name = $request->input('Nombre');
+        $usuario->email = $request->input('Apellido');
+        $usuario->password = $request->input('Contraseña');
         $usuario->tipo = $request->input('Tipo');
         
         $usuario->save();
-        $usuarios = Usuario::paginate(10);//Llamar a todos los datos contenidos dentro de la tabla proveedor
+        $usuarios = User::paginate(10);//Llamar a todos los datos contenidos dentro de la tabla proveedor
         return view('usuario/usuario',compact('usuarios'))->with('status','Actualización hecha, Satisfactoriamente...!')->with('pagina','usuario');//llamar a la vista del provee
     }
 
@@ -144,7 +145,7 @@ class UsuarioController extends Controller
             \File::delete($file_path); 
         }
         $usuario->delete();
-        $usuarios = Usuario::paginate(10);//Llamar a todos los datos contenidos dentro de la tabla proveedor
+        $usuarios = User::paginate(10);//Llamar a todos los datos contenidos dentro de la tabla proveedor
         return view('usuario/usuario',compact('usuarios'))->with('status','Eliminación hecha, Satisfactoriamente...!')->with('pagina','usuario');//llamar a la vista del provee
         
     }

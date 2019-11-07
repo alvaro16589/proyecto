@@ -1,7 +1,7 @@
 @extends('tema.layout')
 @section('contenido')
     
-    <div class="row justify-content-center bg-info">
+    <div class="row justify-content-center bg-teal">
         <col-12>
             <h1>Bienvenido...! listo para comenzar.</h1>
         </col-12>

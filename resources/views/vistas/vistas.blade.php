@@ -53,13 +53,19 @@
                                         <div class="col-12">
                                           <!--        carrusel             -->
                                           <div id="s{{$articulo->id}}IDcar" class="carousel slide" data-ride="carousel">
-                                            <ol class="carousel-indicators bg-gray">
+                                            {{-- imagenes para loscontroles --}}
+                                            <ol class="carousel-indicators carousel  bg-gray">
                                               <li data-target="#s{{$articulo->id}}IDcar" data-slide-to="0" class="active">
-                                              
+                                                <img class="d-block w-100" src="{{asset('asset/img/articulos/'.$articulo->imagen)}}" alt="First slide">
                                               </li>
-                                              <li data-target="#s{{$articulo->id}}IDcar" data-slide-to="1" class=""></li>
-                                              <li data-target="#s{{$articulo->id}}IDcar" data-slide-to="2" class=""></li>
+                                              <li data-target="#s{{$articulo->id}}IDcar" data-slide-to="1" class="">
+                                                <img class="d-block w-100" src="{{asset('asset/img/articulos/'.$articulo->imagen)}}" alt="First slide">
+                                              </li>
+                                              <li data-target="#s{{$articulo->id}}IDcar" data-slide-to="2" class="">
+                                                <img class="d-block w-100" src="{{asset('asset/img/articulos/'.$articulo->imagen)}}" alt="First slide">
+                                              </li>
                                             </ol>
+                                            {{-- inicia el carrusel de imagenes --}}                                            
                                             <div class="carousel-inner">
                                               <div class="carousel-item active">
                                                 <img class="d-block w-100" src="{{asset('asset/img/articulos/'.$articulo->imagen)}}" alt="First slide">

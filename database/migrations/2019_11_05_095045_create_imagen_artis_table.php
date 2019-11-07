@@ -16,6 +16,8 @@ class CreateImagenArtisTable extends Migration
         Schema::create('imagen_artis', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('imagen', 100);
+            $table->unsignedBigInteger('idarti');
+            $table->foreign('idarti')->references('id')->on('articulo')->onDelete('cascade');
             $table->timestamps();
         });
     }

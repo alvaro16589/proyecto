@@ -23,7 +23,7 @@ class CreateArticuloTable extends Migration
             $table->integer('stok');
             $table->float('precio',6,2);
             $table->unsignedBigInteger('idusua');
-            $table->foreign('idusua')->references('id')->on('usuario')->onDelete('cascade');
+            $table->foreign('idusua')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('idmar');
             $table->foreign('idmar')->references('id')->on('marca')->onDelete('cascade');
             $table->unsignedBigInteger('idprov');

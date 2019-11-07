@@ -34,7 +34,7 @@
 
         
     </div>
-       
+     @include('tema.footer')  
     <!-- jQuery -->
     <script src="{{asset('asset/adminlte/plugins/jquery/jquery.min.js')}}"></script>
     <!-- Bootstrap 4 -->
