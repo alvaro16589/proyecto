@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Usuario;
+
 use Illuminate\Http\Request;
-use App\Articulo;
-use App\ImagenArti;
-class InicioController extends Controller
+use App\User;
+class PerfilController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,13 +12,11 @@ class InicioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $imagenes = ImagenArti::all();
-        $articulos = Articulo :: paginate('12');
-       return view('vistas.vistas',compact('articulos'))->with(compact('imagenes'));
+    {
+        //
     }
-   
-     /**
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -48,7 +45,7 @@ class InicioController extends Controller
      */
     public function show($id)
     {
-        
+        return view('usuario.perfil')->with('pagina','Perfil');
     }
 
     /**

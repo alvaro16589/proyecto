@@ -5,10 +5,26 @@
     <div class="card card-primary mt-5">
         <div class="card-header">
             <h3 class="card-title">Detalle articulos</h3>
-    
             <div class="card-tools">
-                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#formularioAgregar" ><i class="fas fa-plus"></i> Agregar</button>
-                
+                 {{-- hacer las busquedas --}}
+                    <form action="/articulo/{{auth()->user()->id}}" method="get" class="input-group input-group-sm float-right">
+                          {{-- boton para hacer busquedas --}}
+                        <input type="text" name="Buscar" class="form-control " placeholder="Search">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                        </div>
+                    
+                    
+                    {{-- fin del formulario de busqueda --}}
+                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#formularioAgregar" >
+                        <i class="fas fa-plus"></i> 
+                            Agregar
+                    </button>
+                    
+                    <a class="btn btn-sm btn-info" href="/articulo">
+                        Mostrar todo
+                    </a>
+                </form>
             </div>
               <!--modal-->
             <div class="modal fade" id="formularioAgregar">

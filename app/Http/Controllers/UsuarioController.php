@@ -71,7 +71,7 @@ class UsuarioController extends Controller
      * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuario $usuario)
+    public function show(User $usuario)
     {
         $usuarios = User::paginate(10);
         return view('usuario/usuario',compact('usuarios'))->with('pagina','usuario');
@@ -83,7 +83,7 @@ class UsuarioController extends Controller
      * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function edit(Usuario $usuario)
+    public function edit(User $usuario)
     {
         if ($usuario->estado == 'activo') {
             $usuario->estado = 'inactivo';
@@ -105,7 +105,7 @@ class UsuarioController extends Controller
      * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUsuarioRequest $request, Usuario $usuario)
+    public function update(StoreUsuarioRequest $request, User $usuario)
     { 
         if ($request->hasFile('Foto')) {
              //eliminacion de la foto si ya existente
@@ -137,7 +137,7 @@ class UsuarioController extends Controller
      * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Usuario $usuario)
+    public function destroy(User $usuario)
     {
         
         if ($usuario->foto != 'user2-160x160.jpg') { 

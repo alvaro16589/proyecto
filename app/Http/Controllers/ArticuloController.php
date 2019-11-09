@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\articulo;
 use App\Proveedor;
 use App\Marca;
+use App\User;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Auth;
 use App\Http\Requests\StoreArticuloRequest;
 use Illuminate\Http\File;
 use Response;
@@ -60,11 +61,10 @@ class ArticuloController extends Controller
         $arti->estado = 'activo';
         $arti->nombre = $request->input('Nombre');
         $arti->descripcion = $request->input('Descripcion');
-        
         $arti->vencimiento = $request->input('Vencimiento');
         $arti->stok = $request->input('Cantidad');
         $arti->precio = $request->input('Precio');
-        $arti->idusua = '1';
+        $arti->idusua = auth()->user()->id;
         $arti->idmar = $request->input('Marca');
         $arti->idprov = $request->input('Proveedor');
         $arti->save();
@@ -80,11 +80,12 @@ class ArticuloController extends Controller
      * @param  \App\articulo  $articulo
      * @return \Illuminate\Http\Response
      */
-    public function show(articulo $articulo)
+    public function show(User $user, Request $request)
     {
+        
         $marcas = Marca::all();
         $proveedores = Proveedor::all();
-        $articulos = Articulo::paginate(10);//muestra todos los datos de la lista en un list
+        $articulos = Articulo::orderBy('id','DESC')->where('nombre', 'like','%'.$request->input('Buscar').'%')->paginate(10);//muestra todos los datos de la lista en un list
         return view('articulo/articulo',compact('articulos'),compact('marcas'))->with(compact('proveedores'))->with('pagina','articulo');//hace el envio de datos en al url de clientes 
     }
 
