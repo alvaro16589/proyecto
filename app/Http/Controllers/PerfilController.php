@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUsuarioRequest;//modulo agregado de los requests para las validaciones de los campos enviados por los formularios
 use Illuminate\Http\Request;
 use App\User;
 class PerfilController extends Controller
@@ -66,9 +67,9 @@ class PerfilController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUsuarioRequest $request, $id)
     {
-        //
+        return 'estamos en el controlador de actualizacion';
     }
 
     /**

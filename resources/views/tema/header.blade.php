@@ -56,13 +56,23 @@
                           {{ Auth::user()->name }} <span class="caret"></span>
                       </a>
                       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        {{-- ver perfil --}}
+                          <a class="dropdown-item"  href="/usuario/perfil/{{ Auth::user()->id }}"onclick="event.preventDefault();
+                            document.getElementById('perfil-form').submit();">
+                              {{ __('Ver Perfil') }}
+                          </a>
+                        {{-- cerrar sesión --}}
                           <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                           document.getElementById('logout-form').submit();">
                               {{ __('Cerrar sesión') }}
                           </a>
+                          
                           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                               @csrf
+                          </form>
+                          <form id="perfil-form" action="/usuario/perfil/{{ Auth::user()->id }}" method="GET" style="display: none;">
+                            @csrf
                           </form>
                       </div>
                   </li>

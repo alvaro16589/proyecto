@@ -151,8 +151,6 @@
                                                 <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" value="{{$usuario->name}}" maxlength=30 >
                                                 <label for="addape">Correo</label>
                                                 <input id="addape" name="Correo" class="form-control input" type="email" placeholder="Ingrese su Correo" value="{{$usuario->email}}" maxlength=70>
-                                                <label for="addcontra">Contraseña actual</label>
-                                                <input id="addcontra" name="oldpassword" class="form-control input" type="text" disabled value="{{$usuario->password}}" maxlength=100 >
                                                 <label for="addcontra2">Nueva contraseña</label>
                                                 <input id="addcontra2" name="Contraseña" class="form-control input" type="password" placeholder="Ingrese su nueva contraseña"  maxlength=100>
                                                 <label for="addtipo">Tipo</label>

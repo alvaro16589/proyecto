@@ -25,7 +25,8 @@ class StoreUsuarioRequest extends FormRequest
     {//'nombre','apellido','contraseña','estado','tipo'
         return [
             'Nombre' => 'required|max:30',
-            'Correo' => 'required|max:70'
+            'Correo' => 'required',
+            'Contraseña' =>'confirmed'
         ];
     }
 }
