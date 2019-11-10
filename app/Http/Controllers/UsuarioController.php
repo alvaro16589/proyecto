@@ -102,7 +102,7 @@ class UsuarioController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Usuario  $usuario
+     * @param  \App\User  $usuario
      * @return \Illuminate\Http\Response
      */
     public function update(StoreUsuarioRequest $request, User $usuario)
@@ -122,8 +122,8 @@ class UsuarioController extends Controller
         }
         //'name', 'email', 'password','tipo', 'estado','foto'
         $usuario->name = $request->input('Nombre');
-        $usuario->email = $request->input('Apellido');
-        $usuario->password = $request->input('Contraseña');
+        $usuario->email = $request->input('Correo');
+        $usuario->password = bcrypt($request->input('Contraseña'));
         $usuario->tipo = $request->input('Tipo');
         
         $usuario->save();

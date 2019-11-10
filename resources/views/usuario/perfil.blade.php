@@ -35,6 +35,8 @@
               </div>
               <div class="col-sm-12 col-md-6 bg-gray p-4">
                 <button type="button" data-toggle="modal" data-target="#mod" class="btn btn-sm btn-success"><i class="fas fa-edit mr-2"></i>Editar</button>
+                
+                <a class="btn btn-sm btn-info" href="/reset">Cambiar contraseña</a>
               </div>
           </div>    
         </div>
