@@ -33,10 +33,15 @@
               <div class=" col-md-6">
 
               </div>
-              <div class="col-sm-12 col-md-6 bg-gray p-4">
+              <div class="col-sm-12 col-md-6 bg-gray p-4 justify-content-between" >
                 <button type="button" data-toggle="modal" data-target="#mod" class="btn btn-sm btn-success"><i class="fas fa-edit mr-2"></i>Editar</button>
+                <form action="/reset" method="POST">{{-- revisar que onda com este campo  por que no me redirecciona a la pagina de reset --}}
                 
-                <a class="btn btn-sm btn-info" href="/reset">Cambiar contraseña</a>
+                  
+                  @csrf
+                  <button type="submit" class="btn btn-sm btn-info" >Cambiar contraseña</button>
+                </form>
+                
               </div>
           </div>    
         </div>

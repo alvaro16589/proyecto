@@ -45,7 +45,6 @@ class UsuarioController extends Controller
     {
        
         if ($request->hasFile('Foto')) {
-            
             $file = $request->file('Foto');//generando ruta de guardado
             $name = time().$file->getClientOriginalName();//generando nombre de usuario
             $file->move(public_path().'/asset/img/userprofile',$name);////'
@@ -88,11 +87,8 @@ class UsuarioController extends Controller
         if ($usuario->estado == 'activo') {
             $usuario->estado = 'inactivo';
         }else{
-           
             $usuario->estado =  'activo';
-           
         } 
-        
         $usuario->save();
         $usuarios = User::paginate(10);//Llamar a todos los datos contenidos dentro de la tabla proveedor
         return view('usuario/usuario',compact('usuarios'))->with('pagina','usuario');//llamar a la vista del provee
