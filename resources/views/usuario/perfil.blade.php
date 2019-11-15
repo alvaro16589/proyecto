@@ -35,9 +35,7 @@
               </div>
               <div class="col-sm-12 col-md-6 bg-gray p-4 justify-content-between" >
                 <button type="button" data-toggle="modal" data-target="#mod" class="btn btn-sm btn-success"><i class="fas fa-edit mr-2"></i>Editar</button>
-                <form action="/reset" method="POST">{{-- revisar que onda com este campo  por que no me redirecciona a la pagina de reset --}}
-                
-                  
+                <form action="/usuario/perfil" method="get">{{-- revisar que onda com este campo  por que no me redirecciona a la pagina de reset --}}
                   @csrf
                   <button type="submit" class="btn btn-sm btn-info" >Cambiar contraseña</button>
                 </form>
@@ -82,15 +80,7 @@
                           <label for="addape">Correo</label>
                           <input id="addape" name="Correo" class="form-control input" type="email" placeholder="Ingrese su Correo" value="{{auth()->user()->email}}" maxlength=70>
 
-                          <label for="addcontra2">Nueva contraseña</label>
-                          <input id="addcontra2" name="Contraseña" class="form-control input @error('Contraseña') is-invalid @enderror" type="password" placeholder="Ingrese su nueva contraseña" required autocomplete="new-password"  maxlength=100>
-                          @error('Contraseña')
-                              <span class="invalid-feedback" role="alert">
-                                  <strong>{{ $message }}</strong>
-                              </span>
-                          @enderror
-                          <label for="addcontra2">Repita contraseña</label>                          
-                          <input id="Contraseña-confirm" type="password" class="form-control" name="Contraseña_confirmation" required autocomplete="new-password">
+                          
 
                           <label for="addco2">Selecionar imagen:</label>
                           <input id="addco2" accept="image/*" name="Foto" class="form-control input" type="file" placeholder="Seleccione una imagen..."  >

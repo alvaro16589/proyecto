@@ -18,7 +18,7 @@ class PerfilController extends Controller
      */
     public function index()
     {
-        //
+        return view('auth.passwords.reset')->with('pagina','Perfil');
     }
 
     /**
@@ -91,7 +91,7 @@ class PerfilController extends Controller
        //'name', 'email', 'password','tipo', 'estado','foto'
        $usuario->name = $request->input('Nombre');
        $usuario->email = $request->input('Correo');
-       $usuario->password = bcrypt($request->input('Contraseña'));
+       //$usuario->password = bcrypt($request->input('Contraseña'));
        $usuario->save();
        return view('usuario.perfil')->with('status','Actualización hecha, Satisfactoriamente...!')->with('pagina','Perfil');//llamar a la vista del provee
        
