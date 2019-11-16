@@ -7,14 +7,12 @@
             <h3 class="card-title">Detalle articulos</h3>
             <div class="card-tools">
                  {{-- hacer las busquedas --}}
-                    <form action="/articulo/{{auth()->user()->id}}" method="get" class="input-group input-group-sm float-right">
-                          {{-- boton para hacer busquedas --}}
-                        <input type="text" name="Buscar" class="form-control " placeholder="Search">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                        </div>
-                    
-                    
+                <form action="/articulo/{{auth()->user()->id}}" method="get" class="input-group input-group-sm float-right">
+                        {{-- boton para hacer busquedas --}}
+                    <input type="text" name="Buscar" class="form-control " placeholder="Search">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                    </div>
                     {{-- fin del formulario de busqueda --}}
                     <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#formularioAgregar" >
                         <i class="fas fa-plus"></i> 

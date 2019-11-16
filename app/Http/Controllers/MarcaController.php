@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Marca;
-
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreMarcaRequest;
 
@@ -52,9 +52,9 @@ class MarcaController extends Controller
      * @param  \App\Marca  $marca
      * @return \Illuminate\Http\Response
      */
-    public function show(Marca $marca)
+    public function show(User $user, Request $request)
     {
-        $marcas = Marca::paginate(14);//muestra todos los datos de la lista en un list
+        $marcas = Marca::orderBy('id','DESC')->where('nombre', 'like','%'.$request->input('Buscar').'%')->orWhere('ciudad', 'like','%'.$request->input('Buscar').'%')->paginate(14);//muestra todos los datos de la lista en un list
         return view('marca/marca',compact('marcas'))->with('pagina','marca');//hace el envio de datos en al url de clientes
     }
 

@@ -70,10 +70,11 @@ class UsuarioController extends Controller
      * @param  \App\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function show(User $usuario)
-    {
-        $usuarios = User::paginate(10);
+    public function show(User $usuario, Request $request)
+    {   //empleando la funcion orWhere de laravel en su ORM
+        $usuarios = User::orderBy('id','DESC')->where('name', 'like','%'.$request->input('Buscar').'%')->orWhere('email', 'like','%'.$request->input('Buscar').'%')->paginate(10);//muestra todos los datos de la lista en un list
         return view('usuario/usuario',compact('usuarios'))->with('pagina','usuario');
+        
     }
 
     /**

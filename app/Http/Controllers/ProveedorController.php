@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Proveedor;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProveedorRequest;
 class ProveedorController extends Controller
@@ -52,9 +53,9 @@ class ProveedorController extends Controller
      * @param  \App\Proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
-    public function show(Proveedor $proveedor)
+    public function show(User $user, Request $request )
     {
-        $proveedores = Proveedor::paginate(10);//Llamar a todos los datos contenidos dentro de la tabla proveedor
+        $proveedores = Proveedor::orderBy('id','DESC')->where('nombre', 'like','%'.$request->input('Buscar').'%')->paginate(10);//muestra todos los datos de la lista en un list
         return view('proveedor/proveedor',compact('proveedores'))->with('pagina','proveedor');//llamar a la vista del provee
     }
 

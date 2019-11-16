@@ -6,51 +6,59 @@
           <div class="card">
             <div class="card-header bg-primary">
               <h3 class="card-title">Detalle de Marcas</h3>
-    
               <div class="card-tools">
-                <div class="input-group input-group-sm" style="width: 250px;">
-                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                {{-- hacer las busquedas --}}
+                <form action="/marca/{{auth()->user()->id}}" method="get" class="input-group input-group-sm float-right">
+                  {{-- boton para hacer busquedas --}}
+                  <input type="text" name="Buscar" class="form-control " placeholder="Search">
                   <div class="input-group-append">
-                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                      <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
                   </div>
-                  <!--boton agregar usuario-->
-                  <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#agreusua" ><i class="fas fa-plus"></i> Agregar</button>
-                  <!--modal agregar usuario-->
-                  <div class="modal fade" id="agreusua">
-                      <div class="modal-dialog modal-lg ">
-                        <form action="/marca" method="POST">
-                          <!--generador de token para envio de datos seguros-->
-                          {{ csrf_field() }}
-                          <div class="modal-content bg-secondary">
-                            <div class="modal-header">
-                              <h4 class="modal-title">Agregar Marca</h4>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body col-md-8 col-sm-12 offset-md-2">
-                              <!--Contenido del modal--> 
-                              <div class="form-group">
-                                  <label for="addnom">Nombre</label>
-                                  <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese un nombre" maxlength=60>
-                                  <label for="addape">Ciudad</label>
-                                  <input id="addape" name="Ciudad" class="form-control input" type="text" placeholder="Ingrese una ciudad" maxlength=30>
-                              </div>
-                              <!--end contenido-->
-                            </div>
-                            <div class="modal-footer justify-content-between">
-                              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                              <button type="submit" class="btn btn-primary">Guardar</button>
-                            </div>
-                          </div>
-                        </form>
-                        <!-- /.modal-content -->
-                      </div>
-                      <!-- /.modal-dialog -->
-                    </div>
-                  <!--fin modal agregar usuario-->
-                </div>
+                  {{-- fin del formulario de busqueda --}}
+                  <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#agremarca" >
+                      <i class="fas fa-plus"></i> 
+                          Agregar
+                  </button>
+                  
+                  <a class="btn btn-sm btn-info" href="/marca">
+                      Mostrar todo
+                  </a>
+                </form>
               </div>
+               <!--modal agregar usuario-->
+              <div class="modal fade" id="agremarca">
+                <div class="modal-dialog modal-lg ">
+                  <form action="/marca" method="POST">
+                    <!--generador de token para envio de datos seguros-->
+                    {{ csrf_field() }}
+                    <div class="modal-content bg-secondary">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Agregar Marca</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body col-md-8 col-sm-12 offset-md-2">
+                        <!--Contenido del modal--> 
+                        <div class="form-group">
+                            <label for="addnom">Nombre</label>
+                            <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese un nombre" maxlength=60>
+                            <label for="addape">Ciudad</label>
+                            <input id="addape" name="Ciudad" class="form-control input" type="text" placeholder="Ingrese una ciudad" maxlength=30>
+                        </div>
+                        <!--end contenido-->
+                      </div>
+                      <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                      </div>
+                    </div>
+                  </form>
+                  <!-- /.modal-content -->
+                </div>
+                  <!-- /.modal-dialog -->
+              </div>
+              <!--fin modal agregar usuario-->
             </div>
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0" style="height: 60em;">

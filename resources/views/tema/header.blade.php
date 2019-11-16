@@ -7,7 +7,7 @@
                   col col-md-10 offset-md-2
                   @endguest " 
             >
-        <h1 class="p-4">{{$namepage}}</h1>
+        <h1 class="p-4"><b>{{$namepage}}</b></h1>
       </div>
     </div>
   </div>

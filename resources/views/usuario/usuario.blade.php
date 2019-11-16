@@ -1,26 +1,37 @@
 @extends('tema.layout')
-@section('contenido')
+@section('contenido') 
     <!-- /.row -->
     <div class="row mt-5" >
         <div class="col-12" >
             <div class="card">
             <div class="card-header bg-primary">
                 <h3 class="card-title">Detalle de usuarios</h3>
-    
                 <div class="card-tools">
-                <div class="input-group input-group-sm" style="width: 250px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                    </div>
-                    <!--boton agregar usuario-->
-                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#agreusua" ><i class="fas fa-plus"></i> Agregar</button>
-                    <!--modal agregar usuario-->
-                    <div class="modal fade" id="agreusua">
-                        <div class="modal-dialog modal-lg ">
-                            <form action="/usuario" method="POST" enctype="multipart/form-data">
-                            {{ csrf_field() }}<!--creador de tokens-->
-                            <div class="modal-content bg-secondary">
+                    {{-- hacer las busquedas --}}
+                    <form action="/usuario/{{auth()->user()->id}}" method="get" class="input-group input-group-sm float-right">
+                            {{-- boton para hacer busquedas --}}
+                        
+                        <input type="text" name="Buscar" class="form-control " placeholder="Search">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                        </div>
+                        {{-- fin del formulario de busqueda --}}
+                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#formularioAgregar" >
+                            <i class="fas fa-plus"></i> 
+                                Agregar
+                        </button>
+                        
+                        <a class="btn btn-sm btn-info" href="/usuario">
+                            Mostrar todo
+                        </a>
+                    </form>
+                </div>
+                <!--modal agregar usuario-->
+                <div class="modal fade" id="formularioAgregar">
+                    <div class="modal-dialog modal-lg ">
+                        <form action="/usuario" method="POST" enctype="multipart/form-data">
+                        {{ csrf_field() }}<!--creador de tokens-->
+                        <div class="modal-content bg-secondary">
                             <div class="modal-header">
                                 <h4 class="modal-title">Agregar usuario</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -33,7 +44,7 @@
                                     <label for="addnom">Nombre</label>
                                     <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" maxlength=30>
                                     <label for="addape">Correo electrónico</label>
-                                    <input id="addape" name="Correo" class="form-control input" type="email" placeholder="Ingrese su Correo" maxlength=70>
+                                <input id="addape" name="Correo" class="form-control input" type="email" placeholder="Ingrese su Correo" maxlength=70 >
                                     <label for="addcontra">Contraseña</label>
                                     <input id="addcontra" name="Contraseña" class="form-control input" type="password" placeholder="Ingrese su contraseña" maxlength=30>
                                     <label for="addcontra2">Repita la contraseña</label>
@@ -48,7 +59,7 @@
                                     </select>
                                     <label for="addco2">Selecionar imagen:</label>
                                     <input id="addco2" accept="image/*" name="Foto" class="form-control input" type="file" placeholder="Seleccione una imagen..."  >
-    
+
                                 
                                 </div>
                                 <!--end contenido-->
@@ -57,15 +68,13 @@
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                 <button type="submit" class="btn btn-primary">Guardar</button>
                             </div>
-                            </div>
-                        </form>
-                        <!-- /.modal-content -->
                         </div>
-                        <!-- /.modal-dialog -->
+                    </form>
+                    <!-- /.modal-content -->
                     </div>
-                    <!--fin modal agregar usuario-->
+                    <!-- /.modal-dialog -->
                 </div>
-                </div>
+                <!--fin modal agregar usuario-->
             </div>
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0" style="height: 60em;">

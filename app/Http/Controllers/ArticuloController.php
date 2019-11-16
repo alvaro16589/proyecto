@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\articulo;
+use App\Articulo;
 use App\Proveedor;
 use App\Marca;
 use App\User;
@@ -23,7 +23,7 @@ class ArticuloController extends Controller
     public function index()
     {
         $marcas = Marca::all();
-        $proveedores = Proveedor::all();
+        $proveedores = Proveedor::orderBy('id','DESC')->where('estado', 'activo')->paginate(10);//muestra todos los datos de la lista en un list
         $articulos = Articulo::paginate(10);//muestra todos los datos de la lista en un list
         return view('articulo/articulo',compact('articulos'),compact('marcas'))->with(compact('proveedores'))->with('pagina','articulo');//hace el envio de datos en al url de clientes 
     }
@@ -69,7 +69,7 @@ class ArticuloController extends Controller
         $arti->idprov = $request->input('Proveedor');
         $arti->save();
         $marcas = Marca::all();
-        $proveedores = Proveedor::all();
+        $proveedores = Proveedor::orderBy('id','DESC')->where('estado', 'activo')->paginate(10);//muestra todos los datos de la lista en un list
         $articulos = Articulo::paginate(10);//muestra todos los datos de la lista en un list
         return view('articulo/articulo',compact('articulos'),compact('marcas'))->with(compact('proveedores'))->with('status','Guardado exitoso...!')->with('pagina','articulo');//hace el envio de datos en al url de clientes  
     }
@@ -84,7 +84,7 @@ class ArticuloController extends Controller
     {
         
         $marcas = Marca::all();
-        $proveedores = Proveedor::all();
+        $proveedores = Proveedor::orderBy('id','DESC')->where('estado', 'activo')->paginate(10);//muestra todos los datos de la lista en un list
         $articulos = Articulo::orderBy('id','DESC')->where('nombre', 'like','%'.$request->input('Buscar').'%')->paginate(10);//muestra todos los datos de la lista en un list
         return view('articulo/articulo',compact('articulos'),compact('marcas'))->with(compact('proveedores'))->with('pagina','articulo');//hace el envio de datos en al url de clientes 
     }
@@ -107,7 +107,7 @@ class ArticuloController extends Controller
         
         $articulo->save();
         $marcas = Marca::all();
-        $proveedores = Proveedor::all();
+        $proveedores = Proveedor::orderBy('id','DESC')->where('estado', 'activo')->paginate(10);//muestra todos los datos de la lista en un list
         $articulos = Articulo::paginate(10);//muestra todos los datos de la lista en un list
         return view('articulo/articulo',compact('articulos'),compact('marcas'))->with(compact('proveedores'))->with('pagina','articulo');//hace el envio de datos en al url de clientes 
     }
@@ -145,7 +145,7 @@ class ArticuloController extends Controller
         $articulo->save();
 
         $marcas = Marca::all();
-        $proveedores = Proveedor::all();
+        $proveedores = Proveedor::orderBy('id','DESC')->where('estado', 'activo')->paginate(10);//muestra todos los datos de la lista en un list
         $articulos = Articulo::paginate(10);//muestra todos los datos de la lista en un list
         return view('articulo/articulo',compact('articulos'),compact('marcas'))->with(compact('proveedores'))->with('status','Actualización hecha, Satisfactoriamente...!')->with('pagina','articulo');//llamar a la vista del provee
     }
@@ -166,7 +166,7 @@ class ArticuloController extends Controller
        
         $articulo->delete();
         $marcas = Marca::all();
-        $proveedores = Proveedor::all();
+        $proveedores = Proveedor::orderBy('id','DESC')->where('estado', 'activo')->paginate(10);//muestra todos los datos de la lista en un list
         $articulos = Articulo::paginate(10);//muestra todos los datos de la lista en un list
         return view('articulo/articulo',compact('articulos'),compact('marcas'))->with(compact('proveedores'))->with('status','Eliminación hecha, Satisfactoriamente...!')->with('pagina','usuario');//llamar a la vista del provee
     }
