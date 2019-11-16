@@ -9,6 +9,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        {{-- dropzone --}}
+        <link rel="stylesheet" href="{{asset('asset/adminlte/dist/css/dropzone.css')}}">
+        <link href = "https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.css" rel = "stylesheet" >  
+
          <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -74,7 +78,9 @@
             <script src="{{asset('asset/adminlte/plugins/bootstrap-switch/css/bootstrap3/bootstrap-switch.min.css')}}"></script>
             <!-- Toastr -->
             <script src="{{asset('asset/adminlte/plugins/toastr/toastr.min.js')}}"></script>
-            
+            {{-- dropzone --}}
+            <script src="{{asset('asset/adminlte/dist/js/dropzone.js')}}"></script>
+            <script src = "https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.js" > </script>
              <script>
                     //codigo para el toast 
                         $(document).ready(function(){
@@ -88,7 +94,40 @@
                             $("#phone").inputmask({"mask": "99999999"}
                         
                         );
+                    //codigo drop zone
+                    // "myAwesomeDropzone" es el ID de nuestro formulario usando la notación camelCase
+                        
                     
+                    Dropzone.options.myAwesomeDropzone = {
+                        autoProcessQueue: false,
+                        uploadMultiple: true,
+                        paramName: "file", // Las imágenes se van a usar bajo este nombre de parámetro
+                        maxFilesize: 2, // Tamaño máximo en MB
+                        maxFiles: 4,
+                        acceptedFiles: ".jpeg,.jpg,.png,.gif",
+                        
+                        init: function() {
+                            var submitBtn = document.querySelector("#submit");
+                            myAwesomeDropzone = this;
+                            
+                            submitBtn.addEventListener("click", function(e){
+                                e.preventDefault();
+                                e.stopPropagation();
+                                myAwesomeDropzone.processQueue();
+                            });
+                            this.on("addedfile", function(file) {
+                                alert("file uploaded");
+                            });
+                            
+                            this.on("complete", function(file) {
+                                myAwesomeDropzone.removeFile(file);
+                            });
+            
+                            this.on("success", 
+                                myAwesomeDropzone.processQueue.bind(myAwesomeDropzone)
+                            );
+                        }
+                    };
                 </script>
     </body>
 </html>

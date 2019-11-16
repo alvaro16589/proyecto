@@ -27,7 +27,7 @@
               <!--modal-->
             <div class="modal fade" id="formularioAgregar">
                 <div class="modal-dialog modal-lg">
-                <form action="/articulo" method="POST" enctype="multipart/form-data">
+                <form action="/articulo" method="POST" enctype="multipart/form-data" >
                     {{ csrf_field() }}
                     <div class="modal-content bg-secondary">
                         <div class="modal-header">
@@ -41,7 +41,12 @@
                         <div class="modal-body">
                         <!--Cuerpo del Modal-->
                         <div class="row">
-                            <div class="col-md-8 offset-2 ">
+                            {{-- lado izquierdo del modal --}}
+                            <div class="col-md-6 " >
+                                    <input class="dropzone " id="myAwesomeDropzone" name="file" type="file" multiple />
+                            </div>
+                            {{-- lado derecho del modal --}}
+                            <div class="col-md-6 ">
                                 <div class="form-group"><!--'estado','nombre','descripcion','imagen','vencimiento','stok'-->
                                 <label for="addnom">Nombre</label>
                                 <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" maxlength=60 >

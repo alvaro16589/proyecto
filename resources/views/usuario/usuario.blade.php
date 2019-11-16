@@ -44,7 +44,7 @@
                                     <label for="addnom">Nombre</label>
                                     <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" maxlength=30>
                                     <label for="addape">Correo electrónico</label>
-                                <input id="addape" name="Correo" class="form-control input" type="email" placeholder="Ingrese su Correo" maxlength=70 >
+                                    <input id="addape" name="Correo" class="form-control input" type="email" placeholder="Ingrese su Correo" maxlength=70>
                                     <label for="addcontra">Contraseña</label>
                                     <input id="addcontra" name="Contraseña" class="form-control input" type="password" placeholder="Ingrese su contraseña" maxlength=30>
                                     <label for="addcontra2">Repita la contraseña</label>
@@ -59,8 +59,6 @@
                                     </select>
                                     <label for="addco2">Selecionar imagen:</label>
                                     <input id="addco2" accept="image/*" name="Foto" class="form-control input" type="file" placeholder="Seleccione una imagen..."  >
-
-                                
                                 </div>
                                 <!--end contenido-->
                             </div>
