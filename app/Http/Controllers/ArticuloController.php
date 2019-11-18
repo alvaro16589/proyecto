@@ -40,6 +40,18 @@ class ArticuloController extends Controller
         return 'estamos en el controlador create';
     }
 
+    public function dropzone(Request $request){
+
+        
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');//generando ruta de guardado
+            $name = time().$file->getClientOriginalName();//generando nombre de usuario
+            $file->move(public_path().'/asset/img/articulos',$name);////'
+            
+        }
+        
+    }
+
     /**
      * Store a newly created resource in storage.
      *

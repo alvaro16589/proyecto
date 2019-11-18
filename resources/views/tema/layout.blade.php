@@ -12,11 +12,7 @@
         {{--  dropzone --}}
         <link rel = "stylesheet" href = "{{asset('asset/adminlte/dist/css/dropzone.css')}}">
         <script src = "{{asset('asset/adminlte/dist/js/dropzone.js')}}"></script>
-        {{-- <link rel="stylesheet" href="{{asset('asset/adminlte/dist/css/dropzone.min.css')}}">
-        <link rel="stylesheet" href="{{asset('asset/adminlte/dist/css/basic.css')}}">
-        <link rel="stylesheet" href="{{asset('asset/adminlte/dist/css/basic.min.css')}}">--}}
-        
-
+         <link rel="stylesheet" href="{{asset('asset/adminlte/dist/css/dropzone.min.css')}}">
          <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -84,10 +80,10 @@
             <script src="{{asset('asset/adminlte/plugins/toastr/toastr.min.js')}}"></script>
             {{-- dropzone --}}
             
-            {{--  <script src = "{{asset('asset/adminlte/dist/js/dropzone.min.js')}}" > </script>
+              <script src = "{{asset('asset/adminlte/dist/js/dropzone.min.js')}}" > </script>
             <script src = "{{asset('asset/adminlte/dist/js/dropzone-amd-module.js')}}" > </script>
             <script src = "{{asset('asset/adminlte/dist/js/dropzone-amd-module.min.js')}}" > </script>
-            scri--}}
+            {{--scri--}}
             <script>
                     //codigo para el toast 
                         $(document).ready(function(){
@@ -104,37 +100,16 @@
                     //codigo drop zone
                     // "myAwesomeDropzone" es el ID de nuestro formulario usando la notación camelCase
                         
-                    /*
+                    
                     Dropzone.options.myAwesomeDropzone = {
-                        autoProcessQueue: false,
+                        autoProcessQueue: true,
                         uploadMultiple: true,
                         paramName: "file", // Las imágenes se van a usar bajo este nombre de parámetro
                         maxFilesize: 2, // Tamaño máximo en MB
                         maxFiles: 4,
-                        acceptedFiles: ".jpeg,.jpg,.png,.gif",
-                        
-                        init: function() {
-                            var submitBtn = document.querySelector("#submit");
-                            myAwesomeDropzone = this;
-                            
-                            submitBtn.addEventListener("click", function(e){
-                                e.preventDefault();
-                                e.stopPropagation();
-                                myAwesomeDropzone.processQueue();
-                            });
-                            this.on("addedfile", function(file) {
-                                alert("file uploaded");
-                            });
-                            
-                            this.on("complete", function(file) {
-                                myAwesomeDropzone.removeFile(file);
-                            });
-            
-                            this.on("success", 
-                                myAwesomeDropzone.processQueue.bind(myAwesomeDropzone)
-                            );
-                        }
-                    };*/
+                        acceptedFiles: ".jpeg,.jpg,.png,.gif"
+                                                
+                    };
                 </script>
     </body>
 </html>

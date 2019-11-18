@@ -22,6 +22,10 @@ Route::resource('/precio', 'PrecioController');
 Route::resource('/proveedor', 'ProveedorController');
 Route::resource('/provmarc', 'ProvmarcController');
 Route::resource('/usuario', 'UsuarioController');
+
+Route::post('/articulo/dropzone', 'ArticuloController@dropzone');
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
