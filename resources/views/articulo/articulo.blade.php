@@ -27,8 +27,7 @@
               <!--modal-->
             <div class="modal fade" id="formularioAgregar">
                 <div class="modal-dialog modal-lg">
-                <form action="/articulo" method="POST" enctype="multipart/form-data" >
-                    {{ csrf_field() }}
+                
                     <div class="modal-content bg-secondary">
                         <div class="modal-header">
                         <h4 class="modal-title">Ingresar articulo
@@ -43,44 +42,48 @@
                         <div class="row">
                             {{-- lado izquierdo del modal --}}
                             <div class="col-md-6 " >
-                                    <input class="dropzone " id="myAwesomeDropzone" name="file" type="file" multiple />
+                                    @include('articulo.dropzone')
                             </div>
+                        <form action="/articulo" method="POST" enctype="multipart/form-data" >
+                            {{ csrf_field() }}
                             {{-- lado derecho del modal --}}
                             <div class="col-md-6 ">
                                 <div class="form-group"><!--'estado','nombre','descripcion','imagen','vencimiento','stok'-->
-                                <label for="addnom">Nombre</label>
-                                <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" maxlength=60 >
-                                <label for="addape">Descripción</label>
-                                <textarea id="addape" name="Descripcion" class="form-control input"  placeholder="Ingrese su descripción..." maxlength=100></textarea>
-                                <label for="addcontra">Caducidad</label>
-                                <input id="addcontra" name="Vencimiento" class="form-control input" type="date"  >                                            
-                                <label for="addcontra">Cantidad</label>
-                                <input id="addcontra" name="Cantidad" class="form-control input" type="number" style="width: 50%;" min=0 max=200 value="1">  
-                                <label for="addcontra">Precio(Bs.)</label>
-                                <input id="addcontra" name="Precio" class="form-control input" type="number" style="width: 50%;" min=1.0 max=500000.0 value="1.0">  
-                                <label for="addm">Marca</label>
-                                <select id="addm" name="Marca" class="form-control select2" style="width: 50%;" aria-placeholder="Seleccione una marca...">
-                                    @foreach ($marcas as $marca)
-                                    <option value="{{$marca->id}}">{{$marca->nombre}}</option>
-                                    @endforeach
+                                    <label for="addnom">Nombre</label>
+                                    <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" maxlength=60 >
+                                    <label for="addape">Descripción</label>
+                                    <textarea id="addape" name="Descripcion" class="form-control input"  placeholder="Ingrese su descripción..." maxlength=100></textarea>
+                                    <label for="addcontra">Caducidad</label>
+                                    <input id="addcontra" name="Vencimiento" class="form-control input" type="date"  >                                            
+                                    <label for="addcontra">Cantidad</label>
+                                    <input id="addcontra" name="Cantidad" class="form-control input" type="number" style="width: 50%;" min=0 max=200 value="1">  
+                                    <label for="addcontra">Precio(Bs.)</label>
+                                    <input id="addcontra" name="Precio" class="form-control input" type="number" style="width: 50%;" min=1.0 max=500000.0 value="1.0">  
+                                    <label for="addm">Marca</label>
+                                    <select id="addm" name="Marca" class="form-control select2" style="width: 50%;" aria-placeholder="Seleccione una marca...">
+                                        @foreach ($marcas as $marca)
+                                        <option value="{{$marca->id}}">{{$marca->nombre}}</option>
+                                        @endforeach
+                                        
+                                    </select>
+                                    <label for="addtipo">Proveedor</label>
+                                    <select id="addtipo" name="Proveedor" class="form-control select2" style="width: 50%;" aria-placeholder="Seleccione un proveedor...">
+                                        @foreach ($proveedores as $proveedor)
+                                            <option value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
+                                        @endforeach
+                                    </select>
+        
+                                    <label for="addco2">Selecionar imagen:</label>
+                                    <input id="addco2" accept="image/*" name="Imagen" class="form-control input" type="file" placeholder="Seleccione una imagen..."  >
+                        
+
+                                    <div class="card-footer ">
                                     
-                                </select>
-                                <label for="addtipo">Proveedor</label>
-                                <select id="addtipo" name="Proveedor" class="form-control select2" style="width: 50%;" aria-placeholder="Seleccione un proveedor...">
-                                    @foreach ($proveedores as $proveedor)
-                                        <option value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
-                                    @endforeach
-                                </select>
-    
-                                <label for="addco2">Selecionar imagen:</label>
-                                <input id="addco2" accept="image/*" name="Imagen" class="form-control input" type="file" placeholder="Seleccione una imagen..."  >
-    
-                                <div class="card-footer ">
-                                
+                                    </div>
                                 </div>
-                            </div>
                             
                             </div>
+                        </form>
                         </div>
                         <!--Fin del cuerpo del modal-->
                         </div>
@@ -90,7 +93,6 @@
                         </div>
                     </div>
                     <!-- /.modal-content -->
-                </form>
                 <!-- /.modal-dialog -->
                 </div>
                 <!-- /.modal -->

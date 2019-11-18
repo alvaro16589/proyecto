@@ -26,6 +26,8 @@ class ArticuloController extends Controller
         $proveedores = Proveedor::orderBy('id','DESC')->where('estado', 'activo')->paginate(10);//muestra todos los datos de la lista en un list
         $articulos = Articulo::paginate(10);//muestra todos los datos de la lista en un list
         return view('articulo/articulo',compact('articulos'),compact('marcas'))->with(compact('proveedores'))->with('pagina','articulo');//hace el envio de datos en al url de clientes 
+        
+        //return view('articulo/dropzone')->with('pagina','articulo');
     }
 
     /**

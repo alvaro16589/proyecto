@@ -9,9 +9,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
-        {{-- dropzone --}}
-        <link rel="stylesheet" href="{{asset('asset/adminlte/dist/css/dropzone.css')}}">
-        <link href = "https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.css" rel = "stylesheet" >  
+        {{--  dropzone --}}
+        <link rel = "stylesheet" href = "{{asset('asset/adminlte/dist/css/dropzone.css')}}">
+        <script src = "{{asset('asset/adminlte/dist/js/dropzone.js')}}"></script>
+        {{-- <link rel="stylesheet" href="{{asset('asset/adminlte/dist/css/dropzone.min.css')}}">
+        <link rel="stylesheet" href="{{asset('asset/adminlte/dist/css/basic.css')}}">
+        <link rel="stylesheet" href="{{asset('asset/adminlte/dist/css/basic.min.css')}}">--}}
+        
 
          <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -79,9 +83,12 @@
             <!-- Toastr -->
             <script src="{{asset('asset/adminlte/plugins/toastr/toastr.min.js')}}"></script>
             {{-- dropzone --}}
-            <script src="{{asset('asset/adminlte/dist/js/dropzone.js')}}"></script>
-            <script src = "https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.js" > </script>
-             <script>
+            
+            {{--  <script src = "{{asset('asset/adminlte/dist/js/dropzone.min.js')}}" > </script>
+            <script src = "{{asset('asset/adminlte/dist/js/dropzone-amd-module.js')}}" > </script>
+            <script src = "{{asset('asset/adminlte/dist/js/dropzone-amd-module.min.js')}}" > </script>
+            scri--}}
+            <script>
                     //codigo para el toast 
                         $(document).ready(function(){
                             $(".toast").toast({delay: 5000});
@@ -97,7 +104,7 @@
                     //codigo drop zone
                     // "myAwesomeDropzone" es el ID de nuestro formulario usando la notación camelCase
                         
-                    
+                    /*
                     Dropzone.options.myAwesomeDropzone = {
                         autoProcessQueue: false,
                         uploadMultiple: true,
@@ -127,7 +134,7 @@
                                 myAwesomeDropzone.processQueue.bind(myAwesomeDropzone)
                             );
                         }
-                    };
+                    };*/
                 </script>
     </body>
 </html>
