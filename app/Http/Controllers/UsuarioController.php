@@ -58,6 +58,7 @@ class UsuarioController extends Controller
         $usua->tipo = $request->input('Tipo');
         $usua->foto = $name;
         $usua->save();
+    
          $usuarios = User::paginate(10);
         return view('usuario/usuario',compact('usuarios'))->with('status','Guardado exitoso...!')->with('pagina','usuario');
         

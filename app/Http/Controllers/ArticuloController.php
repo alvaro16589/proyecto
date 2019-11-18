@@ -45,7 +45,7 @@ class ArticuloController extends Controller
         
         if ($request->hasFile('file')) {
             $file = $request->file('file');//generando ruta de guardado
-            $name = time().$file->getClientOriginalName();//generando nombre de usuario
+            $name = uniqid().$file->getClientOriginalName();//generando nombre de usuario
             $file->move(public_path().'/asset/img/articulos',$name);////'
             
         }
@@ -82,6 +82,9 @@ class ArticuloController extends Controller
         $arti->idmar = $request->input('Marca');
         $arti->idprov = $request->input('Proveedor');
         $arti->save();
+
+       
+        
         $marcas = Marca::all();
         $proveedores = Proveedor::orderBy('id','DESC')->where('estado', 'activo')->paginate(10);//muestra todos los datos de la lista en un list
         $articulos = Articulo::paginate(10);//muestra todos los datos de la lista en un list

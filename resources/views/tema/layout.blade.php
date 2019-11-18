@@ -102,14 +102,15 @@
                         
                     
                     Dropzone.options.myAwesomeDropzone = {
-                        autoProcessQueue: true,
-                        uploadMultiple: true,
+                        
                         paramName: "file", // Las imágenes se van a usar bajo este nombre de parámetro
                         maxFilesize: 2, // Tamaño máximo en MB
                         maxFiles: 4,
                         acceptedFiles: ".jpeg,.jpg,.png,.gif"
                                                 
                     };
+                 
+                 
                 </script>
     </body>
 </html>

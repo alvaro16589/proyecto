@@ -41,13 +41,13 @@
                         <!--Cuerpo del Modal-->
                         <div class="row">
                             {{-- lado izquierdo del modal --}}
-                            <div class="col-md-6 " >
+                            <div class="col-md-5 " >
                                     @include('articulo.dropzone')
                             </div>
-                            <form action="/articulo" method="POST" enctype="multipart/form-data" >
+                            <form action="/articulo" method="POST" enctype="multipart/form-data" class="col-md-7" >
                                 {{ csrf_field() }}
                                 {{-- lado derecho del modal --}}
-                                <div class="col-md-6 ">
+                                <div >
                                     <div class="form-group"><!--'estado','nombre','descripcion','imagen','vencimiento','stok'-->
                                         <label for="addnom">Nombre</label>
                                         <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" maxlength=60 >

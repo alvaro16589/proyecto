@@ -29,7 +29,7 @@
                 <!--modal agregar usuario-->
                 <div class="modal fade" id="formularioAgregar">
                     <div class="modal-dialog modal-lg ">
-                        <form action="/usuario" method="POST" enctype="multipart/form-data">
+                        <form action="/usuario" method="POST" enctype="multipart/form-data" >
                         {{ csrf_field() }}<!--creador de tokens-->
                         <div class="modal-content bg-secondary">
                             <div class="modal-header">
@@ -44,11 +44,11 @@
                                     <label for="addnom">Nombre</label>
                                     <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" maxlength=30>
                                     <label for="addape">Correo electrónico</label>
-                                    <input id="addape" name="Correo" class="form-control input" type="email" placeholder="Ingrese su Correo" maxlength=70>
-                                    <label for="addcontra">Contraseña</label>
-                                    <input id="addcontra" name="Contraseña" class="form-control input" type="password" placeholder="Ingrese su contraseña" maxlength=30>
+                                    <input id="addape" name="Correo" class="form-control input" type="email" placeholder="Ingrese su Correo" maxlength=70 >
+                                    <label for="addcontra">Contraseña</label> 
+                                    <input id="addcontra" name="Contraseña" class="form-control input" type="password" placeholder="Ingrese su contraseña" maxlength=30 >
                                     <label for="addcontra2">Repita la contraseña</label>
-                                    <input id="addcontra2" name="addcontra2" class="form-control input" type="password" placeholder="Ingrese su contraseña" maxlength=30>
+                                    <input id="addcontra2" name="addcontra2" class="form-control input" type="password" placeholder="Ingrese su contraseña" maxlength=30 >
                                     
                                     <label for="addtipo">Tipo</label>
                                     <select id="addtipo" name="Tipo" class="form-control select2" style="width: 100%;">
