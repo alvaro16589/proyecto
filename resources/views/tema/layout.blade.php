@@ -110,7 +110,25 @@
                                                 
                     };
                  
-                 
+                    
+                    Dropzone.options.dzId = {
+                        url: "/articulo/dropzone",
+                        sending: function(data, xhr, formData){
+                            formData.append('_token', "{{ csrf_token() }}" );
+                      
+                        },
+                    
+                        paramName: "file", // Las imágenes se van a usar bajo este nombre de parámetro
+                        maxFilesize: 2, // Tamaño máximo en MB
+                        maxFiles: 4,
+                        acceptedFiles: ".jpeg,.jpg,.png,.gif",
+                        success: function(results, callback){
+                          //set value of your hidden input field here
+                          //console.log(results['name']);
+                          document.getElementById("file").value = results['name'];
+                        }  
+                         
+                    }; 
                 </script>
     </body>
 </html>

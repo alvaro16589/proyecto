@@ -60,8 +60,8 @@ class ArticuloController extends Controller
      */
     public function store(StoreArticuloRequest $request)
     {//'estado','nombre','descripcion','imagen','vencimiento','stok'
-
-        $arti = new Articulo();
+       return $request;
+        /*$arti = new Articulo();
         if ($request->hasFile('Imagen')) {
             $file = $request->file('Imagen');//generando ruta de guardado
             $name = time().$file->getClientOriginalName();//generando nombre de usuario
@@ -89,7 +89,9 @@ class ArticuloController extends Controller
         $proveedores = Proveedor::orderBy('id','DESC')->where('estado', 'activo')->paginate(10);//muestra todos los datos de la lista en un list
         $articulos = Articulo::paginate(10);//muestra todos los datos de la lista en un list
         return view('articulo/articulo',compact('articulos'),compact('marcas'))->with(compact('proveedores'))->with('status','Guardado exitoso...!')->with('pagina','articulo');//hace el envio de datos en al url de clientes  
+    */
     }
+
 
     /**
      * Display the specified resource.

@@ -42,7 +42,10 @@
                         <div class="row">
                             {{-- lado izquierdo del modal --}}
                             <div class="col-md-5 " >
-                                    @include('articulo.dropzone')
+                                <form action="/articulo/dropzone" class="dropzone bg-secondary" id="myAwesomeDropzone" method="post" enctype="multipart/form-data">
+                                    @csrf				
+                                </form>
+                                
                             </div>
                             <form action="/articulo" method="POST" enctype="multipart/form-data" class="col-md-7" >
                                 {{ csrf_field() }}
@@ -75,13 +78,18 @@
             
                                         <label for="addco2">Selecionar imagen:</label>
                                         <input id="addco2" accept="image/*" name="Imagen" class="form-control input" type="file" placeholder="Seleccione una imagen..."  >
-                            
+                                        <div class="dropzone bg-teal"  id="dzId" >
+                                            <div class="fallback">
+                                                <input id="file" name="file[]" type="file" multiple />
+                                            </div>
+                                        </div>
 
                                         <div class="card-footer ">
-                                        
+                                            
                                         </div>
                                     </div>
-                                
+                                                        <button type="submit" class="btn btn-primary">Guardar</button>
+
                                 </div>
                             </form>
                         </div>
