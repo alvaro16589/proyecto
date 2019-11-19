@@ -39,6 +39,8 @@ class ArticuloController extends Controller
     {
         return 'estamos en el controlador create';
     }
+    public $varglob = "";
+    
 
     public function dropzone(Request $request){
 
@@ -47,7 +49,7 @@ class ArticuloController extends Controller
             $file = $request->file('file');//generando ruta de guardado
             $name = uniqid().$file->getClientOriginalName();//generando nombre de usuario
             $file->move(public_path().'/asset/img/articulos',$name);////'
-            
+            $this->varglob = $name;
         }
         
     }
@@ -60,7 +62,7 @@ class ArticuloController extends Controller
      */
     public function store(StoreArticuloRequest $request)
     {//'estado','nombre','descripcion','imagen','vencimiento','stok'
-       return $request;
+        return $this->varglob;
         /*$arti = new Articulo();
         if ($request->hasFile('Imagen')) {
             $file = $request->file('Imagen');//generando ruta de guardado

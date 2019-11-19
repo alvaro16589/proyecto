@@ -124,8 +124,8 @@
                         acceptedFiles: ".jpeg,.jpg,.png,.gif",
                         success: function(results, callback){
                           //set value of your hidden input field here
-                          //console.log(results['name']);
-                          document.getElementById("file").v.value = results['name'];
+                          console.log(results['name']);
+                         
                         }  
                          
                     }; 

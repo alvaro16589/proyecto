@@ -78,11 +78,14 @@
             
                                         <label for="addco2">Selecionar imagen:</label>
                                         <input id="addco2" accept="image/*" name="Imagen" class="form-control input" type="file" placeholder="Seleccione una imagen..."  >
+                                      {{-- comment 
+                                        
                                         <div class="dropzone bg-teal"  id="dzId" >
                                             <div class="fallback">
-                                                <input id="file" name="file[]" type="file" multiple />
+                                                <input  name="file" type="file" multiple />
                                             </div>
-                                        </div>
+                                            
+                                        </div>--}}
 
                                         <div class="card-footer ">
                                             
