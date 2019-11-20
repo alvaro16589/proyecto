@@ -147,4 +147,24 @@ class UsuarioController extends Controller
         return view('usuario/usuario',compact('usuarios'))->with('status','Eliminación hecha, Satisfactoriamente...!')->with('pagina','usuario');//llamar a la vista del provee
         
     }
+    //reportes
+    public function reporte()
+    {
+        $usuarios = User::all();
+
+        return view('usuario.reporte', compact('usuarios'));
+    }
+
+    public function pdf()
+    {        
+        /**
+         * toma en cuenta que para ver los mismos 
+         * datos debemos hacer la misma consulta
+        **/
+        $usuarios = Usuario::all(); 
+
+        $pdf = PDF::loadView('pdf.usuarios', compact('usuarios'));
+
+        return $pdf->download('listado.pdf');
+    }
 }
