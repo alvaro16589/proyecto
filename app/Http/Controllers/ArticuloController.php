@@ -6,6 +6,8 @@ use App\Articulo;
 use App\Proveedor;
 use App\Marca;
 use App\User;
+use App\Temporal;
+use App\ImagenArti;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Auth;
 use App\Http\Requests\StoreArticuloRequest;
@@ -39,17 +41,19 @@ class ArticuloController extends Controller
     {
         return 'estamos en el controlador create';
     }
-    public $varglob = "";
+  
     
 
     public function dropzone(Request $request){
 
-        
+        $temporal = new Temporal();
         if ($request->hasFile('file')) {
             $file = $request->file('file');//generando ruta de guardado
             $name = uniqid().$file->getClientOriginalName();//generando nombre de usuario
             $file->move(public_path().'/asset/img/articulos',$name);////'
-            $this->varglob = $name;
+            
+            $temporal->nombre = $name;
+            $temporal->save();
         }
         
     }
@@ -62,8 +66,9 @@ class ArticuloController extends Controller
      */
     public function store(StoreArticuloRequest $request)
     {//'estado','nombre','descripcion','imagen','vencimiento','stok'
-        return $this->varglob;
-        /*$arti = new Articulo();
+        $temporals = Temporal::all();
+        $arti = new Articulo();
+        
         if ($request->hasFile('Imagen')) {
             $file = $request->file('Imagen');//generando ruta de guardado
             $name = time().$file->getClientOriginalName();//generando nombre de usuario
@@ -84,14 +89,20 @@ class ArticuloController extends Controller
         $arti->idmar = $request->input('Marca');
         $arti->idprov = $request->input('Proveedor');
         $arti->save();
-
-       
+        foreach ($temporals as $temporal) {
+            $imagen = new ImagenArti();
+            $imagen->imagen = $temporal->nombre;
+            $imagen->idarti = $arti->id;    
+            $imagen->save();
+            $temporal->delete();
+        }
+        
         
         $marcas = Marca::all();
         $proveedores = Proveedor::orderBy('id','DESC')->where('estado', 'activo')->paginate(10);//muestra todos los datos de la lista en un list
         $articulos = Articulo::paginate(10);//muestra todos los datos de la lista en un list
         return view('articulo/articulo',compact('articulos'),compact('marcas'))->with(compact('proveedores'))->with('status','Guardado exitoso...!')->with('pagina','articulo');//hace el envio de datos en al url de clientes  
-    */
+   
     }
 
 

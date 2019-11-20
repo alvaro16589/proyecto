@@ -18,7 +18,6 @@
                         <i class="fas fa-plus"></i> 
                             Agregar
                     </button>
-                    
                     <a class="btn btn-sm btn-info" href="/articulo">
                         Mostrar todo
                     </a>
@@ -26,91 +25,67 @@
             </div>
               <!--modal-->
             <div class="modal fade" id="formularioAgregar">
-                <div class="modal-dialog modal-lg">
-                
-                    <div class="modal-content bg-secondary">
-                        <div class="modal-header">
-                        <h4 class="modal-title">Ingresar articulo
-                            
-                        </h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        </div>
-                        <div class="modal-body">
-                        <!--Cuerpo del Modal-->
-                        <div class="row">
-                            {{-- lado izquierdo del modal --}}
-                            <div class="col-md-5 " >
-                                <form action="/articulo/dropzone" class="dropzone bg-secondary" id="myAwesomeDropzone" method="post" enctype="multipart/form-data">
-                                    @csrf				
-                                </form>
-                                
+                <form action="/articulo" method="POST" enctype="multipart/form-data" >
+                        {{ csrf_field() }}
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content bg-secondary">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Ingresar articulo</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                            <form action="/articulo" method="POST" enctype="multipart/form-data" class="col-md-7" >
-                                {{ csrf_field() }}
-                                {{-- lado derecho del modal --}}
-                                <div >
-                                    <div class="form-group"><!--'estado','nombre','descripcion','imagen','vencimiento','stok'-->
-                                        <label for="addnom">Nombre</label>
-                                        <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" maxlength=60 >
-                                        <label for="addape">Descripción</label>
-                                        <textarea id="addape" name="Descripcion" class="form-control input"  placeholder="Ingrese su descripción..." maxlength=100></textarea>
-                                        <label for="addcontra">Caducidad</label>
-                                        <input id="addcontra" name="Vencimiento" class="form-control input" type="date"  >                                            
-                                        <label for="addcontra">Cantidad</label>
-                                        <input id="addcontra" name="Cantidad" class="form-control input" type="number" style="width: 50%;" min=0 max=200 value="1">  
-                                        <label for="addcontra">Precio(Bs.)</label>
-                                        <input id="addcontra" name="Precio" class="form-control input" type="number" style="width: 50%;" min=1.0 max=500000.0 value="1.0">  
-                                        <label for="addm">Marca</label>
-                                        <select id="addm" name="Marca" class="form-control select2" style="width: 50%;" aria-placeholder="Seleccione una marca...">
-                                            @foreach ($marcas as $marca)
-                                            <option value="{{$marca->id}}">{{$marca->nombre}}</option>
-                                            @endforeach
-                                            
-                                        </select>
-                                        <label for="addtipo">Proveedor</label>
-                                        <select id="addtipo" name="Proveedor" class="form-control select2" style="width: 50%;" aria-placeholder="Seleccione un proveedor...">
-                                            @foreach ($proveedores as $proveedor)
-                                                <option value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
-                                            @endforeach
-                                        </select>
-            
-                                        <label for="addco2">Selecionar imagen:</label>
-                                        <input id="addco2" accept="image/*" name="Imagen" class="form-control input" type="file" placeholder="Seleccione una imagen..."  >
-                                      {{-- comment 
+                            <div class="modal-body">
+                            <!--Cuerpo del Modal-->
+                            {{-- lado derecho del modal --}}
+                            <div class="col col-md-8 offset-md-2">
+                                <div class="form-group"><!--'estado','nombre','descripcion','imagen','vencimiento','stok'-->
+                                    <label for="addnom">Nombre</label>
+                                    <input id="addnom" name="Nombre" class="form-control input" type="text" placeholder="Ingrese su nombre" maxlength=60 >
+                                    <label for="addape">Descripción</label>
+                                    <textarea id="addape" name="Descripcion" class="form-control input"  placeholder="Ingrese su descripción..." maxlength=100></textarea>
+                                    <label for="addcontra">Caducidad</label>
+                                    <input id="addcontra" name="Vencimiento" class="form-control input" type="date"  >                                            
+                                    <label for="addcontra">Cantidad</label>
+                                    <input id="addcontra" name="Cantidad" class="form-control input" type="number" style="width: 50%;" min=0 max=200 value="1">  
+                                    <label for="addcontra">Precio(Bs.)</label>
+                                    <input id="addcontra" name="Precio" class="form-control input" type="number" style="width: 50%;" min=1.0 max=500000.0 value="1.0">  
+                                    <label for="addm">Marca</label>
+                                    <select id="addm" name="Marca" class="form-control select2" style="width: 50%;" aria-placeholder="Seleccione una marca...">
+                                        @foreach ($marcas as $marca)
+                                        <option value="{{$marca->id}}">{{$marca->nombre}}</option>
+                                        @endforeach
                                         
-                                        <div class="dropzone bg-teal"  id="dzId" >
-                                            <div class="fallback">
-                                                <input  name="file" type="file" multiple />
-                                            </div>
-                                            
-                                        </div>--}}
-
-                                        <div class="card-footer ">
-                                            
-                                        </div>
+                                    </select>
+                                    <label for="addtipo">Proveedor</label>
+                                    <select id="addtipo" name="Proveedor" class="form-control select2" style="width: 50%;" aria-placeholder="Seleccione un proveedor...">
+                                        @foreach ($proveedores as $proveedor)
+                                            <option value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
+                                        @endforeach
+                                    </select>
+                                    <label for="addco2">Selecionar imagen:</label>
+                                    <input id="addco2" accept="image/*" name="Imagen" class="form-control input" type="file" placeholder="Seleccione una imagen..."  >
+                                
+                                    <label for="dzId">Agregar vistas (4)</label>
+                                    <div class="dropzone bg-teal"  id="dzId" ></div>
+                                    <div class="card-footer ">
                                     </div>
-                                                        <button type="submit" class="btn btn-primary">Guardar</button>
-
                                 </div>
-                            </form>
+                            </div>
+                            <!--Fin del cuerpo del modal-->
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
                         </div>
-                        <!--Fin del cuerpo del modal-->
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                <!-- /.modal-dialog -->
-                </div>
+                        <!-- /.modal-content -->
+                    <!-- /.modal-dialog -->
+                    </div> 
+                </form>
                 <!-- /.modal -->
             </div>        
         </div>
-      
-    
         <div class="card-body table-responsive p-0" style="height: 60em;">
           <table class="table table-head-fixed table-hover " >
             <thead><!--'estado','nombre','descripcion','imagen','vencimiento','stok'-->
