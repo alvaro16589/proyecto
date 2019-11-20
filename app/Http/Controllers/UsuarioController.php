@@ -11,9 +11,10 @@ use Illuminate\Http\File;
 use Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
-
+use Barryvdh\DomPDF\Facade as PDF;
 class UsuarioController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -148,22 +149,21 @@ class UsuarioController extends Controller
         
     }
     //reportes
+    
     public function reporte()
     {
-        $usuarios = User::all();
-
-        return view('usuario.reporte', compact('usuarios'));
+        $usuarios = User::paginate(10);
+        //return 'entramos al controlador de reporte';
+        return view('usuario/reporte', compact('usuarios'));
     }
-
-    public function pdf()
+    public function pdf() 
     {        
         /**
          * toma en cuenta que para ver los mismos 
          * datos debemos hacer la misma consulta
         **/
-        $usuarios = Usuario::all(); 
-
-        $pdf = PDF::loadView('pdf.usuarios', compact('usuarios'));
+        $usuarios = User::all();
+        $pdf = PDF::loadView('usuario.reporte', compact('usuarios'));
 
         return $pdf->download('listado.pdf');
     }
