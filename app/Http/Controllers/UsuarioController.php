@@ -163,8 +163,8 @@ class UsuarioController extends Controller
          * datos debemos hacer la misma consulta
         **/
         $usuarios = User::all();
-        $pdf = PDF::loadView('usuario.reporte', compact('usuarios'));
+        $pdf = PDF::loadView('pdf.usuario', compact('usuarios'));
 
-        return $pdf->download('listado.pdf');
+        return $pdf->download('usuarios.pdf');
     }
 }
