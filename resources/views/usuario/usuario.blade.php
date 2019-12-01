@@ -47,8 +47,8 @@
                                     <input id="addape" name="Correo" class="form-control input" type="email" placeholder="Ingrese su Correo" maxlength=70 >
                                     <label for="addcontra">Contraseña</label> 
                                     <input id="addcontra" name="Contraseña" class="form-control input" type="password" placeholder="Ingrese su contraseña" maxlength=30 >
-                                    <label for="addcontra2">Repita la contraseña</label>
-                                    <input id="addcontra2" name="addcontra2" class="form-control input" type="password" placeholder="Ingrese su contraseña" maxlength=30 >
+                                    <label for="password-confirm">Repita la contraseña</label>
+                                    <input id="password-confirm" name="password_confirmation" class="form-control input" type="password" placeholder="Ingrese su contraseña" maxlength=30 >
                                     
                                     <label for="addtipo">Tipo</label>
                                     <select id="addtipo" name="Tipo" class="form-control select2" style="width: 100%;">

@@ -153,8 +153,7 @@ class UsuarioController extends Controller
     public function reporte()
     {
         $usuarios = User::paginate(10);
-        //return 'entramos al controlador de reporte';
-        return view('usuario/reporte', compact('usuarios'));
+        return view('usuario/reporte', compact('usuarios'))->with('pagina','Reporte de usuarios');
     }
     public function pdf() 
     {        
@@ -163,8 +162,40 @@ class UsuarioController extends Controller
          * datos debemos hacer la misma consulta
         **/
         $usuarios = User::all();
-        $pdf = PDF::loadView('pdf.usuario', compact('usuarios'));
-
-        return $pdf->download('usuarios.pdf');
+        $coment = 'Reporte de usuarios con los datos sin filtrar';
+        $pdf = PDF::loadView('pdf.usuario', compact('usuarios','coment'))->setPaper('letter');//,'landscape' para cambiar la horientacion de la hoja
+        return $pdf->stream('usuarios.pdf');//descargar directa "dawnload" en lugar de stream
+    }
+    public function reporteac()
+    {
+        $usuarios = User::orderBy('id','DESC')->where('estado', 'activo')->paginate(10);
+        return view('usuario/reporte', compact('usuarios'))->with('pagina','Reporte de usuarios activos');
+    }
+    public function pdfac() 
+    {        
+        /**
+         * toma en cuenta que para ver los mismos 
+         * datos debemos hacer la misma consulta
+        **/
+        $usuarios = User::orderBy('id','DESC')->where('estado', 'activo')->get();
+        $coment = 'Reporte de usuarios activos';
+        $pdf = PDF::loadView('pdf.usuario', compact('usuarios','coment'))->setPaper('letter');//,'landscape' para cambiar la horientacion de la hoja
+        return $pdf->stream('usuarios.pdf');//descargar directa "dawnload" en lugar de stream
+    }
+    public function reportein()
+    {
+        $usuarios = User::orderBy('id','DESC')->where('estado', 'inactivo')->paginate(10);
+        return view('usuario/reporte', compact('usuarios'))->with('pagina','Reporte de usuarios inactivos');
+    }
+    public function pdfin() 
+    {        
+        /**
+         * toma en cuenta que para ver los mismos 
+         * datos debemos hacer la misma consulta
+        **/
+        $usuarios = User::orderBy('id','DESC')->where('estado', 'inactivo')->get();
+        $coment = 'Reporte de usuarios activos';
+        $pdf = PDF::loadView('pdf.usuario', compact('usuarios','coment'))->setPaper('letter');//,'landscape' para cambiar la horientacion de la hoja
+        return $pdf->stream('usuarios.pdf');//descargar directa "dawnload" en lugar de stream
     }
 }

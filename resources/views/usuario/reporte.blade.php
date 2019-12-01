@@ -1,4 +1,4 @@
-@extends('tema.layoutreport')
+@extends('tema.layout')
 @section('contenido') 
     <!-- /.row -->
     <div class="row mt-5" >
@@ -34,7 +34,7 @@
                             <td>{{$usuario->name}}</td>
                             
                             <td>
-                                {{$usuario->estado=='activo'}}
+                                {{$usuario->estado}}
                             </td>
                             <td>
                                 {{ $usuario->email }}
@@ -53,11 +53,30 @@
                     
                 </div>
             <!-- /.card-body -->
+           
+            @if ($pagina=='Reporte de usuarios')
                 <div class="card-footer">
                     <a href="{{ route('usuarios.pdf') }}" class="btn btn-sm btn-primary">
-                        Descargar productos en PDF
+                        Descargar usuarios en PDF
                     </a>
-                </div>   
+                </div>  
+            @else
+                @if ($pagina=='Reporte de usuarios activos')
+                    <div class="card-footer">
+                        <a href="{{ route('usuariosac.pdf') }}" class="btn btn-sm btn-primary">
+                            Descargar usuarios activos en PDF
+                        </a>
+                    </div>
+                @else  
+                    <div class="card-footer">
+                        <a href="{{ route('usuariosin.pdf') }}" class="btn btn-sm btn-primary">
+                            Descargar usuarios inactivos en PDF
+                        </a>
+                    </div>
+                @endif
+            @endif
+            
+                 
             
             </div>
             <!-- /.card -->

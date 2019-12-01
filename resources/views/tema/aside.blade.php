@@ -36,10 +36,10 @@
             </a>
           </li>
           <li class="nav-item has-treeview menu-open">
-          <a href="#" class="nav-link  active">
+            <a href="#" class="nav-link  active">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                Editar : 
+                Módulos : 
                 <i class="fas fa-angle-left right"></i>
                 <span class="badge badge-info right">6</span>
               </p>
@@ -72,58 +72,41 @@
               <!--finalizacion del dropdawn-->
             </ul>
           </li>
-         
-          
-          
-          
-          <li class="nav-header">EXAMPLES</li>
-            <li class="nav-item">
-              <a href="/reporte" class="nav-link">
-                  
-                <i class="nav-icon far fa-calendar-alt"></i>
-                <p>
-                  Reporte Usuarios
-                  <span class="badge badge-info right">2</span>
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="../gallery.html" class="nav-link">
-                <i class="nav-icon far fa-image"></i>
-                <p>
-                  Gallery
-                </p>
-              </a>
-            </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon far fa-envelope"></i>
-                <p>
-                  Mailbox
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="../mailbox/mailbox.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Inbox</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../mailbox/compose.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Compose</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../mailbox/read-mail.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Read</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
+          <li class="nav-header">Reportes</li>
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+             
+              <li class="nav-item has-treeview ">{{-- menu-open --}}              
+                <a href="#" class="nav-link  active">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>
+                    Reportes usuarios: 
+                    <i class="fas fa-angle-left right"></i>
+                    <span class="badge badge-info right">6</span>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/reporte" class="nav-link @if($pagina == 'Reporte de usuarios') {{'active'}} @endif">
+                      <i class="far fa-circle nav-icon"></i>
+                     <p>Todos los usuarios </p>
+                    </a>
+                  </li>              
+                  <li class="nav-item">
+                    <a href="/reporteac" class="nav-link @if($pagina == 'Reporte de usuarios activos') {{'active'}} @endif">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Usuarios activos</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/reportein" class="nav-link @if($pagina == 'Reporte de usuarios inactivos') {{'active'}} @endif ">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Usuarios inactivos</p>
+                    </a>
+                  </li>
+                  <!--finalizacion del dropdawn-->
+                </ul>
+              </li>
           </ul>
       </nav>
       <!-- /.sidebar-menu -->

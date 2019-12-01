@@ -24,8 +24,15 @@ Route::resource('/provmarc', 'ProvmarcController');
 Route::resource('/usuario', 'UsuarioController');
 
 Route::post('/articulo/dropzone', 'ArticuloController@dropzone');
+//rutas reportes
+//Usuarios
 Route::get('/reporte', 'UsuarioController@reporte'); 
 Route::get('descargar-usuarios', 'UsuarioController@pdf')->name('usuarios.pdf');
+Route::get('/reporteac', 'UsuarioController@reporteac'); 
+Route::get('descargar-usuarios-ac', 'UsuarioController@pdfac')->name('usuariosac.pdf');
+Route::get('/reportein', 'UsuarioController@reportein'); 
+Route::get('descargar-usuarios-in', 'UsuarioController@pdfin')->name('usuariosin.pdf');
+
 
 Auth::routes();
 
