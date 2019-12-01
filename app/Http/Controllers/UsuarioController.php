@@ -22,8 +22,14 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarios = User::paginate(10);
-        return view('usuario/usuario',compact('usuarios'))->with('pagina','usuario');
+        if (auth()->user()->tipo == 'Administrador') {
+            $usuarios = User::paginate(10);
+            return view('usuario/usuario',compact('usuarios'))->with('pagina','usuario');
+        }
+        else{
+            abort(403,"No esta autorizado para realizar esta acción.");// con 401 Unauthorized // 403 es personalizable
+        }
+        
     }
 
     /**
@@ -148,7 +154,8 @@ class UsuarioController extends Controller
         return view('usuario/usuario',compact('usuarios'))->with('status','Eliminación hecha, Satisfactoriamente...!')->with('pagina','usuario');//llamar a la vista del provee
         
     }
-    //reportes
+    //___________________________##################################################################################_________________________
+    //                  REPORTES
     
     public function reporte()
     {
@@ -166,12 +173,12 @@ class UsuarioController extends Controller
         $pdf = PDF::loadView('pdf.usuario', compact('usuarios','coment'))->setPaper('letter');//,'landscape' para cambiar la horientacion de la hoja
         return $pdf->stream('usuarios.pdf');//descargar directa "dawnload" en lugar de stream
     }
-    public function reporteac()
+    public function reporteac() // vista usuarios solo activos
     {
         $usuarios = User::orderBy('id','DESC')->where('estado', 'activo')->paginate(10);
         return view('usuario/reporte', compact('usuarios'))->with('pagina','Reporte de usuarios activos');
     }
-    public function pdfac() 
+    public function pdfac() //vista solo usuarios activos
     {        
         /**
          * toma en cuenta que para ver los mismos 
@@ -182,12 +189,12 @@ class UsuarioController extends Controller
         $pdf = PDF::loadView('pdf.usuario', compact('usuarios','coment'))->setPaper('letter');//,'landscape' para cambiar la horientacion de la hoja
         return $pdf->stream('usuarios.pdf');//descargar directa "dawnload" en lugar de stream
     }
-    public function reportein()
+    public function reportein() //Usuarios inactivos
     {
         $usuarios = User::orderBy('id','DESC')->where('estado', 'inactivo')->paginate(10);
         return view('usuario/reporte', compact('usuarios'))->with('pagina','Reporte de usuarios inactivos');
     }
-    public function pdfin() 
+    public function pdfin() //usuarios inactivos
     {        
         /**
          * toma en cuenta que para ver los mismos 

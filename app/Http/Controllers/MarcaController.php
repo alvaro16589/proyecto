@@ -16,8 +16,14 @@ class MarcaController extends Controller
      */
     public function index()
     {
-        $marcas = Marca::paginate(14);//muestra todos los datos de la lista en un list
-        return view('marca/marca',compact('marcas'))->with('pagina','marca');//hace el envio de datos en al url de clientes 
+        if (auth()->user()->tipo == 'Administrador') {
+            $marcas = Marca::paginate(14);//muestra todos los datos de la lista en un list
+            return view('marca/marca',compact('marcas'))->with('pagina','marca');//hace el envio de datos en al url de clientes 
+        }
+        else{
+            abort(403,"No esta autorizado para realizar esta acción.");// con 401 Unauthorized // 403 es personalizable
+        }
+       
     }
 
     /**

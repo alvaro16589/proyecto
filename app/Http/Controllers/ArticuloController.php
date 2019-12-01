@@ -24,12 +24,20 @@ class ArticuloController extends Controller
      */
     public function index()
     {
-        $marcas = Marca::all();
-        $proveedores = Proveedor::orderBy('id','DESC')->where('estado', 'activo')->paginate(10);//muestra todos los datos de la lista en un list
-        $articulos = Articulo::paginate(10);//muestra todos los datos de la lista en un list
-        return view('articulo/articulo',compact('articulos'),compact('marcas'))->with(compact('proveedores'))->with('pagina','articulo');//hace el envio de datos en al url de clientes 
+        if (auth()->user()->tipo == 'Administrador') {
+           
+            $marcas = Marca::all();
+            $proveedores = Proveedor::orderBy('id','DESC')->where('estado', 'activo')->paginate(10);//muestra todos los datos de la lista en un list
+            $articulos = Articulo::paginate(10);//muestra todos los datos de la lista en un list
+            return view('articulo/articulo',compact('articulos'),compact('marcas'))->with(compact('proveedores'))->with('pagina','articulo');//hace el envio de datos en al url de clientes 
+        }
+        else{
+            abort(403,"No esta autorizado para realizar esta acción.");// con 401 Unauthorized // 403 es personalizable
+        }
+
         
-        //return view('articulo/dropzone')->with('pagina','articulo');
+        
+       
     }
 
     /**

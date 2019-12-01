@@ -15,9 +15,15 @@ class ProveedorController extends Controller
      */
     public function index()
     {
-        $proveedores = Proveedor::paginate(10);//Llamar a todos los datos contenidos dentro de la tabla proveedor
-        return view('proveedor/proveedor',compact('proveedores'))->with('pagina','proveedor');//llamar a la vista del proveedor
-    }
+        if (auth()->user()->tipo == 'Administrador') {
+            $proveedores = Proveedor::paginate(10);//Llamar a todos los datos contenidos dentro de la tabla proveedor
+            return view('proveedor/proveedor',compact('proveedores'))->with('pagina','proveedor');//llamar a la vista del proveedor
+            
+        }
+        else{
+            abort(403,"No esta autorizado para realizar esta acción.");// con 401 Unauthorized // 403 es personalizable
+        }
+     }   
 
     /**
      * Show the form for creating a new resource.
