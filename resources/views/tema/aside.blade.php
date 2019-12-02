@@ -35,13 +35,14 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview menu-open @if (auth()->user()->tipo == "Secretaria")
+              d-none
+          @endif">
             <a href="#" class="nav-link  active">
-              <i class="nav-icon fas fa-copy"></i>
+              <i class="nav-icon fas fa-copy "></i>
               <p>
                 Módulos : 
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">6</span>
+                
               </p>
             </a>
             <ul class="nav nav-treeview">
@@ -81,8 +82,7 @@
                   <i class="nav-icon fas fa-copy"></i>
                   <p>
                     Reportes usuarios: 
-                    <i class="fas fa-angle-left right"></i>
-                    <span class="badge badge-info right">6</span>
+                    
                   </p>
                 </a>
                 <ul class="nav nav-treeview">

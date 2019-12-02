@@ -21,7 +21,9 @@
           </a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a class="navbar-brand" href="@guest{{ url('/') }} @else {{ url('/home') }}@endguest">
+          <a class="navbar-brand" href="@guest{{ url('/') }} @else @if (auth()->user()->tipo == 'Usuario') 
+            {{url('/') }} 
+          @else {{url('/home')}}@endif @endguest">
             {{ $namepage }}
           </a>
         </li>

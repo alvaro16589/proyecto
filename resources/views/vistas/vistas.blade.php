@@ -1,32 +1,25 @@
 @extends('vistas.vistasarti')
 @section('contenido')
     <section class="contentainer m-4 card card-solid">
-        <div class="row card-body pb-0">
+        <div class="row card-body pb-0" id="items">
             @foreach ($articulos as $articulo)
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 d-flex align-items-stretch">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
                     <div class="card bg-ligth ">
-                        <h3 class="card-header">{{$articulo->nombre}}</h3>
-                        <img style="height: 40ex; width:unset; display: block;" src="{{asset('asset/img/articulos/'.$articulo->imagen)}}" alt="Card image">
-                            <div class="row">
-                                <div class="col col-md-7">
-                                <div class="card-body">
-                                    <p class="card-text">{{$articulo->descripcion}}</p>
+                        <h5 class="card-header">{{$articulo->nombre}}</h5>
+                        <img style="height: 100%; width: 100%; display: block;" src="{{asset('asset/img/articulos/'.$articulo->imagen)}}" alt="Card image">
+                            
+                        <ul class="list-group list-group-flush">
+                                <div class="bg-gray py-2 px-3 mt-4">
+                                    <h2 class="mb-0">
+                                    {{$articulo->precio}} Bs.
+                                    </h2>
+                                    
                                 </div>
-                                </div>
-                                <div class="col col-md-5">
-                                <ul class="list-group list-group-flush">
-                                        <div class="bg-gray py-2 px-3 mt-4">
-                                            <h2 class="mb-0">
-                                            {{$articulo->precio}} Bs.
-                                            </h2>
-                                            
-                                        </div>
-                                </ul>
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#mod{{$articulo->id}}">
-                                <i class="fas fa-eye"></i>
-                            </button>
+                        </ul>
+                               
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#mod{{$articulo->id}}">
+                            <i class="fas fa-eye"></i>
+                        </button>
                         <div class="row card-footer position-bottom ">
                         </div>         
                     </div>
@@ -114,10 +107,10 @@
                                           
                                           <div class="card-footer ">
                                               <div class="mt-4">
-                                                  <div class="btn btn-primary btn-lg btn-flat">
+                                                  <button type="button" class="btn btn-primary btn-lg btn-flat" id="marcador" onclick anyadirCarrito>
                                                       <i class="fas fa-cart-plus fa-lg mr-2"></i> 
                                                       Subir a carro
-                                                  </div>
+                                                  </button>
                                   
                                                   <div class="btn btn-default btn-lg btn-flat">
                                                       <i class="fas fa-heart fa-lg mr-2"></i> 

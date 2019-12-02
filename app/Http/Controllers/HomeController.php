@@ -22,7 +22,14 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
+
     {
-        return view('home')->with('pagina','home');
+        if (auth()->user()->tipo == 'Administrador' OR auth()->user()->tipo == 'Secretaria' ) {
+            return view('home')->with('pagina','home');
+        }
+        else{
+            return view('vistas.vistas')->with('pagina','Inicio');
+        }
+        
     }
 }
