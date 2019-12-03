@@ -62,16 +62,23 @@
             let $carrito = document.querySelector('#carrito');
             let $total = document.querySelector('#total');
             
-            function anyadirCarrito () {
-                url: "/vista/detalle";
+            function anyadirCarrito (precio,item,cantidad,nombre) {
+                // Creamos el nodo del item del carrito
+                let miNodo = document.createElement('li');
+                    miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
+                    miNodo.textContent = nombre + ' x ' + cantidad + ' - ' + precio + 'Bs.';
+                // Boton de borrar
+                let miBoton = document.createElement('button');
+                miBoton.classList.add('btn', 'btn-danger', 'mx-5');
+                miBoton.textContent = 'X';
+                miBoton.style.marginLeft = '1rem';
+                miBoton.setAttribute('item', item);
+                miBoton.addEventListener('click', borrarItemCarrito);
+                // Mezclamos nodos
+                $total.textContent = precio; 
+                miNodo.appendChild(miBoton);
+                $carrito.appendChild(miNodo);
                
-                       
-                // Anyadimos el Nodo a nuestro carrito
-                carrito.push(this.getAttribute('marcador'))
-                // Calculo el total
-                calcularTotal();
-                // Renderizamos el carrito 
-                renderizarCarrito();
             }
             function renderizarCarrito () {
                 // Vaciamos todo el html
