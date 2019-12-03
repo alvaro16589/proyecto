@@ -123,10 +123,10 @@
                         maxFiles: 4,
                         acceptedFiles: ".jpeg,.jpg,.png,.gif",
                         success: function(results, callback){
-                          //set value of your hidden input field here
-                          console.log(results['name']);
+                            //set value of your hidden input field here
+                            console.log(results['name']);
                          
-                        }  
+                            }  
                          
                     }; 
                 </script>

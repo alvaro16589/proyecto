@@ -28,7 +28,9 @@ class HomeController extends Controller
             return view('home')->with('pagina','home');
         }
         else{
-            return view('vistas.vistas')->with('pagina','Inicio');
+            $imagenes = ImagenArti::all();
+            $articulos = Articulo :: paginate('12');
+            return view('vistas.vistas',compact('articulos'))->with(compact('imagenes'));
         }
         
     }

@@ -61,8 +61,11 @@
             let total = 0;
             let $carrito = document.querySelector('#carrito');
             let $total = document.querySelector('#total');
-        
+            
             function anyadirCarrito () {
+                url: "/vista/detalle";
+               
+                       
                 // Anyadimos el Nodo a nuestro carrito
                 carrito.push(this.getAttribute('marcador'))
                 // Calculo el total
@@ -73,6 +76,7 @@
             function renderizarCarrito () {
                 // Vaciamos todo el html
                 $carrito.textContent = '';
+                
                 // Quitamos los duplicados
                 let carritoSinDuplicados = [...new Set(carrito)];
                 // Generamos los Nodos a partir de carrito
@@ -126,7 +130,7 @@
                     });
                     total = total + miItem[0]['precio'];
                 }
-                // Renderizamos el precio en el HTML
+                /// Renderizamos el precio en el HTML
                 $total.textContent = total.toFixed(2);
             }
             // Eventos

@@ -107,7 +107,7 @@
                                           
                                           <div class="card-footer ">
                                               <div class="mt-4">
-                                                  <button type="button" class="btn btn-primary btn-lg btn-flat" id="marcador" onclick anyadirCarrito>
+                                                  <button type="button" class="btn btn-primary btn-lg btn-flat" id="marcador" marcador="{{$loop->iteration}}" onclick="anyadirCarrito()" >
                                                       <i class="fas fa-cart-plus fa-lg mr-2"></i> 
                                                       Subir a carro
                                                   </button>
