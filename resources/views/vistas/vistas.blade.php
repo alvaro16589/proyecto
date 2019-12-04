@@ -108,7 +108,7 @@
                                           <div class="card-footer ">
                                               <div class="mt-4">
                                                   <button type="button" class="btn btn-primary btn-lg btn-flat" id="marcador"  
-                                                      onclick="anyadirCarrito({{$articulo->precio}},{{$articulo->id}},{{$articulo->stok}},{{$articulo->nombre}})" >
+                                                      onclick="anyadirCarrito({{$articulo}})" >
                                                       <i class="fas fa-cart-plus fa-lg mr-2"></i> 
                                                       Subir a carro
                                                   </button>

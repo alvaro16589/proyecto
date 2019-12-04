@@ -1,9 +1,7 @@
 <div class="container">
     <div class="row">
-        <!-- Elementos generados a partir del JSON
-        <main id="items" class="col-sm-8 row"></main> -->
         <!-- Carrito -->
-        <aside class="col-sm-4">
+        <aside class="col">
             <h2>Carrito</h2>
             <!-- Elementos del carrito -->
             <ul id="carrito" class="list-group"></ul>

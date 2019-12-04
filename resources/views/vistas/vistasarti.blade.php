@@ -59,31 +59,35 @@
             
             let carrito = [];
             let total = 0;
+            let precio = [];
             let $carrito = document.querySelector('#carrito');
             let $total = document.querySelector('#total');
             
-            function anyadirCarrito (precio,item,cantidad,nombre) {
+            function anyadirCarrito (arti) {
                 // Creamos el nodo del item del carrito
                 let miNodo = document.createElement('li');
                     miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
-                    miNodo.textContent = nombre + ' x ' + cantidad + ' - ' + precio + 'Bs.';
+                    miNodo.textContent = arti.nombre + ' x ' + arti.stok + ' - ' + arti.precio + 'Bs.';
                 // Boton de borrar
                 let miBoton = document.createElement('button');
                 miBoton.classList.add('btn', 'btn-danger', 'mx-5');
                 miBoton.textContent = 'X';
                 miBoton.style.marginLeft = '1rem';
-                miBoton.setAttribute('item', item);
+                miBoton.setAttribute('item', arti.id);
                 miBoton.addEventListener('click', borrarItemCarrito);
                 // Mezclamos nodos
-                $total.textContent = precio; 
                 miNodo.appendChild(miBoton);
                 $carrito.appendChild(miNodo);
+                //agregando datos a los array
+                carrito.push(arti.id)
+                precio.push(arti.precio)
+                //caculamos el total
+                calcularTotal (); 
                
             }
             function renderizarCarrito () {
                 // Vaciamos todo el html
                 $carrito.textContent = '';
-                
                 // Quitamos los duplicados
                 let carritoSinDuplicados = [...new Set(carrito)];
                 // Generamos los Nodos a partir de carrito
@@ -130,15 +134,12 @@
                 // Limpiamos precio anterior
                 total = 0;
                 // Recorremos el array del carrito
-                for (let item of carrito) {
-                    // De cada elemento obtenemos su precio
-                    let miItem = baseDeDatos.filter(function(itemBaseDatos) {
-                        return itemBaseDatos['id'] == item;
-                    });
-                    total = total + miItem[0]['precio'];
-                }
-                /// Renderizamos el precio en el HTML
+                for (let item of precio) {
+                    total = total + item;
+                }    
+                // Renderizamos el precio en el HTML
                 $total.textContent = total.toFixed(2);
+                
             }
             // Eventos
 
