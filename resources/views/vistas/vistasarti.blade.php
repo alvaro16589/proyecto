@@ -33,7 +33,7 @@
         <div >
             <div class="row">
                 {{-- columna izquierda --}}
-                <div class="col-sm-9 col-md-10">
+                <div class="col-sm-7 col-md-8">
                     @yield('contenido')
                 </div>
                 {{-- columna derecha --}}
@@ -59,15 +59,17 @@
             
             let carrito = [];
             let total = 0;
+            let nombre = [];
             let precio = [];
+            let stok =[];
             let $carrito = document.querySelector('#carrito');
             let $total = document.querySelector('#total');
             
             function anyadirCarrito (arti) {
-                // Creamos el nodo del item del carrito
+                /*/ Creamos el nodo del item del carrito
                 let miNodo = document.createElement('li');
                     miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
-                    miNodo.textContent = arti.nombre + ' x ' + arti.stok + ' - ' + arti.precio + 'Bs.';
+                    miNodo.textContent = arti.nombre + ' x ' + arti.stok + ' - ' + arti.precio + ' Bs.';
                 // Boton de borrar
                 let miBoton = document.createElement('button');
                 miBoton.classList.add('btn', 'btn-danger', 'mx-5');
@@ -78,14 +80,19 @@
                 // Mezclamos nodos
                 miNodo.appendChild(miBoton);
                 $carrito.appendChild(miNodo);
-                //agregando datos a los array
+                //agregando datos a los array+*/
                 carrito.push(arti.id)
                 precio.push(arti.precio)
+                nombre.push(arti.nombre)
+                stok.push(arti.stok);
                 //caculamos el total
+                renderizarCarrito();
                 calcularTotal (); 
                
             }
             function renderizarCarrito () {
+                //inicializamos una variable de recorrido
+                var i=0;
                 // Vaciamos todo el html
                 $carrito.textContent = '';
                 // Quitamos los duplicados
@@ -93,9 +100,7 @@
                 // Generamos los Nodos a partir de carrito
                 carritoSinDuplicados.forEach(function (item, indice) {
                     // Obtenemos el item que necesitamos de la variable base de datos
-                    let miItem = baseDeDatos.filter(function(itemBaseDatos) {
-                        return itemBaseDatos['id'] == item;
-                    });
+                    let miItem = carrito;
                     // Cuenta el número de veces que se repite el producto
                     let numeroUnidadesItem = carrito.reduce(function (total, itemId) {
                         return itemId === item ? total += 1 : total;
@@ -103,7 +108,7 @@
                     // Creamos el nodo del item del carrito
                     let miNodo = document.createElement('li');
                     miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
-                    miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0]['nombre']} - ${miItem[0]['precio']}€`;
+                    miNodo.textContent = numeroUnidadesItem + ' X ' + nombre[i] + '-' + precio[i] + 'Bs.';
                     // Boton de borrar
                     let miBoton = document.createElement('button');
                     miBoton.classList.add('btn', 'btn-danger', 'mx-5');
@@ -114,16 +119,25 @@
                     // Mezclamos nodos
                     miNodo.appendChild(miBoton);
                     $carrito.appendChild(miNodo);
+                    //incrementamos la variable de recorrido
+                    i = i + 1;
                 })
             }
             function borrarItemCarrito () {
-                console.log()
+                
                 // Obtenemos el producto ID que hay en el boton pulsado
                 let id = this.getAttribute('item');
                 // Borramos todos los productos
-                carrito = carrito.filter(function (carritoId) {
-                    return carritoId !== id;
-                });
+                const elemento = (element) => element == id;
+                var i = carrito.findIndex(elemento);
+              
+                if ( i !== -1 ) {
+                    carrito.splice( i, 1 );
+                    nombre.splice( i, 1 );
+                    precio.splice( i, 1 );
+                    stok .splice( i, 1 );
+                }
+                
                 // volvemos a renderizar
                 renderizarCarrito();
                 // Calculamos de nuevo el precio
