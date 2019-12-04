@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\ImagenArti;
+use App\Articulo;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
