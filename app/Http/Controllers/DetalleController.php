@@ -12,9 +12,8 @@ class DetalleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(Request $request){
+        return 'estamos en el controlador index de detalle'.$request;
     }
 
     /**

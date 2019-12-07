@@ -64,22 +64,10 @@
             let stok =[];
             let $carrito = document.querySelector('#carrito');
             let $total = document.querySelector('#total');
+            let $footer = document.querySelector('#footer');
             
             function anyadirCarrito (arti) {
-                /*/ Creamos el nodo del item del carrito
-                let miNodo = document.createElement('li');
-                    miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
-                    miNodo.textContent = arti.nombre + ' x ' + arti.stok + ' - ' + arti.precio + ' Bs.';
-                // Boton de borrar
-                let miBoton = document.createElement('button');
-                miBoton.classList.add('btn', 'btn-danger', 'mx-5');
-                miBoton.textContent = 'X';
-                miBoton.style.marginLeft = '1rem';
-                miBoton.setAttribute('item', arti.id);
-                miBoton.addEventListener('click', borrarItemCarrito);
-                // Mezclamos nodos
-                miNodo.appendChild(miBoton);
-                $carrito.appendChild(miNodo);
+          
                 //agregando datos a los array+*/
                 carrito.push(arti.id)
                 precio.push(arti.precio)
@@ -92,9 +80,11 @@
             }
             function renderizarCarrito () {
                 //inicializamos una variable de recorrido
-                var i=0;
+                var i = 0;
+                var verCiclo = 0;
                 // Vaciamos todo el html
                 $carrito.textContent = '';
+                $footer.textContent = '';
                 // Quitamos los duplicados
                 let carritoSinDuplicados = [...new Set(carrito)];
                 // Generamos los Nodos a partir de carrito
@@ -103,25 +93,57 @@
                     let miItem = carrito;
                     // Cuenta el número de veces que se repite el producto
                     let numeroUnidadesItem = carrito.reduce(function (total, itemId) {
-                        return itemId === item ? total += 1 : total;
+                        if (itemId === item) {
+                            total += 1;
+                            
+                        }
+                        return  total;
                     }, 0);
+                    console.log(carrito);
                     // Creamos el nodo del item del carrito
-                    let miNodo = document.createElement('li');
-                    miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
-                    miNodo.textContent = numeroUnidadesItem + ' X ' + nombre[i] + '-' + precio[i] + 'Bs.';
+                    let miNodo = document.createElement('tr');
+                    let colNombre = document.createElement('td');
+                    let colCantidad = document.createElement('td');
+                    let colPrecio = document.createElement('td');
+                    let colBoton = document.createElement('td');
+                    //obtenemos el indice que el item dentro de la tabla carrito y hacemos que 
+                    //este tome el valot de i, para su inserción dentro de el tr
+                    const elemento = (element) => element == item;
+                    var i = carrito.findIndex(elemento);
+                    if ( i !== -1 ) {
+                        colNombre.textContent = nombre[i];
+                       // colNombre.setAttribute('name','nombre');
+                        colCantidad.textContent = numeroUnidadesItem;
+                        colPrecio.textContent = precio[i];
+                    }
                     // Boton de borrar
                     let miBoton = document.createElement('button');
-                    miBoton.classList.add('btn', 'btn-danger', 'mx-5');
-                    miBoton.textContent = 'X';
+                    let mifa = document.createElement('i');
+                    mifa.classList.add("fas", "fa-times");
+                    miBoton.classList.add('btn-sm', 'btn-danger');
                     miBoton.style.marginLeft = '1rem';
                     miBoton.setAttribute('item', item);
                     miBoton.addEventListener('click', borrarItemCarrito);
+                    miBoton.appendChild(mifa);
+                    colBoton.appendChild(miBoton);
                     // Mezclamos nodos
-                    miNodo.appendChild(miBoton);
+                    miNodo.appendChild(colNombre);
+                    miNodo.appendChild(colCantidad);
+                    miNodo.appendChild(colPrecio);
+                    miNodo.appendChild(colBoton);
                     $carrito.appendChild(miNodo);
                     //incrementamos la variable de recorrido
-                    i = i + 1;
+                   verCiclo += 1;
                 })
+                if (verCiclo!= 0) {
+                    let miBotonEnviar = document.createElement('button');
+                    miBotonEnviar.classList.add('btn','btn-sm', 'btn-success');
+                    miBotonEnviar.textContent = 'Registrar transacción'
+                    miBotonEnviar.setAttribute('type', 'submit');
+                    $footer.appendChild(miBotonEnviar);
+                }
+                
+                
             }
             function borrarItemCarrito () {
                 
