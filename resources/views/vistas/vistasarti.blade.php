@@ -67,8 +67,12 @@
             let $footer = document.querySelector('#footer');
             
             function anyadirCarrito (arti) {
-          
+                //crear una cookie
+                setCookie('carr', carrito, 1);
+                //leer una cookie
+                console.log(getCookie('carr'));
                 //agregando datos a los array+*/
+
                 carrito.push(arti.id)
                 precio.push(arti.precio)
                 nombre.push(arti.nombre)
@@ -99,7 +103,7 @@
                         }
                         return  total;
                     }, 0);
-                    console.log(carrito);
+                    
                     // Creamos el nodo del item del carrito
                     let miNodo = document.createElement('tr');
                     let colNombre = document.createElement('td');
@@ -132,8 +136,10 @@
                     miNodo.appendChild(colPrecio);
                     miNodo.appendChild(colBoton);
                     $carrito.appendChild(miNodo);
+
+                    
                     //incrementamos la variable de recorrido
-                   verCiclo += 1;
+                    verCiclo += 1;
                 })
                 if (verCiclo!= 0) {
                     let miBotonEnviar = document.createElement('button');
@@ -177,10 +183,135 @@
                 $total.textContent = total.toFixed(2);
                 
             }
-            // Eventos
+            /*
+            
+             * Genera una cookie
+            
+             *
+            
+             * Esta funcion se utiliza en la funcion javascript:showUsr
+            
+             * Tiene que recibir:
+            
+             * 	nombre=nombre de la cookie
+            
+             * 	valor=valor de la cookie
+            
+             * 	caducidad=caducidad de la cookie en dias (-1 elimina la cookie)
+            
+             */
+            
+            function setCookie(nombre, valor, caducidad) {
 
-          
-        </script>
+                //Si no tenemos caducidad para la cookie, la definimos a 31 dias
+            
+                if(!caducidad)
+            
+                    caducidad = 31
+            
+             
+            
+                var expireDate = new Date() //coge la fecha actual
+            
+                expireDate.setDate(expireDate.getDate()+caducidad);
+            
+             
+            
+                //crea la cookie: incluye el nombre, la caducidad y la ruta donde esta guardada
+            
+                //cada valor esta separado por ; y un espacio
+            
+                document.cookie = nombre + "=" + escape(valor) + "; expires=" + expireDate.toGMTString() + "; path=/";
+            
+            }
+            
+             
+            
+            /*
+            
+             * Lee una cookie
+            
+             *
+            
+             * Tiene que recibir:
+            
+             * 	nombre=nombre de la cookie a leer
+            
+             */
+            
+            function getCookie(nombre)
+            
+            {
+            
+                /*
+            
+                 * document.cookie
+            
+                 * Contiene todas las cookies que estan al alcance de la paginas web en el formato:
+            
+                 * nombreCookie1=valor1; nombreCookie2=valor2
+            
+                 *
+            
+                 * document.cookie.length
+            
+                 * Contiene la longitud de la suma de todas las cookies
+            
+                 */
+            
+                if(document.cookie.length>0)
+            
+                {
+            
+                    /*
+            
+                     * indexOf(caracter,desde) Devuelve la primera posicion que el caracter aparece
+            
+                     * devuelve -1 si no encuentra el caracter
+            
+                     */
+            
+                    start=document.cookie.indexOf(nombre + "=");
+            
+                    if (start!=-1)
+            
+                    {
+            
+                        //El inicio de la cookie, el nombre de la cookie mas les simbolo '='
+            
+                        start=start + nombre.length+1;
+            
+                        //Buscamos el final de la cookie (es el simbolo ';')
+            
+                        end=document.cookie.indexOf(";",start);
+            
+                        //Si no encontramos el simbolo del final ';', el final sera el final de la cookie.
+            
+                        if (end==-1)
+            
+                            end=document.cookie.length;
+            
+                        //Devolvemos el contenido de la cookie.
+            
+                        //substring(start,end) devuelve la cadena entre el valor mas bajo y
+            
+                        //el mas alto, indiferentemente de la posicion.
+            
+                        return unescape(document.cookie.substring(start,end));
+            
+                    }
+            
+                }
+            
+                //no hemos encontrado la cookie
+            
+                return "";
+            
+            }
+            
+            //-->
+            
+            </script>
 </body>
 </html>
 

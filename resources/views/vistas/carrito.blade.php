@@ -4,7 +4,8 @@
                 <div class="card-header">
                     <h2>Carrito</h2> 
                 </div>
-                <form action="/detalle" method="GET">
+                <form method="GET" action="/detalle">
+                    @csrf
                     <div class="card-body">
                     <!-- Elementos del carrito -->
                     <table  class="table table-head-fixed table-hover " >

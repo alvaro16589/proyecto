@@ -12,8 +12,8 @@ class DetalleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request){
-        return 'estamos en el controlador index de detalle'.$request;
+    public function index(){
+        return view('detalle.detalle')->with('pagina','Detalle');
     }
 
     /**
@@ -45,7 +45,7 @@ class DetalleController extends Controller
      */
     public function show(Detalle $detalle)
     {
-        //
+       
     }
 
     /**
