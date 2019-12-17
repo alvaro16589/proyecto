@@ -10,10 +10,8 @@
     
 
     <title>{{$namepage}}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
+   <!--axios para http-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -46,7 +44,12 @@
 
         
     </div>
-     @include('tema.footer')  
+     @include('tema.footer') 
+     
+     {{-- Routes --}}
+          @routes    
+     <!-- Scripts -->
+     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- jQuery -->
     <script src="{{asset('asset/adminlte/plugins/jquery/jquery.min.js')}}"></script>
     <!-- Bootstrap 4 -->
@@ -55,8 +58,7 @@
     <script src="{{asset('asset/adminlte/dist/js/adminlte.min.js')}}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{asset('asset/adminlte/dist/js/demo.js')}}"></script>
-    <script >
-            
+    <script > 
             let carrito = [];
             let total = 0;
             let nombre = [];
@@ -65,6 +67,28 @@
             let $carrito = document.querySelector('#carrito');
             let $total = document.querySelector('#total');
             let $footer = document.querySelector('#footer');
+
+            /*///funcion para enviar los valores en la url
+            this.enviar = function(){
+                $http.get("/detalle", {deta: carrito})
+                .then(function(response) {
+                    });
+               
+               // alert('Se ha guardado correctamente');
+
+            }
+            */  
+            function enviar(){
+                return axios.get(route('index', carrito))
+                .then((response) => {console.log('entro',carrito);
+                    return response.data;
+                    
+                });
+                
+            }          
+
+
+           
             
             function anyadirCarrito (arti) {
                 //crear una cookie
@@ -72,7 +96,8 @@
                 //leer una cookie
                 console.log(getCookie('carr'));
                 //agregando datos a los array+*/
-
+                
+                
                 carrito.push(arti.id)
                 precio.push(arti.precio)
                 nombre.push(arti.nombre)
@@ -142,10 +167,12 @@
                     verCiclo += 1;
                 })
                 if (verCiclo!= 0) {
-                    let miBotonEnviar = document.createElement('button');
+                    let miBotonEnviar = document.createElement('a');
                     miBotonEnviar.classList.add('btn','btn-sm', 'btn-success');
                     miBotonEnviar.textContent = 'Registrar transacción'
-                    miBotonEnviar.setAttribute('type', 'submit');
+                    //miBotonEnviar.setAttribute('type', 'button');
+                    miBotonEnviar.setAttribute( 'url','/detalle');
+                    miBotonEnviar.setAttribute( 'onclick','enviar()');
                     $footer.appendChild(miBotonEnviar);
                 }
                 

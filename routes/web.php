@@ -16,7 +16,7 @@ Route::resource('/', 'InicioController');
 
 Route::resource('/articulo', 'ArticuloController');
 Route::resource('/usuario/perfil', 'PerfilController');
-Route::resource('/detalle', 'DetalleController');
+Route::get('/detalle', 'DetalleController@index')->name('index');
 Route::resource('/marca', 'MarcaController');
 Route::resource('/precio', 'PrecioController');
 Route::resource('/proveedor', 'ProveedorController');
