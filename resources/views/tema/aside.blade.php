@@ -138,6 +138,32 @@
                   <!--finalizacion del dropdawn-->
                 </ul>
               </li>
+               {{-- Reporte marca --}}
+               <li class="nav-item has-treeview ">{{-- menu-open --}}              
+                <a href="#" class="nav-link  active">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>
+                    Reportes Marca: 
+                    
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/reportemc" class="nav-link @if($pagina == 'Reporte de proveedores') {{'active'}} @endif">
+                      <i class="far fa-circle nav-icon"></i>
+                     <p>Todos las marcas </p>
+                    </a>
+                  </li>              
+                  <li class="nav-item">
+                    <a href="/reporteacmc" class="nav-link @if($pagina == 'Reporte de proveedores activos') {{'active'}} @endif">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>marcas agrupadas por ciudad</p>
+                    </a>
+                  </li>
+                  
+                  <!--finalizacion del dropdawn-->
+                </ul>
+              </li>
           </ul>
       </nav>
       <!-- /.sidebar-menu -->

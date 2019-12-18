@@ -65,6 +65,7 @@
               <table class="table table-head-fixed table-hover " >
                 <thead>
                   <tr>
+                    <th>Nº</th>
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Ciudad</th>
@@ -75,18 +76,19 @@
                 <tbody>
                   @foreach ($marcas as $marca)
                     <tr>
-                    <td>{{$marca->id}}</td>
-                    <td>{{$marca->nombre}}</td>
-                    <td>{{$marca->ciudad}}</td>
-                    <td>
-                      <form method="POST" action="/marca/{{$marca->id}}">
-                        @method('DELETE')
-                        {{ csrf_field() }}  <!--genera un token para enviar los datos al controlador-->
-                        <button type="submit" class="btn btn-danger btn-sm"><i for="btn" class="fa fa-trash"></i> Borrar</button>
-                      </form>
-                    </td>
-                    <td><a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#mod{{$marca->id}}"><i for="btn" class="fa fa-edit"></i> Editar</a></td>
-                  </tr>  
+                      <td>{{$loop->iteration}}</td>
+                      <td>{{$marca->id}}</td>
+                      <td>{{$marca->nombre}}</td>
+                      <td>{{$marca->ciudad}}</td>
+                      <td>
+                        <form method="POST" action="/marca/{{$marca->id}}">
+                          @method('DELETE')
+                          {{ csrf_field() }}  <!--genera un token para enviar los datos al controlador-->
+                          <button type="submit" class="btn btn-danger btn-sm"><i for="btn" class="fa fa-trash"></i> Borrar</button>
+                        </form>
+                      </td>
+                      <td><a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#mod{{$marca->id}}"><i for="btn" class="fa fa-edit"></i> Editar</a></td>
+                    </tr>  
                     <!--modal editar usuario-->
                     <div class="modal fade" id="mod{{$marca->id}}">
                         <div class="modal-dialog modal-lg modal-secondary ">
