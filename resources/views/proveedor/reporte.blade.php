@@ -5,13 +5,10 @@
         <div class="col-12" >
             <div class="card">
                 <div class="card-header bg-primary">
-                    <h3 class="card-title">Detalle de usuarios</h3>
-                    
-                    
+                    <h3 class="card-title">Detalle de Proveedores</h3>
                 </div>
                 <div  class="card-comment">
-                    <p>Listado de usuarios registrados sin filtrar</p>
-                    
+                    <p>Listado de Proveedores registrados sin filtrar</p>
                 </div>  
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0" style="height: 60em;">
@@ -19,28 +16,21 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Avatar</th>
                             <th>Nombre</th>
                             <th>Estado</th>
-                            <th>E mail</th>
-                            <th>Tipo</th>
+                            <th>Celular</th>
+                            <th>Dirección</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($usuarios as $usuario)
+                        @foreach ($proveedores as $proveedor)
                         <tr>
-                            <td>{{$usuario->id}}</td>
-                            <td><img class=" img-fluid img-circle img-bordered-sm img-md " src="{{asset('asset/img/userprofile/'.$usuario->foto)}}" alt="user image"></td>
-                            <td>{{$usuario->name}}</td>
+                            <td>{{ $proveedor->id }}</td>
+                            <td>{{ $proveedor->nombre }}</td>
+                            <td>{{ $proveedor->estado }}</td>
+                            <td>{{ $proveedor->celular }}</td>
+                            <td>{{ $proveedor->direccion }}</td>
                             
-                            <td>
-                                {{$usuario->estado}}
-                            </td>
-                            <td>
-                                {{ $usuario->email }}
-                            </td>
-                            <td>{{ $usuario->tipo }}</td>
-                            <td>
                             
                         </tr>
                         
@@ -52,29 +42,28 @@
                     </table>
                     <!--paginacion de tablas en la pagina -->
                     <div class="pagination justify-content-center">
-                        {{ $usuarios->links() }}
+                        {{ $proveedores->links() }}
                     </div>
-            </div>
                 </div>
             <!-- /.card-body -->
            
-            @if ($pagina=='Reporte de usuarios')
+            @if ($pagina=='Reporte de proveedores')
                 <div class="card-footer">
-                    <a href="{{ route('usuarios.pdf') }}" class="btn btn-sm btn-primary">
-                        Descargar usuarios en PDF
+                    <a href="{{ route('proveedor.pdf') }}" class="btn btn-sm btn-primary">
+                        Descargar proveedores en PDF
                     </a>
                 </div>  
             @else
-                @if ($pagina=='Reporte de usuarios activos')
+                @if ($pagina=='Reporte de proveedores activos')
                     <div class="card-footer">
-                        <a href="{{ route('usuariosac.pdf') }}" class="btn btn-sm btn-primary">
-                            Descargar usuarios activos en PDF
+                        <a href="{{ route('proveedorac.pdf') }}" class="btn btn-sm btn-primary">
+                            Descargar proveedores activos en PDF
                         </a>
                     </div>
                 @else  
                     <div class="card-footer">
-                        <a href="{{ route('usuariosin.pdf') }}" class="btn btn-sm btn-primary">
-                            Descargar usuarios inactivos en PDF
+                        <a href="{{ route('proveedorin.pdf') }}" class="btn btn-sm btn-primary">
+                            Descargar proveedores inactivos en PDF
                         </a>
                     </div>
                 @endif

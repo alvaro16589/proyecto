@@ -6,6 +6,9 @@ use App\Proveedor;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProveedorRequest;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
+use Barryvdh\DomPDF\Facade as PDF;
 class ProveedorController extends Controller
 {
     /**
@@ -114,5 +117,56 @@ class ProveedorController extends Controller
         $proveedor->delete();
         $proveedores = Proveedor::paginate(10);//Llamar a todos los datos contenidos dentro de la tabla proveedor
         return view('proveedor/proveedor',compact('proveedores'))->with('status','Eliminación hecha, Satisfactoriamente...!')->with('pagina','proveedor');//llamar a la vista del provee
+    }
+    //___________________________##################################################################################_________________________
+    //                  REPORTES
+    
+    public function reporte()
+    {
+        $proveedores = Proveedor::paginate(10);
+        return view('proveedor/reporte', compact('proveedores'))->with('pagina','Reporte de proveedores');
+    }
+    public function pdf() 
+    {        
+        /**
+         * toma en cuenta que para ver los mismos 
+         * datos debemos hacer la misma consulta
+        **/
+        $proveedores = Proveedor::all();
+        $coment = 'Reporte de proveedores con los datos sin filtrar';
+        $pdf = PDF::loadView('pdf.proveedor', compact('proveedores','coment'))->setPaper('letter');//,'landscape' para cambiar la horientacion de la hoja
+        return $pdf->stream('proveedor.pdf');//descargar directa "dawnload" en lugar de stream
+    }
+    public function reporteac() // vista usuarios solo activos
+    {
+        $proveedores = Proveedor::orderBy('id','DESC')->where('estado', 'activo')->paginate(10);
+        return view('proveedor/reporte', compact('proveedores'))->with('pagina','Reporte de proveedores activos');
+    }
+    public function pdfac() //vista solo usuarios activos
+    {        
+        /**
+         * toma en cuenta que para ver los mismos 
+         * datos debemos hacer la misma consulta
+        **/
+        $proveedores = Proveedor::orderBy('id','DESC')->where('estado', 'activo')->get();
+        $coment = 'Reporte de proveedores activos';
+        $pdf = PDF::loadView('pdf.proveedor', compact('proveedores','coment'))->setPaper('letter');//,'landscape' para cambiar la horientacion de la hoja
+        return $pdf->stream('proveedores.pdf');//descargar directa "dawnload" en lugar de stream
+    }
+    public function reportein() //Usuarios inactivos
+    {
+        $proveedores = Proveedor::orderBy('id','DESC')->where('estado', 'inactivo')->paginate(10);
+        return view('proveedor/reporte', compact('proveedores'))->with('pagina','Reporte de proveedores inactivos');
+    }
+    public function pdfin() //usuarios inactivos
+    {        
+        /**
+         * toma en cuenta que para ver los mismos 
+         * datos debemos hacer la misma consulta
+        **/
+        $proveedores = Proveedor::orderBy('id','DESC')->where('estado', 'inactivo')->get();
+        $coment = 'Reporte de proveedores activos';
+        $pdf = PDF::loadView('pdf.proveedor', compact('proveedores','coment'))->setPaper('letter');//,'landscape' para cambiar la horientacion de la hoja
+        return $pdf->stream('proveedores.pdf');//descargar directa "dawnload" en lugar de stream
     }
 }

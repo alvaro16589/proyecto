@@ -6,28 +6,32 @@
                 </div>
               
                     <div class="card-body">
-                    <!-- Elementos del carrito -->
-                    <table  class="table table-head-fixed table-hover " >
-                        <thead><!--'estado','cantidad','precio'-->
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Cantidad</th>
-                                <th>Precio</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="carrito">
-                
-                        </tbody>
-                    </table>
+                        <!-- Elementos del carrito -->
+                        <table  class="table table-head-fixed table-hover " >
+                            <thead><!--'estado','cantidad','precio'-->
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="carrito">
+                    
+                            </tbody>
+                        </table>
                     </div>
                     <div class="card-footer" >
                         <!-- Precio total -->
                         <p class="text-center">Total: <span id="total"></span> Bs.</p>
                         {{-- Este div es para agregar un boton de enviar por java script --}}
-                        <div id="footer">
+                        <form action="/detalle" method="GET">
+                            @csrf
+                            <div id="footer">
 
-                        </div>
+                            </div>
+                        </form>
+                        
                     </div>
                
             </div>

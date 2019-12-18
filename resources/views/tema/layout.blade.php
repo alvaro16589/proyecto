@@ -41,7 +41,10 @@
         <!-- Content Wrapper. Contains page content -->
         
         <div class="wrapper">
-            @include('tema/aside')
+            @if (auth()->user()->tipo !== "Usuario")
+                @include('tema/aside')
+            @endif
+            
             @include('tema/header')
             <div class="content-wrapper">
                 <section class="content">

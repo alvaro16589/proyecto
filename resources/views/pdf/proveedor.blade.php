@@ -42,7 +42,7 @@
                     center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                     padding-left: 6em;
                     text-decoration: underline;">
-            <b>Reporte de Usuarios</b>
+            <b>Reporte de Proveedores</b>
         </h1>
         <p >
             <h5 class="detalles">Observaciones:{{ $coment ?? ''}}</h5> 
@@ -55,29 +55,20 @@
             <thead class="cabecera"> 
                 <tr style="">
                     <th style="padding: 1em; ">ID</th>
-                    <th style="padding: 1em; ">Avatar</th>
                     <th style="padding: 1em;">Nombres</th>
                     <th style="padding: 1em; ">Estado</th>
-                    <th style="padding: 1em; ">E mail</th>
-                    <th style="padding: 1em; ">Tipo</th>
+                    <th style="padding: 1em; ">Celular</th>
+                    <th style="padding: 1em; ">Dirección</th>
                 </tr>
             </thead>
             <tbody >
-                @foreach ($usuarios as $usuario)
+                @foreach ($proveedores as $proveedor)
                 <tr >
-                    <td class="espacios" >{{$usuario->id}}</td>
-                    <td class="espacios">
-                        <img  class="circulo" src="./asset/img/userprofile/{{$usuario->foto}}"  alt="user image">
-                    </td>
-                    <td class="espacios">{{$usuario->name}}</td>
-                    
-                    <td class="espacios">
-                        {{$usuario->estado}}
-                    </td>
-                    <td class="espacios">
-                        {{ $usuario->email }}
-                    </td>
-                    <td class="espacios" >{{ $usuario->tipo }}</td>
+                    <td class="espacios" >{{ $proveedor->id }}</td>
+                    <td class="espacios">{{ $proveedor->nombre }}</td>
+                    <td class="espacios">{{ $proveedor->estado }}</td>
+                    <td class="espacios">{{ $proveedor->celular }}</td>
+                    <td class="espacios" >{{ $proveedor->direccion }}</td>
                 </tr>
                 @endforeach
             </tbody>

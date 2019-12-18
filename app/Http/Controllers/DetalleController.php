@@ -14,8 +14,8 @@ class DetalleController extends Controller
      */
     public function index(Request $request){
         
-        //return view('detalle.detalle')->with('pagina','Detalle');
-        return 'estamos en le controlador detalle';
+        return view('detalle.detalle')->with('pagina','Detalle');
+       
     }
 
     /**
@@ -34,11 +34,19 @@ class DetalleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function store(array $data)
+    {//'fecha','iduser','idart','cantidad']
+        $detalle = new Detalle();
+        foreach ($data as $dat) {
+            $detalle->fecha = time()->format('d/m/Y');
+            $detalle->iduser = auth()->user()->id;
+            $detalle->idart = $dat;
+            $detalle->cantidad = 1;
+            $detalle->save();
+        }
+       
 
+    }
     /**
      * Display the specified resource.
      *

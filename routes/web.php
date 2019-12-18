@@ -16,7 +16,7 @@ Route::resource('/', 'InicioController');
 
 Route::resource('/articulo', 'ArticuloController');
 Route::resource('/usuario/perfil', 'PerfilController');
-Route::get('/detalle', 'DetalleController@index')->name('index');
+Route::resource('/detalle', 'DetalleController');
 Route::resource('/marca', 'MarcaController');
 Route::resource('/precio', 'PrecioController');
 Route::resource('/proveedor', 'ProveedorController');
@@ -32,6 +32,14 @@ Route::get('/reporteac', 'UsuarioController@reporteac');
 Route::get('descargar-usuarios-ac', 'UsuarioController@pdfac')->name('usuariosac.pdf');
 Route::get('/reportein', 'UsuarioController@reportein'); 
 Route::get('descargar-usuarios-in', 'UsuarioController@pdfin')->name('usuariosin.pdf');
+//proveedor
+Route::get('/reportepr', 'ProveedorController@reporte'); 
+Route::get('descargar-proveedores', 'ProveedorController@pdf')->name('proveedor.pdf');
+Route::get('/reporteacpr', 'ProveedorController@reporteac'); 
+Route::get('descargar-usuarios-ac', 'ProveedorController@pdfac')->name('proveedorac.pdf');
+Route::get('/reporteinpr', 'ProveedorController@reportein'); 
+Route::get('descargar-proveedores-in', 'ProveedorController@pdfin')->name('proveedorin.pdf');
+
 
 
 Auth::routes();

@@ -68,18 +68,10 @@
             let $total = document.querySelector('#total');
             let $footer = document.querySelector('#footer');
 
-            /*///funcion para enviar los valores en la url
-            this.enviar = function(){
-                $http.get("/detalle", {deta: carrito})
-                .then(function(response) {
-                    });
-               
-               // alert('Se ha guardado correctamente');
-
-            }
-            */  
+            //funcion para enviar los valores en la url
+           
             function enviar(){
-                return axios.get(route('index', carrito))
+                return axios.post(route('/detalle', carrito).append('_token', "{{ csrf_token() }}" ))
                 .then((response) => {console.log('entro',carrito);
                     return response.data;
                     
@@ -167,12 +159,13 @@
                     verCiclo += 1;
                 })
                 if (verCiclo!= 0) {
-                    let miBotonEnviar = document.createElement('a');
+                    let miBotonEnviar = document.createElement('button');
+                    miBotonEnviar.setAttribute( 'onclick','enviar()');
                     miBotonEnviar.classList.add('btn','btn-sm', 'btn-success');
                     miBotonEnviar.textContent = 'Registrar transacción'
-                    //miBotonEnviar.setAttribute('type', 'button');
-                    miBotonEnviar.setAttribute( 'url','/detalle');
-                    miBotonEnviar.setAttribute( 'onclick','enviar()');
+                    miBotonEnviar.setAttribute('type', 'submit');
+                    //miBotonEnviar.setAttribute( 'url','/detalle');
+                    
                     $footer.appendChild(miBotonEnviar);
                 }
                 
@@ -187,7 +180,7 @@
                 var i = carrito.findIndex(elemento);
               
                 if ( i !== -1 ) {
-                    carrito.splice( i, 1 );
+                    carrito.splice( i, 1 );//SPLICE borra un item del array en la posicion "i" y "1" item hacia adelantes
                     nombre.splice( i, 1 );
                     precio.splice( i, 1 );
                     stok .splice( i, 1 );
