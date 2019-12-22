@@ -46,6 +46,14 @@ Route::get('descargar-marca', 'MarcaController@pdf')->name('marca.pdf');
 Route::get('/reporteacmc', 'MarcaController@reporteac'); 
 Route::get('descargar-marca-ac', 'MarcaController@pdfac')->name('marcaac.pdf');
 
+//articulos
+Route::get('/reporteart', 'ArticuloController@reporte'); 
+Route::get('descargar-articulos', 'ArticuloController@pdf')->name('articulo.pdf');
+Route::get('/reporteacart', 'ArticuloController@reporteac'); 
+Route::get('descargar-articulos-ac', 'ArticuloController@pdfac')->name('articuloac.pdf');
+Route::get('/reporteinart', 'ArticuloController@reportein'); 
+Route::get('descargar-articulos-in', 'ArticuloController@pdfin')->name('articuloin.pdf');
+
 //rutas para autentificacion 
 Auth::routes();
 //ruta para el home

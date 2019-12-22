@@ -37,6 +37,7 @@
     
     </head>
     <body  >
+        {!!DNS2D::getBarcodeHTML("http://127.0.0.1:8000/reporte","QRCODE",2,2)!!}
         <h1 style="display: block; 
                     justify-content: 
                     center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -54,6 +55,7 @@
                         padding-left: 4em;">
             <thead class="cabecera"> 
                 <tr style="">
+                    <th style="padding: 1em; ">Nº</th>
                     <th style="padding: 1em; ">ID</th>
                     <th style="padding: 1em; ">Avatar</th>
                     <th style="padding: 1em;">Nombres</th>
@@ -65,6 +67,7 @@
             <tbody >
                 @foreach ($usuarios as $usuario)
                 <tr >
+                    <td class="espacios" >{{$loop->iteration}}</td>
                     <td class="espacios" >{{$usuario->id}}</td>
                     <td class="espacios">
                         <img  class="circulo" src="./asset/img/userprofile/{{$usuario->foto}}"  alt="user image">

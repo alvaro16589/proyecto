@@ -10,7 +10,8 @@
                     
                 </div>
                 <div  class="card-comment">
-                    <p>Listado de usuarios registrados sin filtrar</p>
+                    {!! QrCode::size(150)->generate( 'http://127.0.0.1:8000/reporte'); !!} 
+                    Listado de usuarios registrados sin filtrar
                     
                 </div>  
                 <!-- /.card-header -->
@@ -18,6 +19,7 @@
                     <table class="table table-head-fixed table-hover" >
                     <thead>
                         <tr>
+                            <th>Nº</th>
                             <th>ID</th>
                             <th>Avatar</th>
                             <th>Nombre</th>
@@ -29,6 +31,7 @@
                     <tbody>
                         @foreach ($usuarios as $usuario)
                         <tr>
+                            <td>{{$loop->iteration}}</td>
                             <td>{{$usuario->id}}</td>
                             <td><img class=" img-fluid img-circle img-bordered-sm img-md " src="{{asset('asset/img/userprofile/'.$usuario->foto)}}" alt="user image"></td>
                             <td>{{$usuario->name}}</td>

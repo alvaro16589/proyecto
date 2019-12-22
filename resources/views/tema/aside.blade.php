@@ -149,18 +149,49 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="/reportemc" class="nav-link @if($pagina == 'Reporte de proveedores') {{'active'}} @endif">
+                    <a href="/reportemc" class="nav-link @if($pagina == 'Reporte de marcas') {{'active'}} @endif">
                       <i class="far fa-circle nav-icon"></i>
                      <p>Todos las marcas </p>
                     </a>
                   </li>              
                   <li class="nav-item">
-                    <a href="/reporteacmc" class="nav-link @if($pagina == 'Reporte de proveedores activos') {{'active'}} @endif">
+                    <a href="/reporteacmc" class="nav-link @if($pagina == 'Reporte de marcas por ciudad') {{'active'}} @endif">
                       <i class="far fa-circle nav-icon"></i>
                       <p>marcas agrupadas por ciudad</p>
                     </a>
                   </li>
                   
+                  <!--finalizacion del dropdawn-->
+                </ul>
+              </li>
+               {{-- Reporte articulos --}}
+              <li class="nav-item has-treeview ">{{-- menu-open --}}              
+                <a href="#" class="nav-link  active">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>
+                    Reportes artículos: 
+                    
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="/reporteart" class="nav-link @if($pagina == 'Reporte de artículos') {{'active'}} @endif">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Todos las artículos </p>
+                    </a>
+                  </li>              
+                  <li class="nav-item">
+                    <a href="/reporteacart" class="nav-link @if($pagina == 'Reporte de artículos activos') {{'active'}} @endif">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Artículos activos</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/reporteinart" class="nav-link @if($pagina == 'Reporte de artículos inactivos') {{'active'}} @endif">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Artículos inactivos</p>
+                    </a>
+                  </li>
                   <!--finalizacion del dropdawn-->
                 </ul>
               </li>

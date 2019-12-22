@@ -14,7 +14,7 @@ use App\Http\Requests\StoreArticuloRequest;
 use Illuminate\Http\File;
 use Response;
 use Illuminate\Support\Facades\Storage;
-
+use Barryvdh\DomPDF\Facade as PDF;
 class ArticuloController extends Controller
 {
     /**
@@ -209,5 +209,56 @@ class ArticuloController extends Controller
         $proveedores = Proveedor::orderBy('id','DESC')->where('estado', 'activo')->paginate(10);//muestra todos los datos de la lista en un list
         $articulos = Articulo::paginate(10);//muestra todos los datos de la lista en un list
         return view('articulo/articulo',compact('articulos'),compact('marcas'))->with(compact('proveedores'))->with('status','Eliminación hecha, Satisfactoriamente...!')->with('pagina','usuario');//llamar a la vista del provee
+    }
+     //___________________________##################################################################################_________________________
+    //                  REPORTES
+    
+    public function reporte()
+    {
+        $articulos = Articulo::paginate(10);
+        return view('articulo/reporte', compact('articulos'))->with('pagina','Reporte de artículos');
+    }
+    public function pdf() 
+    {        
+        /**
+         * toma en cuenta que para ver los mismos 
+         * datos debemos hacer la misma consulta
+        **/
+        $articulos = Articulo::all();
+        $coment = 'Reporte de artículos con los datos sin filtrar';
+        $pdf = PDF::loadView('pdf.articulo', compact('articulos','coment'))->setPaper('letter');//,'landscape' para cambiar la horientacion de la hoja
+        return $pdf->stream('articulo.pdf');//descargar directa "dawnload" en lugar de stream
+    }
+    public function reporteac() // vista usuarios solo activos
+    {
+        $articulos = Articulo::orderBy('id','DESC')->where('estado', 'activo')->paginate(10);
+        return view('articulo/reporte', compact('articulos'))->with('pagina','Reporte de artículos activos');
+    }
+    public function pdfac() //vista solo usuarios activos
+    {        
+        /**
+         * toma en cuenta que para ver los mismos 
+         * datos debemos hacer la misma consulta
+        **/
+        $articulos = Articulo::orderBy('id','DESC')->where('estado', 'activo')->get();
+        $coment = 'Reporte de artículos activos';
+        $pdf = PDF::loadView('pdf.articulo', compact('articulos','coment'))->setPaper('letter');//,'landscape' para cambiar la horientacion de la hoja
+        return $pdf->stream('articulo.pdf');//descargar directa "dawnload" en lugar de stream
+    }
+    public function reportein() //Usuarios inactivos
+    {
+        $articulos = Articulo::orderBy('id','DESC')->where('estado', 'inactivo')->paginate(10);
+        return view('articulo/reporte', compact('articulos'))->with('pagina','Reporte de artículos inactivos');
+    }
+    public function pdfin() //usuarios inactivos
+    {        
+        /**
+         * toma en cuenta que para ver los mismos 
+         * datos debemos hacer la misma consulta
+        **/
+        $articulos = Articulo::orderBy('id','DESC')->where('estado', 'inactivo')->get();
+        $coment = 'Reporte de artículos activos';
+        $pdf = PDF::loadView('pdf.articulo', compact('articulos','coment'))->setPaper('letter');//,'landscape' para cambiar la horientacion de la hoja
+        return $pdf->stream('articulo.pdf');//descargar directa "dawnload" en lugar de stream
     }
 }

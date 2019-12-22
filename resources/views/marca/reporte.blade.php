@@ -8,7 +8,8 @@
                     <h3 class="card-title">Detalle de Marcas</h3>
                 </div>
                 <div  class="card-comment">
-                    <p>Listado de marcas registradas</p>
+                    {!! QrCode::size(150)->generate( 'http://127.0.0.1:8000/reportemc'); !!} 
+                    Listado de marcas registradas
                 </div>  
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0" style="height: 60em;">
@@ -36,7 +37,7 @@
                         @endforeach
                     </tbody>
                     </table>
-                        {!! QrCode::size(150)->generate( 'http://127.0.0.1:8000/reportemc'); !!} 
+                        
                     <!--paginacion de tablas en la pagina -->
                     <div class="pagination justify-content-center">
                         {{ $marcas->links() }}
