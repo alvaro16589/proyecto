@@ -48,7 +48,7 @@
                                     <label for="addcontra">Contraseña</label> 
                                     <input id="addcontra" name="Contraseña" class="form-control input" type="password" placeholder="Ingrese su contraseña" maxlength=30 >
                                     <label for="password-confirm">Repita la contraseña</label>
-                                    <input id="password-confirm" name="password_confirmation" class="form-control input" type="password" placeholder="Ingrese su contraseña" maxlength=30 >
+                                    <input id="password-confirm" name="Contraseña_confirmation" class="form-control input" type="password" placeholder="Ingrese su contraseña" maxlength=30 >
                                     
                                     <label for="addtipo">Tipo</label>
                                     <select id="addtipo" name="Tipo" class="form-control select2" style="width: 100%;">

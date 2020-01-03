@@ -31,7 +31,7 @@
         <div >
             <div class="row">
                 {{-- columna izquierda --}}
-                <div class="col-sm-7 col-md-8">
+                <div class="col-sm-12 col-md-12 col-lg-8">
                     @yield('contenido')
                 </div>
                 {{-- columna derecha --}}
@@ -70,14 +70,14 @@
 
             //funcion para enviar los valores en la url
            
-            function enviar(){
-                return axios.post(route('/detalle', carrito).append('_token', "{{ csrf_token() }}" ))
+           /* function enviar(){
+                return axios.post(route('detall', carrito).append('_token', "{{ csrf_token() }}"))
                 .then((response) => {console.log('entro',carrito);
                     return response.data;
                     
                 });
                 
-            }          
+            }*/          
 
 
            
@@ -86,20 +86,30 @@
                 //crear una cookie
                 setCookie('carr', carrito, 1);
                 //leer una cookie
-                console.log(getCookie('carr'));
+                //console.log(getCookie('carr'));
+                // Obtenemos el producto ID que hay en el boton pulsado
+                let id = arti.id;
+                let nom = 'cant'+ id;
+                let cant =  Number(document.getElementById(nom).value);//obtenemos el el texto del text de tipo numérico 
+                const elemento = (element) => element == id;//creamos una contante que contenga el id del producto
+                var i = carrito.findIndex(elemento);//buscar un id dentro de una lista devolviendo su posición
                 //agregando datos a los array+*/
-                
-                
-                carrito.push(arti.id)
-                precio.push(arti.precio)
-                nombre.push(arti.nombre)
-                stok.push(arti.stok);
-                //caculamos el total
+                if ( i !== -1 ) {//si el elemento ya existe entonces solo se agrega la cantidad caso contrario se crean los elementos
+                   stok[i] += cant;
+                }
+                else{
+                    carrito.push(arti.id);
+                    stok.push(cant);
+                    precio.push(arti.precio);
+                    nombre.push(arti.nombre);
+                }
+                //renderizamos y luego caculamos el total
                 renderizarCarrito();
                 calcularTotal (); 
                
             }
             function renderizarCarrito () {
+               
                 //inicializamos una variable de recorrido
                 var i = 0;
                 var verCiclo = 0;
@@ -110,16 +120,13 @@
                 let carritoSinDuplicados = [...new Set(carrito)];
                 // Generamos los Nodos a partir de carrito
                 carritoSinDuplicados.forEach(function (item, indice) {
-                    // Obtenemos el item que necesitamos de la variable base de datos
-                    let miItem = carrito;
-                    // Cuenta el número de veces que se repite el producto
+                    /*/ Cuenta el número de veces que se repite el producto
                     let numeroUnidadesItem = carrito.reduce(function (total, itemId) {
                         if (itemId === item) {
                             total += 1;
-                            
                         }
                         return  total;
-                    }, 0);
+                    }, 0);*/
                     
                     // Creamos el nodo del item del carrito
                     let miNodo = document.createElement('tr');
@@ -133,20 +140,19 @@
                     var i = carrito.findIndex(elemento);
                     if ( i !== -1 ) {
                         colNombre.textContent = nombre[i];
-                       // colNombre.setAttribute('name','nombre');
-                        colCantidad.textContent = numeroUnidadesItem;
-                        colPrecio.textContent = precio[i];
+                        colCantidad.textContent = stok[i];
+                        colPrecio.textContent = 'Bs ' + precio[i];
                     }
                     // Boton de borrar
                     let miBoton = document.createElement('button');
                     let mifa = document.createElement('i');
                     mifa.classList.add("fas", "fa-times");
-                    miBoton.classList.add('btn-sm', 'btn-danger');
-                    miBoton.style.marginLeft = '1rem';
+                    miBoton.classList.add('btn-sm', 'btn-outline-danger');
                     miBoton.setAttribute('item', item);
                     miBoton.addEventListener('click', borrarItemCarrito);
                     miBoton.appendChild(mifa);
                     colBoton.appendChild(miBoton);
+                   
                     // Mezclamos nodos
                     miNodo.appendChild(colNombre);
                     miNodo.appendChild(colCantidad);
@@ -158,7 +164,17 @@
                     //incrementamos la variable de recorrido
                     verCiclo += 1;
                 })
-                if (verCiclo!= 0) {
+                let txtid = document.createElement('input');
+                    txtid.setAttribute('type','input');
+                    txtid.classList.add('d-none');
+                    txtid.setAttribute('name', 'iditems');
+                    txtid.setAttribute('value',carrito );
+                let txtcant = document.createElement('input');
+                    txtcant.setAttribute('type','input');
+                    txtcant.classList.add('d-none');
+                    txtcant.setAttribute('name', 'cantitems');
+                    txtcant.setAttribute('value',stok );
+                if (verCiclo!= 0) {//si la varible es mayor a 1 entonces hubo un ciclo y por consecuencia mostramos el boton de enviar
                     let miBotonEnviar = document.createElement('button');
                     miBotonEnviar.setAttribute( 'onclick','enviar()');
                     miBotonEnviar.classList.add('btn','btn-sm', 'btn-success');
@@ -167,6 +183,8 @@
                     //miBotonEnviar.setAttribute( 'url','/detalle');
                     
                     $footer.appendChild(miBotonEnviar);
+                    $footer.appendChild(txtid);
+                    $footer.appendChild(txtcant);
                 }
                 
                 
@@ -195,9 +213,11 @@
             function calcularTotal () {
                 // Limpiamos precio anterior
                 total = 0;
+                let ite = 0;
                 // Recorremos el array del carrito
                 for (let item of precio) {
-                    total = total + item;
+                    total = total + item * stok[ite];
+                    ite += 1;
                 }    
                 // Renderizamos el precio en el HTML
                 $total.textContent = total.toFixed(2);

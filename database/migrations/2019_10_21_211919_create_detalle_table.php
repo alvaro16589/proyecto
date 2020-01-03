@@ -15,14 +15,10 @@ class CreateDetalleTable extends Migration
     {
         Schema::create('detalle', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('fecha');
             $table->unsignedBigInteger('iduser');
             $table->foreign('iduser')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('idart');
-            $table->foreign('idart')->references('id')->on('articulo')->onDelete('cascade');
-            $table->integer('cantidad');
+            $table->string('estado',30);
             $table->timestamps();
-
         });
     }
 

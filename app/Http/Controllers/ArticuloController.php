@@ -257,7 +257,7 @@ class ArticuloController extends Controller
          * datos debemos hacer la misma consulta
         **/
         $articulos = Articulo::orderBy('id','DESC')->where('estado', 'inactivo')->get();
-        $coment = 'Reporte de artículos activos';
+        $coment = 'Reporte de artículos inactivos';
         $pdf = PDF::loadView('pdf.articulo', compact('articulos','coment'))->setPaper('letter');//,'landscape' para cambiar la horientacion de la hoja
         return $pdf->stream('articulo.pdf');//descargar directa "dawnload" en lugar de stream
     }

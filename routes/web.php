@@ -23,8 +23,10 @@ Route::resource('/proveedor', 'ProveedorController');
 Route::resource('/provmarc', 'ProvmarcController');
 Route::resource('/usuario', 'UsuarioController');
 
+Route::post('/detalle', 'DetalleController@guardar')->name('detall');
+
 Route::post('/articulo/dropzone', 'ArticuloController@dropzone');
-//rutas reportes
+//_____________________________________________________rutas reportes
 //Usuarios
 Route::get('/reporte', 'UsuarioController@reporte'); 
 Route::get('descargar-usuarios', 'UsuarioController@pdf')->name('usuarios.pdf');

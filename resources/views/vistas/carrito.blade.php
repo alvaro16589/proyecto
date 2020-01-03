@@ -2,17 +2,20 @@
         <aside class="sidebar-dark-primary elevation-4">
             <div class="card">
                 <div class="card-header">
-                    <h2>Carrito</h2> 
+                    <h2>
+                        <i class="fas fa-cart-arrow-down fa-lg mr-2"></i>
+                        Carrito
+                    </h2> 
                 </div>
-              
-                    <div class="card-body">
+                <form action="/detalle" method="GET">
+                    <div class="card-body ">
                         <!-- Elementos del carrito -->
-                        <table  class="table table-head-fixed table-hover " >
+                        <table  class="table table-head table-hover " >
                             <thead><!--'estado','cantidad','precio'-->
                                 <tr>
                                     <th>Nombre</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio</th>
+                                    <th>Cant.</th>
+                                    <th>P. U.</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -23,17 +26,14 @@
                     </div>
                     <div class="card-footer" >
                         <!-- Precio total -->
-                        <p class="text-center">Total: <span id="total"></span> Bs.</p>
+                        <p ><h3 class="text-center">Total: <span id="total"></span> Bs.</h3></p>
                         {{-- Este div es para agregar un boton de enviar por java script --}}
-                        <form action="/detalle" method="GET">
-                            @csrf
-                            <div id="footer">
-
+                        
+                            <div  id="footer">
                             </div>
-                        </form>
                         
                     </div>
-               
+                </form>
             </div>
         </aside>
 

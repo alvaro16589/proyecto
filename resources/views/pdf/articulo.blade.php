@@ -70,7 +70,9 @@
                         <td class="espacios" >{{ $loop->iteration }}</td>
                         <td class="espacios" >{{ $articulo->estado }}</td>
                         <td class="espacios" >{{ $articulo->nombre }}</td>
-                        <td class="espacios" ><img class="circulo" src=".asset/img/articulos/{{$articulo->imagen}}" ></td>
+                        <td class="espacios" >
+                            <img class="circulo" src=".asset/img/articulos/{{$articulo->imagen}}" alt="user image" >
+                        </td>
                         <td class="espacios" >{{ $articulo->stok }}</td>
                         <td class="espacios" >{{ $articulo->precio }}</td>
                     </tr>

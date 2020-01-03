@@ -50,9 +50,9 @@
                 <div class="col-sm-4 invoice-col">
                     <b>Factura:  #{{time()}}</b><br>
                     <br>
-                    <b>Order ID:</b> 4F3S8J<br>
-                    <b>Payment Due:</b> {{ now()->format('d/m/Y') }}<br>
-                    <b>Account:</b> 968-34567
+                    <b>Orden ID:</b> 4F3S8J<br>
+                    <b>Fecha de pago:</b> {{ now()->format('d/m/Y') }}<br>
+                    <b>Cuenta :</b> 968-34567
                 </div>
                 <!-- /.col -->
                 </div>
@@ -63,43 +63,27 @@
                 <div class="col-12 table-responsive">
                     <table class="table table-striped">
                     <thead>
-                    <tr>
-                        <th>Qty</th>
-                        <th>Product</th>
-                        <th>Serial #</th>
-                        <th>Description</th>
-                        <th>Subtotal</th>
-                    </tr>
+                        <tr>
+                            <th>Cant.</th>
+                            <th>ID Prod.</th>
+                            <th>Producto</th>
+                            <th>Descripción</th>
+                            <th>Precio U.</th>
+                            <th>Subtotal</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Call of Duty</td>
-                        <td>455-981-221</td>
-                        <td>El snort testosterone trophy driving gloves handsome</td>
-                        <td>$64.50</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Need for Speed IV</td>
-                        <td>247-925-726</td>
-                        <td>Wes Anderson umami biodiesel</td>
-                        <td>$50.00</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Monsters DVD</td>
-                        <td>735-845-642</td>
-                        <td>Terry Richardson helvetica tousled street art master</td>
-                        <td>$10.70</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Grown Ups Blue Ray</td>
-                        <td>422-568-642</td>
-                        <td>Tousled lomo letterpress</td>
-                        <td>$25.99</td>
-                    </tr>
+                        @foreach ($detalles as $detalle)
+                            <tr>
+                                <td>{{ $detalle->cantidad}}</td>
+                                <td>{{ $detalle->id }}</td>
+                                <td>{{ $detalle->nombre }}</td>
+                                <td>{{ $detalle->descripcion }}</td>
+                                <td>Bs {{ $detalle->precio }}</td>
+                                <td>Bs {{ $detalle->cantidad * $detalle->precio }}</td>
+                                
+                            </tr>
+                        @endforeach
                     </tbody>
                     </table>
                 </div>
@@ -110,16 +94,15 @@
                 <div class="row">
                 <!-- accepted payments column -->
                 <div class="col-6">
-                    <p class="lead">Payment Methods:</p>
-                    <img src="../../dist/img/credit/visa.png" alt="Visa">
-                    <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-                    <img src="../../dist/img/credit/american-express.png" alt="American Express">
-                    <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
+                    <p class="lead">Métodos de pago:</p>
+                    <img src="{{asset('asset/adminlte/dist/img/credit/visa.png')}}" alt="Visa">
+                    <img src="{{asset('asset/adminlte/dist/img/credit/mastercard.png')}}" alt="Mastercard">
+                    <img src="{{asset('asset/adminlte/dist/img/credit/american-express.png')}}" alt="American Express">
+                    <img src="{{asset('asset/adminlte/dist/img/credit/paypal2.png')}}" alt="Paypal">
 
                     <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
-                    plugg
-                    dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+                    Para su comodidad se han empleado, los siguientes métodos de pago, por favor 
+                    haga uso responsable de los mismos, y siempre veifique sus datos.
                     </p>
                 </div>
                 <!-- /.col -->
@@ -129,20 +112,20 @@
                     <div class="table-responsive">
                     <table class="table">
                         <tr>
-                        <th style="width:50%">Subtotal:</th>
-                        <td>$250.30</td>
+                            <th style="width:50%">Subtotal:</th>
+                            <td>Bs {{ $subtotal }}</td>
                         </tr>
                         <tr>
-                        <th>Tax (9.3%)</th>
-                        <td>$10.34</td>
+                            <th>Impuesto (9.3%)</th>
+                            <td id="impuesto"> </td>
                         </tr>
                         <tr>
-                        <th>Shipping:</th>
-                        <td>$5.80</td>
+                            <th>Cargos extra:</th>
+                            <td>Bs 5.80</td>
                         </tr>
                         <tr>
-                        <th>Total:</th>
-                        <td>$265.24</td>
+                            <th >Total:</th>
+                            <td id="total"> </td>
                         </tr>
                     </table>
                     </div>
@@ -156,10 +139,10 @@
                 <div class="col-12">
                     <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
                     <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
-                    Payment
+                        Payment
                     </button>
-                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                    <i class="fas fa-download"></i> Generate PDF
+                        <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                        <i class="fas fa-download"></i> Generate PDF
                     </button>
                 </div>
                 </div>
@@ -170,79 +153,11 @@
     </div><!-- /.container-fluid -->
 </section>
       <!-- /.content -->
-      <script>
-        let $title = document.querySelector('#title');
-        $title.textContent = getCookie('carr');
-        
-        function getCookie(nombre)
-            
-            {
-            
-                /*
-            
-                 * document.cookie
-            
-                 * Contiene todas las cookies que estan al alcance de la paginas web en el formato:
-            
-                 * nombreCookie1=valor1; nombreCookie2=valor2
-            
-                 *
-            
-                 * document.cookie.length
-            
-                 * Contiene la longitud de la suma de todas las cookies
-            
-                 */
-            
-                if(document.cookie.length>0)
-            
-                {
-            
-                    /*
-            
-                     * indexOf(caracter,desde) Devuelve la primera posicion que el caracter aparece
-            
-                     * devuelve -1 si no encuentra el caracter
-            
-                     */
-            
-                    start=document.cookie.indexOf(nombre + "=");
-            
-                    if (start!=-1)
-            
-                    {
-            
-                        //El inicio de la cookie, el nombre de la cookie mas les simbolo '='
-            
-                        start=start + nombre.length+1;
-            
-                        //Buscamos el final de la cookie (es el simbolo ';')
-            
-                        end=document.cookie.indexOf(";",start);
-            
-                        //Si no encontramos el simbolo del final ';', el final sera el final de la cookie.
-            
-                        if (end==-1)
-            
-                            end=document.cookie.length;
-            
-                        //Devolvemos el contenido de la cookie.
-            
-                        //substring(start,end) devuelve la cadena entre el valor mas bajo y
-            
-                        //el mas alto, indiferentemente de la posicion.
-            
-                        return unescape(document.cookie.substring(start,end));
-            
-                    }
-            
-                }
-            
-                //no hemos encontrado la cookie
-            
-                return "";
-            
-            }
-          
-      </script>
+    <script>
+         let $impu = document.querySelector('#impuesto');
+         $impu.textContent = 'Bs ' + String((@json($subtotal) * 0.093).toFixed(1));
+         let $tot = document.querySelector('#total');
+         $tot.textContent = 'Bs ' + String((@json($subtotal) + (@json($subtotal) * 0.093) + 5.8).toFixed(1));
+    </script>   
+   
 @endsection

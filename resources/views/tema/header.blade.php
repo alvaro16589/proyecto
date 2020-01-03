@@ -29,7 +29,7 @@
         </li>
         <li class="nav-item d-none d-sm-inline-block">
           @if($pagina ?? '')
-            <h3 style="color: aliceblue;">/ {{$pagina ?? ''}}</h3>
+            <h4 style="color: aliceblue;">/ {{$pagina ?? ''}}</h4>
           @endif
         </li>
       </ul>

@@ -1,6 +1,6 @@
 @extends('vistas.vistasarti')
 @section('contenido')
-    <section class="contentainer m-4 card card-solid">
+    <section class="contentainer card card-solid">
         <div class="row card-body pb-0" id="items">
             @foreach ($articulos as $articulo)
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
@@ -104,16 +104,20 @@
                                                   </h2>
                                                   
                                           </div>
-                                          
+                                          <div class="bg-gradient-gray py-2 px-3 mt-4">
+                                              <h4>Cantidad : </h4>
+                                              <input id="cant{{$articulo->id}}" class="input" type="number" max="{{$articulo->stok}}" min="1" value="1">
+                                          </div>
                                           <div class="card-footer ">
                                               <div class="mt-4">
                                                   <button type="button" class="btn btn-primary btn-lg btn-flat" id="marcador"  
-                                                      onclick="anyadirCarrito({{$articulo}})" >
+                                                      onclick="anyadirCarrito({{$articulo}})"
+                                                      data-dismiss="modal" aria-label="Close" >
                                                       <i class="fas fa-cart-plus fa-lg mr-2"></i> 
                                                       Subir a carro
                                                   </button>
                                   
-                                                  <div class="btn btn-default btn-lg btn-flat">
+                                                  <div class="btn btn-default btn-lg btn-flat d-none">
                                                       <i class="fas fa-heart fa-lg mr-2"></i> 
                                                       Agregar a deseados
                                                   </div>
