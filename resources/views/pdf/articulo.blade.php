@@ -55,7 +55,7 @@
                         padding-left: 4em;">
             <thead class="cabecera"> 
                 <tr style="">
-                    <th>Nº</th>
+                    
                     <th style="padding: 1em; ">Nº</th>
                     <th style="padding: 1em; ">Estado</th>
                     <th style="padding: 1em; ">Nombre</th>

@@ -6,6 +6,9 @@ use App\Detalle;
 use App\Articulo;
 use App\Detallearticulo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class DetalleController extends Controller
 {
@@ -132,17 +135,31 @@ class DetalleController extends Controller
     {
         //
     }
-    public function guardar(array $data)
-    {//'fecha','iduser','idart','cantidad']
-        $detalle = new Detalle();
-        foreach ($data as $dat) {
-            $detalle->fecha = time()->format('d/m/Y');
-            $detalle->iduser = auth()->user()->id;
-            $detalle->idart = $dat;
-            $detalle->cantidad = 1;
-            $detalle->save();
-        }
+    
+    public function pdf(Request $request)
+    {
        
-
+        $det = Detalle::all()->last();
+        $detalles = Detalle::join('detallearticulo','detallearticulo.iddetall','=','detalle.id')
+        ->join('articulo','detallearticulo.idart','=','articulo.id')
+        ->join('users','users.id','=','detalle.iduser')
+        ->where('detalle.id' ,'=',$det->id)
+        ->select('detalle.created_at',
+                'articulo.id',
+                'detallearticulo.cantidad',
+                'articulo.nombre',
+                'articulo.descripcion',
+                'detallearticulo.precio'                                
+            )->get();
+        $subtotal = 0;
+        foreach ($detalles as $de) {
+            $subtotal = $subtotal + ($de->precio * $de->cantidad);
+        }
+        
+        $impuesto = round($subtotal * 0.093,1);
+        $total = round ($subtotal + $impuesto + 5.8,1);
+        $coment = 'Detalle de datos de última compra';
+        $pdf = PDF::loadView('pdf.invoice', compact('detalles','coment','subtotal','impuesto','total'))->setPaper('letter');//,'landscape' para cambiar la horientacion de la hoja
+        return $pdf->stream('invoice.pdf');//descargar directa "dawnload" en lugar de stream
     }
 }

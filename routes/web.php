@@ -26,7 +26,7 @@ Route::resource('/usuario', 'UsuarioController');
 Route::post('/detalle', 'DetalleController@guardar')->name('detall');
 
 Route::post('/articulo/dropzone', 'ArticuloController@dropzone');
-//_____________________________________________________rutas reportes
+//_____________________________________________________rutas reportes pdf
 //Usuarios
 Route::get('/reporte', 'UsuarioController@reporte'); 
 Route::get('descargar-usuarios', 'UsuarioController@pdf')->name('usuarios.pdf');
@@ -55,6 +55,9 @@ Route::get('/reporteacart', 'ArticuloController@reporteac');
 Route::get('descargar-articulos-ac', 'ArticuloController@pdfac')->name('articuloac.pdf');
 Route::get('/reporteinart', 'ArticuloController@reportein'); 
 Route::get('descargar-articulos-in', 'ArticuloController@pdfin')->name('articuloin.pdf');
+
+//detalle
+Route::get('descargar-invoice', 'DetalleController@pdf')->name('invoice.pdf');
 
 //rutas para autentificacion 
 Auth::routes();
