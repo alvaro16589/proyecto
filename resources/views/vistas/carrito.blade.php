@@ -28,9 +28,18 @@
                         <!-- Precio total -->
                         <p ><h3 class="text-center">Total: <span id="total"></span> Bs.</h3></p>
                         {{-- Este div es para agregar un boton de enviar por java script --}}
-                        
+                        @guest
+                            <div class="bg-gradient-lime p-4">
+                                <p>
+                                    Debe registrarse o iniciar sesión para registrar productos en el carrito...!
+                                </p>
+
+                            </div>
+                        @else
                             <div  id="footer">
                             </div>
+                        @endguest
+                            
                         
                     </div>
                 </form>
