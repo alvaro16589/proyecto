@@ -1,7 +1,7 @@
 @extends('tema.layout')
 @section('contenido') 
     <!-- /.row -->
-    <div class="row mt-5" >
+    <div class="row" >
         <div class="col-12" >
             <div class="card">
                 <div class="card-header bg-primary">

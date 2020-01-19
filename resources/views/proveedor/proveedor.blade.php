@@ -1,7 +1,7 @@
 @extends('tema.layout')
 @section('contenido')
     <!--card proveedores-->
-    <div class="card card-primary mt-5">
+    <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title">PROVEEDORES</h3>
                 <div class="card-tools">

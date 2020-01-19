@@ -162,4 +162,26 @@ class DetalleController extends Controller
         $pdf = PDF::loadView('pdf.invoice', compact('detalles','coment','subtotal','impuesto','total'))->setPaper('letter');//,'landscape' para cambiar la horientacion de la hoja
         return $pdf->stream('invoice.pdf');//descargar directa "dawnload" en lugar de stream
     }
+    public function historial()
+    {
+        $detalles = Detalle::join('detallearticulo','detallearticulo.iddetall','=','detalle.id')
+        ->join('articulo','detallearticulo.idart','=','articulo.id')
+        ->join('users','users.id','=','detalle.iduser')
+        ->where('users.id' ,'=',auth()->user()->id)
+        ->select('detalle.id as iddet',
+                'articulo.id',
+                'detallearticulo.cantidad',
+                'articulo.nombre',
+                'articulo.descripcion',
+                'detallearticulo.precio'                               
+            )->get();
+        $buys = Detalle::join('users','users.id','=','detalle.iduser')
+        ->where('users.id' ,'=',auth()->user()->id)
+        ->select('detalle.id',
+                'detalle.created_at',
+                'detalle.estado',
+                                               
+            )->get();
+        return view('detalle/historial',compact('detalles','buys'))->with('pagina','Historial');
+    }
 }

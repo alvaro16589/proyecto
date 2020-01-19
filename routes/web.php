@@ -22,7 +22,7 @@ Route::resource('/precio', 'PrecioController');
 Route::resource('/proveedor', 'ProveedorController');
 Route::resource('/provmarc', 'ProvmarcController');
 Route::resource('/usuario', 'UsuarioController');
-
+Route::get('/historial', 'DetalleController@historial')->name('historial');
 Route::post('/detalle', 'DetalleController@guardar')->name('detall');
 
 Route::post('/articulo/dropzone', 'ArticuloController@dropzone');

@@ -59,14 +59,19 @@
                       </a>
                       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         {{-- ver perfil --}}
-                          <a class="dropdown-item"  href="/usuario/perfil/{{ Auth::user()->id }}"onclick="event.preventDefault();
+                          <a class="dropdown-item"  href="/usuario/perfil/{{ Auth::user()->id }}"
+                            onclick="event.preventDefault();
                             document.getElementById('perfil-form').submit();">
                               {{ __('Ver Perfil') }}
                           </a>
+                        {{-- ver perfil --}}
+                        <a class="dropdown-item"  href="{{ route('historial') }}">
+                            {{ __('Historial') }}
+                        </a>
                         {{-- cerrar sesión --}}
                           <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
-                                          document.getElementById('logout-form').submit();">
+                            document.getElementById('logout-form').submit();">
                               {{ __('Cerrar sesión') }}
                           </a>
                           
