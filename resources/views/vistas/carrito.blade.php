@@ -1,6 +1,6 @@
 
-        <aside class="sidebar-dark-primary elevation-4">
-            <div class="card">
+        <aside class="sidebar-dark-primary elevation-4 sticky-top ">
+            <div class="card ">
                 <div class="card-header">
                     <h2>
                         <i class="fas fa-cart-arrow-down fa-lg mr-2"></i>
