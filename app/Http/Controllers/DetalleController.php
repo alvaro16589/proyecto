@@ -99,6 +99,25 @@ class DetalleController extends Controller
      */
     public function show(Detalle $detalle)
     {
+        //consultal para rellenar los valores###################################################
+        ######################################################################33
+        $detalles = Detalle::join('detallearticulo','detallearticulo.iddetall','=','detalle.id')
+                        ->join('articulo','detallearticulo.idart','=','articulo.id')
+                        ->join('users','users.id','=','detalle.iduser')
+                        ->where('detalle.id' ,'=',$detalle->id)
+                        ->select('detalle.created_at',
+                                'articulo.id',
+                                'detallearticulo.cantidad',
+                                'articulo.nombre',
+                                'articulo.descripcion',
+                                'detallearticulo.precio'                                
+                            )->get();
+        //obtenemos el subtotal para enviarselo a la vista
+        $subtotal = 0;
+        foreach ($detalles as $det) {
+            $subtotal = $subtotal + ($det->precio * $det->cantidad);
+        }
+        return view('detalle.detalle',compact('detalles'))->with('pagina','Detalle')->with('subtotal',$subtotal);
        
     }
 

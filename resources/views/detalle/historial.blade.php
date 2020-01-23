@@ -59,11 +59,20 @@
                                                                 </tr> 
                                                             @endforeach
                                                         </tbody> 
+                                                       
                                                     </table>
+                                                    <div>
+                                                        {{--boton para ir a  la pagina de la factura--}}
+                                                        <form action="/detalle/{{$item->id}}" method="get">
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-warning btn-sm">Ir</button>
+                                                        </form>
+                                                            
+                                                    </div>
+                                                    
                                                 </div>
                                             </div>            
                                         </td>
-                                
                         </tr>  
                     @endforeach
                 </tbody>
